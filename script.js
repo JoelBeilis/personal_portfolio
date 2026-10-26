@@ -104,7 +104,17 @@ function initAscendingTopo() {
 
     // Calculate elevation relative to base (bottom is 0m, top is 850m)
     const grade = holdBtn.getAttribute("data-grade");
-    const elevMap = { V0: "0m (GROUND)", V1: "150m", V2: "320m", V3: "480m", V4: "650m", V5: "850m (SUMMIT)" };
+    // Inside setClimberToHold():
+    const elevMap = { 
+      V0: "0m (BASE CAMP)", 
+      V1: "120m", 
+      V2: "250m", 
+      V3: "380m", 
+      V4: "520m", 
+      V5: "680m", 
+      V6: "810m",
+      V7: "950m (SUMMIT)" 
+    };
     if (elevationLabel) elevationLabel.textContent = `ELEVATION: ${elevMap[grade] || "500m"}`;
   }
 
@@ -155,7 +165,7 @@ function initSuperMoves() {
     });
   });
 
-  // 🚀 DYNO: Leap from base straight to summit
+// 🚀 DYNO: Leap from base straight to summit
   if (dynoBtn) {
     dynoBtn.addEventListener("click", () => {
       if (climber) {
@@ -163,7 +173,7 @@ function initSuperMoves() {
         emitChalkExplosion();
       }
       
-      const summit = document.getElementById("v5-photography");
+      const summit = document.getElementById("v7-photography");
       if (summit) {
         summit.scrollIntoView({ behavior: "smooth" });
       }

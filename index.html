@@ -32,15 +32,23 @@
   <aside class="crag-topo" id="cragTopo" aria-label="Ascending Topo Route">
     <div class="topo-line"></div>
 
-    <!-- Holds ordered TOP (Summit) to BOTTOM (Base) -->
+<!-- Holds ordered TOP (Summit) to BOTTOM (Base) -->
     <div class="holds-column">
-      <button class="hold-node" data-target="#v5-photography" data-grade="V5">
+      <button class="hold-node" data-target="#v7-photography" data-grade="V7">
         <span class="hold-gem anchor-hold"></span>
-        <span class="hold-label">V5: Photography (Summit)</span>
+        <span class="hold-label">V7: Photography (Summit)</span>
       </button>
-      <button class="hold-node" data-target="#v4-builds" data-grade="V4">
+      <button class="hold-node" data-target="#v6-betalog" data-grade="V6">
         <span class="hold-gem sloper-hold"></span>
-        <span class="hold-label">V4: Engineering</span>
+        <span class="hold-label">V6: Beta Log</span>
+      </button>
+      <button class="hold-node" data-target="#v5-projects" data-grade="V5">
+        <span class="hold-gem pinch-hold"></span>
+        <span class="hold-label">V5: Projects & Apps</span>
+      </button>
+      <button class="hold-node" data-target="#v4-skills" data-grade="V4">
+        <span class="hold-gem crimp-hold"></span>
+        <span class="hold-label">V4: Skills</span>
       </button>
       <button class="hold-node" data-target="#v3-karate" data-grade="V3">
         <span class="hold-gem pinch-hold"></span>
@@ -48,7 +56,7 @@
       </button>
       <button class="hold-node" data-target="#v2-gear" data-grade="V2">
         <span class="hold-gem crimp-hold"></span>
-        <span class="hold-label">V2: Camera Glass</span>
+        <span class="hold-label">V2: Gear Locker</span>
       </button>
       <button class="hold-node" data-target="#v1-about" data-grade="V1">
         <span class="hold-gem jug-hold"></span>
@@ -56,7 +64,7 @@
       </button>
       <button class="hold-node active" data-target="#ground" data-grade="V0">
         <span class="hold-gem ground-hold"></span>
-        <span class="hold-label">V0: Crash Pad (Start)</span>
+        <span class="hold-label">V0: Base Camp</span>
       </button>
     </div>
 
@@ -96,11 +104,11 @@
   <!-- MAIN CRAG: Arranged from Summit (Top) down to Ground (Bottom) -->
   <main class="crag-body">
 
-    <!-- ==================== V5: SUMMIT (PHOTOGRAPHY) ==================== -->
-    <section id="v5-photography" class="route-pitch summit-pitch">
+<!-- ==================== V7: SUMMIT (PHOTOGRAPHY) ==================== -->
+    <section id="v7-photography" class="route-pitch summit-pitch">
       <div class="pitch-tab">
-        <span class="pitch-badge">V5 — PITCH 05 // THE SUMMIT</span>
-        <span class="pitch-code">archive_manifest.canvas</span>
+        <span class="pitch-badge">V7 — THE SUMMIT</span>
+        <span class="pitch-code">photo_archive.canvas</span>
       </div>
       <div class="pitch-card">
         <div class="section-title-wrap">
@@ -111,7 +119,6 @@
           <span class="counter-badge" id="photoCount">Loading records...</span>
         </div>
 
-        <!-- Filter & Search Controls -->
         <div class="gallery-controls">
           <div class="search-box">
             <span class="search-ico">🔍</span>
@@ -129,21 +136,52 @@
       </div>
     </section>
 
-    <!-- ==================== V4: ENGINEERING ==================== -->
-    <section id="v4-builds" class="route-pitch">
+    <!-- ==================== V6: THE BETA LOG ==================== -->
+    <section id="v6-betalog" class="route-pitch">
       <div class="pitch-tab">
-        <span class="pitch-badge">V4 — PITCH 04</span>
-        <span class="pitch-code">hardware_lab.md</span>
+        <span class="pitch-badge">V6 — PITCH 06</span>
+        <span class="pitch-code">field_journal.md</span>
       </div>
       <div class="pitch-card">
-        <h2>Engineering, CAD & Computational Builds</h2>
-        <p class="pitch-lead">Designing physical tools, lens accessories, and optical diagnostic hardware.</p>
+        <h2>The Beta Log & Field Dispatches</h2>
+        <p class="pitch-lead">Short dispatches from wildlife blinds, bench testing, and gym sessions.</p>
+
+        <div class="beta-log-list">
+          <article class="beta-entry">
+            <div class="beta-meta">
+              <span class="beta-date">FIELD NOTE // 04</span>
+              <span class="beta-tag">Wildlife</span>
+            </div>
+            <h3>Freezing brush & 300mm patience</h3>
+            <p>Waiting 3 hours in sub-zero Ontario wind for red fox movement. Prime lenses force you to move your feet and anticipate the geometry of the clearing before the subject appears.</p>
+          </article>
+          <article class="beta-entry">
+            <div class="beta-meta">
+              <span class="beta-date">BUILD NOTE // 03</span>
+              <span class="beta-tag">CAD / Print</span>
+            </div>
+            <h3>Dialing tolerances on PETG threads</h3>
+            <p>FDM 3D printed lens filters need a 0.15mm clearance offset to screw smoothly onto vintage metal threads without binding or chewing the plastic.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== V5: PROJECTS (APPS, CAD & HARDWARE) ==================== -->
+    <section id="v5-projects" class="route-pitch">
+      <div class="pitch-tab">
+        <span class="pitch-badge">V5 — PITCH 05</span>
+        <span class="pitch-code">all_projects.canvas</span>
+      </div>
+      <div class="pitch-card">
+        <h2>Projects & Builds</h2>
+        <p class="pitch-lead">Software applications, CAD designs, embedded prototypes, and computational tooling.</p>
         
         <div class="cards-grid">
           <div class="obs-card">
             <div class="obs-card-head">
               <span class="mono-id">[[laser-tripline.ino]]</span>
-              <span class="stat-pill">Sensors</span>
+              <span class="stat-pill">Embedded</span>
             </div>
             <h3>Microsecond Laser Gate Shutter</h3>
             <p>Non-invasive dual-beam infrared trigger with an Arduino interrupt loop to freeze high-velocity avian predators.</p>
@@ -152,20 +190,74 @@
           <div class="obs-card">
             <div class="obs-card-head">
               <span class="mono-id">[[petg-hood.cad]]</span>
-              <span class="stat-pill">3D Print</span>
+              <span class="stat-pill">CAD / 3D</span>
             </div>
-            <h3>PETG Matte Lens Baffle</h3>
+            <h3>PETG Matte Lens Baffle & Ring</h3>
             <p>Engineered petal hood modeled specifically for vintage manual prime glass on modern mirrorless mounts.</p>
             <div class="card-chips"><span>Fusion 360</span><span>PETG</span></div>
           </div>
           <div class="obs-card">
             <div class="obs-card-head">
               <span class="mono-id">[[exif-sync.py]]</span>
-              <span class="stat-pill">Pipeline</span>
+              <span class="stat-pill">App / CLI</span>
             </div>
             <h3>Automated EXIF & WebP Pipeline</h3>
             <p>CLI pipeline converting camera raw exports into lightweight WebP previews with JSON metadata manifests.</p>
-            <div class="card-chips"><span>Python</span><span>Pillow</span></div>
+            <div class="card-chips"><span>Python</span><span>Pillow</span><span>CLI</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== V4: SKILLS & TOOLKIT ==================== -->
+    <section id="v4-skills" class="route-pitch">
+      <div class="pitch-tab">
+        <span class="pitch-badge">V4 — PITCH 04</span>
+        <span class="pitch-code">skills_matrix.md</span>
+      </div>
+      <div class="pitch-card">
+        <h2>Technical Skills & Toolkit</h2>
+        <p class="pitch-lead">Languages, mathematical modeling tools, hardware prototyping, and field craft.</p>
+
+        <div class="skills-grid">
+          <div class="skill-category">
+            <h3>Software & Code</h3>
+            <div class="skill-tags">
+              <span>Python</span>
+              <span>C / C++</span>
+              <span>HTML / CSS / JS</span>
+              <span>Bash / Zsh</span>
+              <span>Git & GitHub</span>
+              <span>Neovim</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h3>Engineering & Prototyping</h3>
+            <div class="skill-tags">
+              <span>Fusion 360 CAD</span>
+              <span>PETG 3D Printing</span>
+              <span>Optoelectronics</span>
+              <span>Arduino & Sensors</span>
+              <span>Soldering & Rigs</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h3>Mathematics & Analysis</h3>
+            <div class="skill-tags">
+              <span>Numerical Modeling</span>
+              <span>Differential Equations</span>
+              <span>Optics Geometry</span>
+              <span>Data Analysis</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h3>Field & Visual Arts</h3>
+            <div class="skill-tags">
+              <span>Manual 35mm Film</span>
+              <span>Wildlife Tracking</span>
+              <span>Lightroom Classic</span>
+              <span>Prime Glass Calibration</span>
+            </div>
           </div>
         </div>
       </div>
@@ -230,20 +322,48 @@
       </div>
     </section>
 
-    <!-- ==================== V1: ABOUT ME ==================== -->
+<!-- ==================== V1: ABOUT ME ==================== -->
     <section id="v1-about" class="route-pitch">
       <div class="pitch-tab">
         <span class="pitch-badge">V1 — PITCH 01</span>
         <span class="pitch-code">profile.md</span>
       </div>
       <div class="pitch-card">
-        <h2>About Joel</h2>
+        <h2>About Joel Beilis</h2>
         <p class="pitch-lead">
-          Honours Mathematics and Physics student, nature photographer, martial artist, and boulderer.
+          Honours Mathematics and Physics student, nature photographer, martial artist, and boulderer??
         </p>
         <p>
-          Whether analyzing plasma potentials, dialing in camera trap timing, or unlocking tricky beta on a boulder problem, I treat every project as a balance of patience, geometry, and mechanical execution.
+          bio...
         </p>
+
+        <!-- Social Icons Row -->
+        <div class="about-socials">
+          <!-- Instagram -->
+          <a href="https://instagram.com/Ice_Cream_Turtle" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+
+          <!-- LinkedIn -->
+          <a href="https://www.linkedin.com/in/joel-beilis-79063b319/" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+              <rect x="2" y="9" width="4" height="12"></rect>
+              <circle cx="4" cy="4" r="2"></circle>
+            </svg>
+          </a>
+
+          <!-- GitHub -->
+          <a href="https://github.com/joelbeilis" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg>
+          </a>
+        </div>
       </div>
     </section>
 
@@ -259,50 +379,50 @@
         <div class="retro-banner-frame">
           <div class="banner-glitch-border">
             <h1 class="jungle-headline">WELCOME TO JOEL'S JUNGLE</h1>
-            <p class="banner-sub">CLIMB UPWARD TO UNLOCK THE ARCHIVES</p>
+            <p class="banner-sub">CLIMB UP (it's free)</p>
           </div>
         </div>
 
         <div class="crag-intro">
           <p>
-            Standard portfolios scroll down. This crag scrolls <strong>UP</strong>. Choose your route grade below, start sending your way to the summit, or slap a dyno to leap straight to the top.
+            Just go <strong>UP</strong>. Choose your route grade below, start sending your way, or just dyno to the top.
           </p>
         </div>
 
-        <!-- Grade Selector (V1 to V9) -->
+<!-- Grade Selector (V1 to V9) -->
         <div class="boulder-grade-selector">
           <div class="grade-selector-label">SELECT YOUR PITCH / GRADE:</div>
           <div class="grade-buttons-row">
             <button class="grade-btn" data-target="#v1-about">
               <span class="grade-code">V1</span>
-              <span class="grade-name">About Me</span>
+              <span class="grade-name">About</span>
             </button>
             <button class="grade-btn" data-target="#v2-gear">
               <span class="grade-code">V2</span>
-              <span class="grade-name">Camera Glass</span>
+              <span class="grade-name">Gear</span>
             </button>
             <button class="grade-btn" data-target="#v3-karate">
               <span class="grade-code">V3</span>
               <span class="grade-name">Karate</span>
             </button>
-            <button class="grade-btn" data-target="#v4-builds">
+            <button class="grade-btn" data-target="#v4-skills">
               <span class="grade-code">V4</span>
-              <span class="grade-name">Engineering</span>
+              <span class="grade-name">Skills</span>
             </button>
-            <button class="grade-btn summit-grade-btn" data-target="#v5-photography">
+            <button class="grade-btn" data-target="#v5-projects">
               <span class="grade-code">V5</span>
-              <span class="grade-name">Photography 🏆</span>
+              <span class="grade-name">Projects</span>
+            </button>
+            <button class="grade-btn" data-target="#v6-betalog">
+              <span class="grade-code">V6</span>
+              <span class="grade-name">Beta Log</span>
+            </button>
+            <button class="grade-btn summit-grade-btn" data-target="#v7-photography">
+              <span class="grade-code">V7</span>
+              <span class="grade-name">Summit 🏆</span>
             </button>
             
-            <!-- Coming Soon Grades -->
-            <button class="grade-btn locked" disabled title="Future Project Expansion">
-              <span class="grade-code">V6</span>
-              <span class="grade-name">Locked 🔒</span>
-            </button>
-            <button class="grade-btn locked" disabled title="Future Project Expansion">
-              <span class="grade-code">V7</span>
-              <span class="grade-name">Locked 🔒</span>
-            </button>
+            <!-- Locked expansion grades -->
             <button class="grade-btn locked" disabled title="Future Project Expansion">
               <span class="grade-code">V8</span>
               <span class="grade-name">Locked 🔒</span>
@@ -317,11 +437,8 @@
         <!-- Quick Launch Actions -->
         <div class="ground-actions">
           <button id="dynoLaunchBtn" class="super-btn dyno-btn">
-            🚀 DYNO TO SUMMIT (V5)!
+            🚀 FULL SEND DYNO
           </button>
-          <a href="#v1-about" class="super-btn climb-step-btn">
-            🧗 Start Climbing Up (V1)
-          </a>
         </div>
 
       </div>

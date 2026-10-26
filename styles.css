@@ -939,3 +939,139 @@ body {
   .gear-columns, .lightbox-window { grid-template-columns: 1fr; }
   .jungle-headline { font-size: 1.8rem; }
 }
+
+/* Centered Social Buttons in V1 About Me */
+.about-socials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px dashed var(--border-line);
+}
+
+.social-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-line);
+  color: var(--text-main);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.social-icon-btn svg {
+  width: 20px;
+  height: 20px;
+  transition: transform var(--transition-fast);
+}
+
+.social-icon-btn:hover {
+  border-color: var(--accent-amber);
+  background: var(--bg-panel-tab);
+  color: var(--accent-amber);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.social-icon-btn:hover svg {
+  transform: scale(1.12);
+}
+
+/* ==========================================================================
+   Skills Pitch (V4)
+   ========================================================================== */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.skill-category {
+  background: var(--bg-card);
+  border: 1px solid var(--border-line);
+  border-radius: 8px;
+  padding: 18px;
+}
+
+.skill-category h3 {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  color: var(--accent-amber);
+  margin-bottom: 12px;
+  border-bottom: 1px dashed var(--border-line);
+  padding-bottom: 6px;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-tags span {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  background: var(--bg-panel-tab);
+  border: 1px solid var(--border-glow);
+  padding: 3px 8px;
+  border-radius: 4px;
+  color: var(--text-main);
+}
+
+/* ==========================================================================
+   Beta Log Pitch (V6)
+   ========================================================================== */
+.beta-log-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.beta-entry {
+  background: var(--bg-card);
+  border-left: 3px solid var(--accent-coral);
+  border-top: 1px solid var(--border-line);
+  border-right: 1px solid var(--border-line);
+  border-bottom: 1px solid var(--border-line);
+  border-radius: 0 8px 8px 0;
+  padding: 16px 20px;
+}
+
+.beta-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.beta-date {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent-amber);
+}
+
+.beta-tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  background: var(--border-line);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--text-muted);
+}
+
+.beta-entry h3 {
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+  color: var(--text-main);
+}
+
+.beta-entry p {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
