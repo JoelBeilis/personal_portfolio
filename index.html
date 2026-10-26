@@ -3,43 +3,66 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Joel Beilis — Photography & Engineering</title>
+  <title>Joel's Jungle — Climb to the Summit</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- Climbing Route Topo Spine -->
-  <aside class="climbing-topo" id="climbingTopo" aria-label="Climbing Route Topo">
-    <div class="topo-line"></div>
-    
-    <!-- Holds acting as waypoint buttons -->
-    <button class="hold-btn active" data-target="#hero" data-grade="V0" aria-label="Send to Start: V0">
-      <span class="hold-shape jug"></span>
-      <span class="hold-tag">V0 START</span>
-    </button>
-    <button class="hold-btn" data-target="#gallery" data-grade="V3" aria-label="Send to Gallery: V3">
-      <span class="hold-shape crimp"></span>
-      <span class="hold-tag">V3 GALLERY</span>
-    </button>
-    <button class="hold-btn" data-target="#projects" data-grade="V5" aria-label="Send to Projects: V5">
-      <span class="hold-shape pinch"></span>
-      <span class="hold-tag">V5 BUILDS</span>
-    </button>
-    <button class="hold-btn" data-target="#about" data-grade="V7" aria-label="Send to About: V7">
-      <span class="hold-shape sloper"></span>
-      <span class="hold-tag">V7 ABOUT</span>
-    </button>
-    <button class="hold-btn" data-target="#contact" data-grade="TOP" aria-label="Send to Top: TOP">
-      <span class="hold-shape anchor"></span>
-      <span class="hold-tag">TOP SEND</span>
-    </button>
+  <!-- Floating HUD: Actions & Theme -->
+  <header class="hud-bar">
+    <div class="hud-left">
+      <span class="hud-tag">ROUTE: V_PROJECT</span>
+      <span class="elevation-label" id="elevationLabel">ELEVATION: 0m (GROUND)</span>
+    </div>
+    <div class="hud-right">
+      <button id="chalkBtn" class="hud-btn" title="Chalk up for +100% friction">
+        <span>🧗 Chalk Up</span>
+        <span class="friction-pill" id="frictionBadge">+0%</span>
+      </button>
+      <button id="themeToggle" class="hud-btn" aria-label="Toggle Theme">
+        <span class="theme-icon">🌙</span>
+      </button>
+    </div>
+  </header>
 
-    <!-- Retro 8-Bit Pixel Climber -->
-    <div class="pixel-climber" id="climber" aria-hidden="true">
-      <div class="climber-chalk-container" id="climberChalkContainer"></div>
+  <!-- Vertical Topo Climbing Spine -->
+  <aside class="crag-topo" id="cragTopo" aria-label="Ascending Topo Route">
+    <div class="topo-line"></div>
+
+    <!-- Holds ordered TOP (Summit) to BOTTOM (Base) -->
+    <div class="holds-column">
+      <button class="hold-node" data-target="#v5-photography" data-grade="V5">
+        <span class="hold-gem anchor-hold"></span>
+        <span class="hold-label">V5: Photography (Summit)</span>
+      </button>
+      <button class="hold-node" data-target="#v4-builds" data-grade="V4">
+        <span class="hold-gem sloper-hold"></span>
+        <span class="hold-label">V4: Engineering</span>
+      </button>
+      <button class="hold-node" data-target="#v3-karate" data-grade="V3">
+        <span class="hold-gem pinch-hold"></span>
+        <span class="hold-label">V3: Martial Arts</span>
+      </button>
+      <button class="hold-node" data-target="#v2-gear" data-grade="V2">
+        <span class="hold-gem crimp-hold"></span>
+        <span class="hold-label">V2: Camera Glass</span>
+      </button>
+      <button class="hold-node" data-target="#v1-about" data-grade="V1">
+        <span class="hold-gem jug-hold"></span>
+        <span class="hold-label">V1: About Me</span>
+      </button>
+      <button class="hold-node active" data-target="#ground" data-grade="V0">
+        <span class="hold-gem ground-hold"></span>
+        <span class="hold-label">V0: Crash Pad (Start)</span>
+      </button>
+    </div>
+
+    <!-- Retro 8-bit Sprite Climber -->
+    <div class="pixel-climber" id="climber">
+      <div class="chalk-emitter" id="chalkEmitter"></div>
       <svg viewBox="0 0 32 32" class="climber-svg" shape-rendering="crispEdges">
         <!-- Beanie & Hair -->
         <rect x="12" y="3" width="8" height="3" fill="#f59e0b" />
@@ -47,23 +70,21 @@
         <!-- Head / Skin -->
         <rect x="12" y="8" width="8" height="6" fill="#fcd34d" />
         <rect x="17" y="10" width="2" height="2" fill="#1e1b4b" />
-        <!-- Torso / Tank Top -->
+        <!-- Torso / Jersey -->
         <rect x="11" y="14" width="10" height="9" fill="#818cf8" />
         <rect x="13" y="14" width="6" height="3" fill="#a5b4fc" />
-        <!-- Chalk Bag on Back -->
-        <rect x="8" y="19" width="4" height="4" fill="#fb7185" id="climberChalkBag" />
-        <rect x="9" y="18" width="2" height="1" fill="#f1f5f9" />
-        <!-- Left Arm reaching up -->
-        <rect x="9" y="10" width="3" height="4" fill="#fcd34d" />
-        <rect x="8" y="7" width="3" height="4" fill="#fcd34d" />
+        <!-- Chalk Bag -->
+        <rect x="8" y="19" width="4" height="4" fill="#fb7185" />
+        <rect x="9" y="18" width="2" height="1" fill="#f8fafc" />
+        <!-- Arms / Hands on holds -->
+        <rect x="9" y="8" width="3" height="6" fill="#fcd34d" />
         <rect x="8" y="5" width="4" height="3" fill="#fcd34d" />
-        <!-- Right Arm crimping -->
-        <rect x="20" y="11" width="3" height="4" fill="#fcd34d" />
-        <rect x="22" y="8" width="4" height="3" fill="#fcd34d" />
-        <!-- Harness & Shorts -->
+        <rect x="20" y="9" width="3" height="5" fill="#fcd34d" />
+        <rect x="22" y="7" width="4" height="3" fill="#fcd34d" />
+        <!-- Harness & Leg Loops -->
         <rect x="11" y="23" width="10" height="3" fill="#312e81" />
         <rect x="12" y="24" width="8" height="1" fill="#ec4899" />
-        <!-- Legs & Climbing Shoes -->
+        <!-- Legs & Sticky Rubber Climbing Shoes -->
         <rect x="10" y="26" width="3" height="4" fill="#fcd34d" />
         <rect x="8" y="29" width="5" height="3" fill="#06b6d4" />
         <rect x="19" y="25" width="3" height="4" fill="#fcd34d" />
@@ -72,243 +93,255 @@
     </div>
   </aside>
 
-  <!-- Navigation Bar -->
-  <header class="app-header">
-    <div class="header-inner">
-      <div class="vault-brand">
-        <span class="vault-icon">📁</span>
-        <span class="vault-path">JoelBeilis_Vault / <span class="active-node">home.md</span></span>
-      </div>
-      <nav class="nav-links">
-        <a href="#gallery" class="nav-item">Gallery</a>
-        <a href="#projects" class="nav-item">Builds</a>
-        <a href="#about" class="nav-item">About</a>
-        <a href="#contact" class="nav-item">Contact</a>
-        <button id="chalkBtn" class="pill-btn chalk-btn" title="Chalk up for extra friction!">
-          <span class="btn-icon">🧗</span>
-          <span class="btn-text">Chalk Up</span>
-          <span class="friction-badge" id="frictionBadge">+0%</span>
-        </button>
-        <button id="themeToggle" class="pill-btn theme-btn" aria-label="Toggle Obsidian Retroma theme">
-          <span class="theme-icon">🌙</span>
-        </button>
-      </nav>
-    </div>
-  </header>
+  <!-- MAIN CRAG: Arranged from Summit (Top) down to Ground (Bottom) -->
+  <main class="crag-body">
 
-  <main class="page-container">
-    
-    <!-- Hero Section -->
-    <section id="hero" class="panel hero-panel">
-      <div class="panel-header-tab">
-        <span class="tab-dot"></span>
-        <span>00_hero.md</span>
+    <!-- ==================== V5: SUMMIT (PHOTOGRAPHY) ==================== -->
+    <section id="v5-photography" class="route-pitch summit-pitch">
+      <div class="pitch-tab">
+        <span class="pitch-badge">V5 — PITCH 05 // THE SUMMIT</span>
+        <span class="pitch-code">archive_manifest.canvas</span>
       </div>
-      <div class="panel-body">
-        <div class="obsidian-properties">
-          <div class="prop-row">
-            <span class="prop-key">id:</span>
-            <span class="prop-val">joel_beilis</span>
+      <div class="pitch-card">
+        <div class="section-title-wrap">
+          <div>
+            <h2>Photographic Works</h2>
+            <p class="section-sub">ROM Wildlife Photographer of the Year Youth winner. Candid, unstaged frames.</p>
           </div>
-          <div class="prop-row">
-            <span class="prop-key">focus:</span>
-            <span class="prop-val-badge">Photography</span>
-            <span class="prop-val-badge">Physics</span>
-            <span class="prop-val-badge">Engineering</span>
-            <span class="prop-val-badge">Bouldering</span>
-          </div>
-          <div class="prop-row">
-            <span class="prop-key">status:</span>
-            <span class="prop-val" style="color: var(--accent-orange);">⚡ Ready to send</span>
-          </div>
+          <span class="counter-badge" id="photoCount">Loading records...</span>
         </div>
 
-        <h1 class="hero-title">Framing nature through glass & precision engineering.</h1>
-        <p class="hero-desc">
-          ROM Youth Wildlife Photographer of the Year winner. Capturing candid, un-staged wildlife and coastal environments with prime lenses, custom-engineered camera traps, and mechanical hardware.
+        <!-- Filter & Search Controls -->
+        <div class="gallery-controls">
+          <div class="search-box">
+            <span class="search-ico">🔍</span>
+            <input type="text" id="gallerySearch" placeholder="Filter by species, lens, camera, region..." />
+          </div>
+          <div class="tags-row" id="tagFilters"></div>
+        </div>
+
+        <div class="gallery-grid" id="galleryGrid"></div>
+
+        <div class="summit-anchor-box">
+          <p>🚩 You've topped out on the crag.</p>
+          <button id="summitFallBtn" class="super-btn freefall-btn">Free Fall Back to Ground! 🪂</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== V4: ENGINEERING ==================== -->
+    <section id="v4-builds" class="route-pitch">
+      <div class="pitch-tab">
+        <span class="pitch-badge">V4 — PITCH 04</span>
+        <span class="pitch-code">hardware_lab.md</span>
+      </div>
+      <div class="pitch-card">
+        <h2>Engineering, CAD & Computational Builds</h2>
+        <p class="pitch-lead">Designing physical tools, lens accessories, and optical diagnostic hardware.</p>
+        
+        <div class="cards-grid">
+          <div class="obs-card">
+            <div class="obs-card-head">
+              <span class="mono-id">[[laser-tripline.ino]]</span>
+              <span class="stat-pill">Sensors</span>
+            </div>
+            <h3>Microsecond Laser Gate Shutter</h3>
+            <p>Non-invasive dual-beam infrared trigger with an Arduino interrupt loop to freeze high-velocity avian predators.</p>
+            <div class="card-chips"><span>C++</span><span>Optics</span><span>Embedded</span></div>
+          </div>
+          <div class="obs-card">
+            <div class="obs-card-head">
+              <span class="mono-id">[[petg-hood.cad]]</span>
+              <span class="stat-pill">3D Print</span>
+            </div>
+            <h3>PETG Matte Lens Baffle</h3>
+            <p>Engineered petal hood modeled specifically for vintage manual prime glass on modern mirrorless mounts.</p>
+            <div class="card-chips"><span>Fusion 360</span><span>PETG</span></div>
+          </div>
+          <div class="obs-card">
+            <div class="obs-card-head">
+              <span class="mono-id">[[exif-sync.py]]</span>
+              <span class="stat-pill">Pipeline</span>
+            </div>
+            <h3>Automated EXIF & WebP Pipeline</h3>
+            <p>CLI pipeline converting camera raw exports into lightweight WebP previews with JSON metadata manifests.</p>
+            <div class="card-chips"><span>Python</span><span>Pillow</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== V3: MARTIAL ARTS ==================== -->
+    <section id="v3-karate" class="route-pitch">
+      <div class="pitch-tab">
+        <span class="pitch-badge">V3 — PITCH 03</span>
+        <span class="pitch-code">martial_arts.md</span>
+      </div>
+      <div class="pitch-card">
+        <h2>Martial Arts: Karate & Discipline</h2>
+        <p class="pitch-lead">Years spent teaching and training form the backbone of patience in both climbing and tracking wildlife in the field.</p>
+        
+        <div class="karate-stats-grid">
+          <div class="stat-box">
+            <span class="stat-num">3+</span>
+            <span class="stat-desc">Years as Dojo Instructor</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num">Kata & Kumite</span>
+            <span class="stat-desc">Precision form, focus & fast reflexes</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num">Field Focus</span>
+            <span class="stat-desc">Remaining completely motionless in freezing brush</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== V2: CAMERA EQUIPMENT ==================== -->
+    <section id="v2-gear" class="route-pitch">
+      <div class="pitch-tab">
+        <span class="pitch-badge">V2 — PITCH 02</span>
+        <span class="pitch-code">optics_locker.md</span>
+      </div>
+      <div class="pitch-card">
+        <h2>Camera Rig & Prime Glass</h2>
+        <p class="pitch-lead"><em>"Date your camera body, marry your prime lenses."</em> Keeping optics sharp and mechanics predictable.</p>
+        
+        <div class="gear-columns">
+          <div class="gear-block">
+            <h3>Bodies</h3>
+            <ul>
+              <li><strong>Nikon D700:</strong> Legendary full-frame CCD/CMOS color rendition</li>
+              <li><strong>Nikkormat 35mm SLR:</strong> Mechanical mechanical film purity</li>
+              <li><strong>Sony Mirrorless:</strong> Fast-aperture compact digital walkabout</li>
+            </ul>
+          </div>
+          <div class="gear-block">
+            <h3>Primes & Specialized Glass</h3>
+            <ul>
+              <li><strong>28mm Pancake:</strong> Ultra-lightweight street & landscape</li>
+              <li><strong>50mm f/1.4:</strong> Natural human eye perspective & low-light speed</li>
+              <li><strong>105mm Micro:</strong> Macro textures & razor wildlife portraits</li>
+              <li><strong>300mm Prime:</strong> Distant raptor & coastal action</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== V1: ABOUT ME ==================== -->
+    <section id="v1-about" class="route-pitch">
+      <div class="pitch-tab">
+        <span class="pitch-badge">V1 — PITCH 01</span>
+        <span class="pitch-code">profile.md</span>
+      </div>
+      <div class="pitch-card">
+        <h2>About Joel</h2>
+        <p class="pitch-lead">
+          Honours Mathematics and Physics student, nature photographer, martial artist, and boulderer.
         </p>
-
-        <div class="hero-actions">
-          <a href="#gallery" class="cta-primary">Explore Gallery ↓</a>
-          <a href="#projects" class="cta-secondary">View Hardware Builds</a>
-        </div>
+        <p>
+          Whether analyzing plasma potentials, dialing in camera trap timing, or unlocking tricky beta on a boulder problem, I treat every project as a balance of patience, geometry, and mechanical execution.
+        </p>
       </div>
     </section>
 
-    <!-- Gallery Section -->
-    <section id="gallery" class="panel gallery-panel">
-      <div class="panel-header-tab">
-        <span class="tab-dot"></span>
-        <span>01_photo_archive.canvas</span>
+    <!-- ==================== V0: GROUND ZERO / BASE CAMP ==================== -->
+    <section id="ground" class="route-pitch ground-pitch">
+      <div class="pitch-tab">
+        <span class="pitch-badge">V0 — BASE CAMP // CRASH PAD</span>
+        <span class="pitch-code">start_line.canvas</span>
       </div>
-      <div class="panel-body">
-        <div class="section-title-wrap">
-          <h2>Photographic Works</h2>
-          <span class="section-meta" id="photoCount">Loading entries...</span>
-        </div>
-
-        <!-- Filter & Search Toolbar -->
-        <div class="filter-bar">
-          <div class="search-input-wrap">
-            <span class="search-icon">🔍</span>
-            <input type="text" id="gallerySearch" placeholder="Filter by title, camera, lens, location..." aria-label="Search photos">
-          </div>
-          <div class="tags-scroller" id="tagPillsContainer">
-            <!-- Populated via script.js -->
+      <div class="pitch-card jungle-welcome-card">
+        
+        <!-- Big Retro Banner -->
+        <div class="retro-banner-frame">
+          <div class="banner-glitch-border">
+            <h1 class="jungle-headline">WELCOME TO JOEL'S JUNGLE</h1>
+            <p class="banner-sub">CLIMB UPWARD TO UNLOCK THE ARCHIVES</p>
           </div>
         </div>
 
-        <!-- Masonry Grid -->
-        <div class="gallery-grid" id="galleryGrid">
-          <!-- Dynamically populated photos -->
-        </div>
-      </div>
-    </section>
-
-    <!-- Hardware & Builds Section -->
-    <section id="projects" class="panel projects-panel">
-      <div class="panel-header-tab">
-        <span class="tab-dot"></span>
-        <span>02_engineering_notes.md</span>
-      </div>
-      <div class="panel-body">
-        <div class="section-title-wrap">
-          <h2>Engineering & Creative Builds</h2>
-          <span class="section-meta">CAD / Embedded / Computational</span>
+        <div class="crag-intro">
+          <p>
+            Standard portfolios scroll down. This crag scrolls <strong>UP</strong>. Choose your route grade below, start sending your way to the summit, or slap a dyno to leap straight to the top.
+          </p>
         </div>
 
-        <div class="projects-grid">
-          <article class="project-card">
-            <div class="card-head">
-              <span class="card-id">[[ir-wildlife-gate.ino]]</span>
-              <span class="card-chip">Embedded</span>
-            </div>
-            <h3>Microsecond Laser Tripline Camera Shutter</h3>
-            <p>Non-invasive dual-beam infrared trigger with an Arduino interrupt controller to photograph fast-moving birds of prey and nocturnal critters.</p>
-            <div class="card-tags">
-              <span>C++</span>
-              <span>Hardware</span>
-              <span>Optoelectronics</span>
-            </div>
-          </article>
-
-          <article class="project-card">
-            <div class="card-head">
-              <span class="card-id">[[lens-hood-baffle.cad]]</span>
-              <span class="card-chip">3D Print</span>
-            </div>
-            <h3>Custom PETG Matte Lens Baffle & Ring</h3>
-            <p>Engineered petal hood modeled specifically for vintage manual prime glass on modern mirrorless mounts, preventing off-axis stray light flaring.</p>
-            <div class="card-tags">
-              <span>Fusion 360</span>
-              <span>Optics</span>
-              <span>PETG</span>
-            </div>
-          </article>
-
-          <article class="project-card">
-            <div class="card-head">
-              <span class="card-id">[[exif-manifest-gen.py]]</span>
-              <span class="card-chip">CLI Tool</span>
-            </div>
-            <h3>Automated EXIF Extraction & WebP Optimizer</h3>
-            <p>CLI pipeline parsing shutter count, aperture, and focal length into clean static JSON, reducing multi-megabyte gallery uploads to fast WebP assets.</p>
-            <div class="card-tags">
-              <span>Python</span>
-              <span>Pillow</span>
-              <span>Static Site</span>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="panel about-panel">
-      <div class="panel-header-tab">
-        <span class="tab-dot"></span>
-        <span>03_about_me.md</span>
-      </div>
-      <div class="panel-body">
-        <div class="about-grid">
-          <div class="about-text">
-            <h2>About & Philosophy</h2>
-            <p>
-              I am an Honours Mathematics and Physics student, photographer, and boulderer. My photography is rooted in patience and mechanical simplicity: <em>"Date your camera body, marry your prime lenses."</em>
-            </p>
-            <p>
-              Recognized with the Grand Prize in the <strong>Royal Ontario Museum (ROM) Wildlife Photographer of the Year Youth Contest</strong>, my work highlights intimate moments with avian predators, marine life, and raw wilderness landscapes without disturbing natural behaviors.
-            </p>
-            <div class="gear-drawer">
-              <h4>Primary Kit & Field Tools</h4>
-              <ul class="gear-list">
-                <li><strong>Bodies:</strong> Full-frame Digital Workhorse & 35mm Manual Film SLR</li>
-                <li><strong>Glass:</strong> 28mm Pancake, 35mm f/1.8, 50mm f/1.4, 105mm Micro</li>
-                <li><strong>Shoes:</strong> Soft sticky rubber for technical bouldering footwork</li>
-              </ul>
-            </div>
-          </div>
-          <div class="about-card-box">
-            <div class="boulder-problem-card">
-              <div class="problem-header">
-                <span>BOULDER PROBLEM: THE SEND</span>
-                <span class="grade-pill">V7 CRIMP</span>
-              </div>
-              <div class="problem-stats">
-                <div><span>Beta:</span> Flash Attempt</div>
-                <div><span>Holds:</span> Dual-Tex & Chalk</div>
-                <div><span>Style:</span> Technical Dyno</div>
-              </div>
-              <button class="climb-dyno-btn" id="sendDynoAction">Trigger Dyno Jump 🚀</button>
-            </div>
+        <!-- Grade Selector (V1 to V9) -->
+        <div class="boulder-grade-selector">
+          <div class="grade-selector-label">SELECT YOUR PITCH / GRADE:</div>
+          <div class="grade-buttons-row">
+            <button class="grade-btn" data-target="#v1-about">
+              <span class="grade-code">V1</span>
+              <span class="grade-name">About Me</span>
+            </button>
+            <button class="grade-btn" data-target="#v2-gear">
+              <span class="grade-code">V2</span>
+              <span class="grade-name">Camera Glass</span>
+            </button>
+            <button class="grade-btn" data-target="#v3-karate">
+              <span class="grade-code">V3</span>
+              <span class="grade-name">Karate</span>
+            </button>
+            <button class="grade-btn" data-target="#v4-builds">
+              <span class="grade-code">V4</span>
+              <span class="grade-name">Engineering</span>
+            </button>
+            <button class="grade-btn summit-grade-btn" data-target="#v5-photography">
+              <span class="grade-code">V5</span>
+              <span class="grade-name">Photography 🏆</span>
+            </button>
+            
+            <!-- Coming Soon Grades -->
+            <button class="grade-btn locked" disabled title="Future Project Expansion">
+              <span class="grade-code">V6</span>
+              <span class="grade-name">Locked 🔒</span>
+            </button>
+            <button class="grade-btn locked" disabled title="Future Project Expansion">
+              <span class="grade-code">V7</span>
+              <span class="grade-name">Locked 🔒</span>
+            </button>
+            <button class="grade-btn locked" disabled title="Future Project Expansion">
+              <span class="grade-code">V8</span>
+              <span class="grade-name">Locked 🔒</span>
+            </button>
+            <button class="grade-btn locked" disabled title="Future Project Expansion">
+              <span class="grade-code">V9</span>
+              <span class="grade-name">Locked 🔒</span>
+            </button>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="panel contact-panel">
-      <div class="panel-header-tab">
-        <span class="tab-dot"></span>
-        <span>04_contact_desk.md</span>
-      </div>
-      <div class="panel-body">
-        <h2>Reach the Top</h2>
-        <p>Looking to collaborate on optical engineering, print licensing, or trade beta at the climbing gym?</p>
-        <div class="contact-links">
-          <a href="mailto:contact@joelbeilis.com" class="contact-card">
-            <span class="c-icon">✉️</span>
-            <div>
-              <span class="c-title">Email</span>
-              <span class="c-sub">contact@joelbeilis.com</span>
-            </div>
-          </a>
-          <a href="https://github.com/joelbeilis" target="_blank" rel="noreferrer" class="contact-card">
-            <span class="c-icon">🐙</span>
-            <div>
-              <span class="c-title">GitHub</span>
-              <span class="c-sub">@joelbeilis</span>
-            </div>
+        <!-- Quick Launch Actions -->
+        <div class="ground-actions">
+          <button id="dynoLaunchBtn" class="super-btn dyno-btn">
+            🚀 DYNO TO SUMMIT (V5)!
+          </button>
+          <a href="#v1-about" class="super-btn climb-step-btn">
+            🧗 Start Climbing Up (V1)
           </a>
         </div>
+
       </div>
     </section>
 
   </main>
 
-  <!-- Fullscreen Lightbox Modal -->
-  <div class="lightbox-modal" id="lightboxModal" role="dialog" aria-modal="true" aria-hidden="true">
+  <!-- Fullscreen Lightbox -->
+  <div class="lightbox-modal" id="lightboxModal" role="dialog" aria-hidden="true">
     <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
-    <div class="lightbox-content">
-      <button class="lightbox-close" id="lightboxClose" aria-label="Close modal">✕</button>
-      <div class="lightbox-image-wrap">
-        <img id="lightboxImg" src="" alt="">
+    <div class="lightbox-window">
+      <button class="lightbox-close" id="lightboxClose">✕</button>
+      <div class="lightbox-frame">
+        <img id="lightboxImg" src="" alt="" />
       </div>
-      <div class="lightbox-meta-panel">
+      <div class="lightbox-sidebar">
         <h3 id="lightboxTitle"></h3>
-        <p id="lightboxLocation" class="meta-location"></p>
-        <div class="exif-specs" id="lightboxExif"></div>
-        <div class="lightbox-tags" id="lightboxTags"></div>
+        <p id="lightboxLocation" class="loc-text"></p>
+        <div class="exif-data" id="lightboxExif"></div>
+        <div class="tag-pills" id="lightboxTags"></div>
       </div>
     </div>
   </div>

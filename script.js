@@ -1,7 +1,7 @@
 // ==========================================================================
-// Sample Photographic Dataset (Easily replaced or loaded from photos.json)
+// Gallery Dataset
 // ==========================================================================
-const photosData = [
+const photos = [
   {
     id: "falcon-01",
     title: "Peregrine Falcon in High Descent",
@@ -12,7 +12,7 @@ const photosData = [
     exif: { camera: "Nikon D700", lens: "300mm f/4", shutter: "1/3200s", aperture: "f/4", iso: "400" }
   },
   {
-    id: "harbor-seal-02",
+    id: "seal-02",
     title: "Atlantic Harbor Seal Breaching",
     location: "Acadia Coastline, Maine",
     thumb: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
@@ -21,7 +21,7 @@ const photosData = [
     exif: { camera: "Nikon D700", lens: "105mm Micro f/2.8", shutter: "1/1600s", aperture: "f/5.6", iso: "200" }
   },
   {
-    id: "monochrome-dune-03",
+    id: "dunes-03",
     title: "Salt Marsh Morning Mist",
     location: "Cape Cod, Massachusetts",
     thumb: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=600&q=80",
@@ -30,7 +30,7 @@ const photosData = [
     exif: { camera: "Nikkormat SLR", lens: "50mm f/1.4", shutter: "1/500s", aperture: "f/8", iso: "100" }
   },
   {
-    id: "osprey-clutch-04",
+    id: "osprey-04",
     title: "Osprey Returning to Roost",
     location: "Algonquin Highlands, Ontario",
     thumb: "https://images.unsplash.com/photo-1574063413132-355dbfd83e25?auto=format&fit=crop&w=600&q=80",
@@ -39,7 +39,7 @@ const photosData = [
     exif: { camera: "Nikon D700", lens: "300mm f/4", shutter: "1/2500s", aperture: "f/4.5", iso: "320" }
   },
   {
-    id: "granite-boulder-05",
+    id: "lichen-05",
     title: "Weathered Granite & Lichen",
     location: "Smugglers Notch, Vermont",
     thumb: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
@@ -48,8 +48,8 @@ const photosData = [
     exif: { camera: "Nikkormat SLR", lens: "28mm Pancake", shutter: "1/250s", aperture: "f/11", iso: "100" }
   },
   {
-    id: "red-fox-06",
-    title: "Red Fox in Dense Understory",
+    id: "fox-06",
+    title: "Red Fox in Dense Underbrush",
     location: "Bruce Peninsula, Ontario",
     thumb: "https://images.unsplash.com/photo-1516934024742-b461fba47600?auto=format&fit=crop&w=600&q=80",
     full: "https://images.unsplash.com/photo-1516934024742-b461fba47600?auto=format&fit=crop&w=1600&q=85",
@@ -58,236 +58,249 @@ const photosData = [
   }
 ];
 
-// Active State
-let activeFilterTag = "All";
-let hasMaxFriction = false;
+let activeTag = "All";
+let hasFriction = false;
 let frictionTimer = null;
 
 // ==========================================================================
-// Initialization
+// Boot & Reverse-Scroll Initialization
 // ==========================================================================
 document.addEventListener("DOMContentLoaded", () => {
   initTheme();
-  initClimberTopo();
-  initChalkMechanic();
+  initAscendingTopo();
+  initChalk();
+  initSuperMoves();
   initGallery();
   initLightbox();
+
+  // Ensure initial load starts at the BOTTOM (Joel's Jungle Base Camp)
+  if (!window.location.hash) {
+    setTimeout(() => {
+      window.scrollTo({ top: document.body.scrollHeight, behavior: "auto" });
+    }, 50);
+  }
 });
 
 // ==========================================================================
-// Theme Management (Retroma Dark/Light)
+// Ascending Topo & Climber Motion
 // ==========================================================================
-function initTheme() {
-  const toggleBtn = document.getElementById("themeToggle");
-  const savedTheme = localStorage.getItem("jb-theme") || "dark";
-  document.documentElement.setAttribute("data-theme", savedTheme);
-  updateThemeIcon(savedTheme);
-
-  toggleBtn.addEventListener("click", () => {
-    const current = document.documentElement.getAttribute("data-theme");
-    const next = current === "dark" ? "light" : "dark";
-    document.documentElement.setAttribute("data-theme", next);
-    localStorage.setItem("jb-theme", next);
-    updateThemeIcon(next);
-  });
-}
-
-function updateThemeIcon(theme) {
-  const icon = document.querySelector(".theme-icon");
-  if (icon) icon.textContent = theme === "dark" ? "🌙" : "☀️";
-}
-
-// ==========================================================================
-// Bouldering Topo & Climber Logic
-// ==========================================================================
-function initClimberTopo() {
+function initAscendingTopo() {
   const climber = document.getElementById("climber");
-  const holdButtons = document.querySelectorAll(".hold-btn");
-  const topoContainer = document.getElementById("climbingTopo");
+  const topo = document.getElementById("cragTopo");
+  const holdNodes = Array.from(document.querySelectorAll(".hold-node"));
+  const elevationLabel = document.getElementById("elevationLabel");
 
-  if (!climber || !topoContainer) return;
+  if (!climber || !topo) return;
 
-  function updateClimberPosition(activeHold) {
-    if (!activeHold) return;
-    const holdRect = activeHold.getBoundingClientRect();
-    const topoRect = topoContainer.getBoundingClientRect();
-    const relativeTop = holdRect.top - topoRect.top + holdRect.height / 2;
-    climber.style.top = `${relativeTop}px`;
+  function setClimberToHold(holdBtn) {
+    if (!holdBtn) return;
+    const hRect = holdBtn.getBoundingClientRect();
+    const tRect = topo.getBoundingClientRect();
+    const relativeY = hRect.top - tRect.top + hRect.height / 2;
+    climber.style.top = `${relativeY}px`;
 
-    holdButtons.forEach(btn => btn.classList.remove("active"));
-    activeHold.classList.add("active");
+    holdNodes.forEach(b => b.classList.remove("active"));
+    holdBtn.classList.add("active");
+
+    // Calculate elevation relative to base (bottom is 0m, top is 850m)
+    const grade = holdBtn.getAttribute("data-grade");
+    const elevMap = { V0: "0m (GROUND)", V1: "150m", V2: "320m", V3: "480m", V4: "650m", V5: "850m (SUMMIT)" };
+    if (elevationLabel) elevationLabel.textContent = `ELEVATION: ${elevMap[grade] || "500m"}`;
   }
 
-  // Click hold to jump / scroll
-  holdButtons.forEach(btn => {
+  // Clicking any topo hold smooth-scrolls to that pitch
+  holdNodes.forEach(btn => {
     btn.addEventListener("click", () => {
-      const targetId = btn.getAttribute("data-target");
-      const targetEl = document.querySelector(targetId);
-      if (targetEl) {
-        if (hasMaxFriction) {
-          triggerDynoAnimation();
-        }
-        targetEl.scrollIntoView({ behavior: "smooth" });
+      const target = document.querySelector(btn.getAttribute("data-target"));
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth" });
       }
     });
   });
 
-  // Track scroll position to update hold
-  const sections = Array.from(holdButtons).map(b => document.querySelector(b.getAttribute("data-target")));
+  // Track scrolling (Scrolling UP increases elevation and moves climber UP)
+  const sections = holdNodes.map(h => document.querySelector(h.getAttribute("data-target")));
+
   window.addEventListener("scroll", () => {
-    const scrollPos = window.scrollY + window.innerHeight * 0.35;
-    let currentIdx = 0;
+    const scrollMiddle = window.scrollY + window.innerHeight * 0.45;
+    let activeIdx = 0;
 
     sections.forEach((sec, idx) => {
-      if (sec && sec.offsetTop <= scrollPos) {
-        currentIdx = idx;
+      if (sec && sec.offsetTop <= scrollMiddle) {
+        activeIdx = idx;
       }
     });
 
-    updateClimberPosition(holdButtons[currentIdx]);
+    setClimberToHold(holdNodes[activeIdx]);
   }, { passive: true });
 
-  // Initial placement
-  updateClimberPosition(holdButtons[0]);
+  // Initial anchor to base
+  setClimberToHold(holdNodes[holdNodes.length - 1]);
+}
 
-  // About dyno button
-  const dynoActionBtn = document.getElementById("sendDynoAction");
-  if (dynoActionBtn) {
-    dynoActionBtn.addEventListener("click", () => {
-      triggerDynoAnimation();
-      emitChalkPuff(climber);
+// ==========================================================================
+// Dyno (Jump to Top) & Free Fall (Drop to Ground)
+// ==========================================================================
+function initSuperMoves() {
+  const dynoBtn = document.getElementById("dynoLaunchBtn");
+  const fallBtn = document.getElementById("summitFallBtn");
+  const climber = document.getElementById("climber");
+
+  // Grade buttons routing
+  document.querySelectorAll(".grade-btn:not(.locked)").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const target = document.querySelector(btn.getAttribute("data-target"));
+      if (target) target.scrollIntoView({ behavior: "smooth" });
+    });
+  });
+
+  // 🚀 DYNO: Leap from base straight to summit
+  if (dynoBtn) {
+    dynoBtn.addEventListener("click", () => {
+      if (climber) {
+        climber.classList.add("dyno-jumping");
+        emitChalkExplosion();
+      }
+      
+      const summit = document.getElementById("v5-photography");
+      if (summit) {
+        summit.scrollIntoView({ behavior: "smooth" });
+      }
+
+      setTimeout(() => {
+        if (climber) climber.classList.remove("dyno-jumping");
+      }, 1000);
+    });
+  }
+
+  // 🪂 FREE FALL: Plummet from summit to ground
+  if (fallBtn) {
+    fallBtn.addEventListener("click", () => {
+      if (climber) {
+        climber.classList.add("free-falling");
+      }
+
+      const ground = document.getElementById("ground");
+      if (ground) {
+        ground.scrollIntoView({ behavior: "smooth" });
+      }
+
+      // Screen shake landing FX
+      setTimeout(() => {
+        if (climber) climber.classList.remove("free-falling");
+        document.body.style.transform = "translateY(6px)";
+        setTimeout(() => document.body.style.transform = "translateY(0)", 120);
+        emitChalkExplosion();
+      }, 900);
     });
   }
 }
 
-function triggerDynoAnimation() {
-  const climber = document.getElementById("climber");
-  if (!climber) return;
-  climber.classList.remove("climber-dyno");
-  void climber.offsetWidth; // Reflow
-  climber.classList.add("climber-dyno");
-}
-
 // ==========================================================================
-// Interactive "Chalk Up" Mechanic
+// Chalk Up Mechanic
 // ==========================================================================
-function initChalkMechanic() {
+function initChalk() {
   const chalkBtn = document.getElementById("chalkBtn");
-  const frictionBadge = document.getElementById("frictionBadge");
+  const badge = document.getElementById("frictionBadge");
   const climber = document.getElementById("climber");
 
   if (!chalkBtn || !climber) return;
 
   chalkBtn.addEventListener("click", () => {
-    // 1. Trigger climber dipping hand into chalk bag
     climber.classList.remove("climber-chalking");
     void climber.offsetWidth;
     climber.classList.add("climber-chalking");
 
-    // 2. Emit randomized chalk particles from chalk bag position
-    emitChalkPuff(climber);
+    emitChalkExplosion();
 
-    // 3. Grant Max Friction power-up (+100% grip for 15s)
-    hasMaxFriction = true;
-    climber.classList.add("max-friction");
-    frictionBadge.textContent = "+100%";
-    frictionBadge.style.color = "#34d399";
-    chalkBtn.querySelector(".btn-text").textContent = "Chalked!";
+    hasFriction = true;
+    badge.textContent = "+100%";
+    badge.style.color = "#34d399";
 
     clearTimeout(frictionTimer);
     frictionTimer = setTimeout(() => {
-      hasMaxFriction = false;
-      climber.classList.remove("max-friction");
-      frictionBadge.textContent = "+0%";
-      frictionBadge.style.color = "var(--accent-orange)";
-      chalkBtn.querySelector(".btn-text").textContent = "Chalk Up";
-    }, 15000);
+      hasFriction = false;
+      badge.textContent = "+0%";
+      badge.style.color = "var(--accent-amber)";
+    }, 12000);
   });
 }
 
-function emitChalkPuff(climber) {
-  const container = document.getElementById("climberChalkContainer");
-  if (!container) return;
+function emitChalkExplosion() {
+  const emitter = document.getElementById("chalkEmitter");
+  if (!emitter) return;
 
-  // Generate 12 scattered pixel dust particles
-  for (let i = 0; i < 12; i++) {
-    const particle = document.createElement("span");
-    particle.className = "chalk-particle";
-
+  for (let i = 0; i < 14; i++) {
+    const p = document.createElement("span");
+    p.className = "particle";
     const size = Math.floor(Math.random() * 4) + 2;
-    particle.style.width = `${size}px`;
-    particle.style.height = `${size}px`;
+    p.style.width = `${size}px`;
+    p.style.height = `${size}px`;
 
-    // Random velocity angle
-    const angle = Math.random() * Math.PI * 2;
-    const distance = Math.floor(Math.random() * 32) + 12;
-    const tx = Math.cos(angle) * distance;
-    const ty = Math.sin(angle) * distance;
+    const rad = Math.random() * Math.PI * 2;
+    const dist = Math.floor(Math.random() * 30) + 10;
+    p.style.setProperty("--tx", `${Math.cos(rad) * dist}px`);
+    p.style.setProperty("--ty", `${Math.sin(rad) * dist}px`);
 
-    particle.style.setProperty("--tx", `${tx}px`);
-    particle.style.setProperty("--ty", `${ty}px`);
-
-    container.appendChild(particle);
-    setTimeout(() => particle.remove(), 800);
+    emitter.appendChild(p);
+    setTimeout(() => p.remove(), 750);
   }
 }
 
 // ==========================================================================
-// Gallery Engine: Multi-Tag Filtering & Search
+// Gallery & Filter Engine
 // ==========================================================================
 function initGallery() {
   const grid = document.getElementById("galleryGrid");
-  const tagsContainer = document.getElementById("tagPillsContainer");
+  const tagsContainer = document.getElementById("tagFilters");
   const searchInput = document.getElementById("gallerySearch");
   const countLabel = document.getElementById("photoCount");
 
-  // Extract unique tags
-  const tagsSet = new Set(["All"]);
-  photosData.forEach(p => p.tags.forEach(t => tagsSet.add(t)));
+  const tags = new Set(["All"]);
+  photos.forEach(p => p.tags.forEach(t => tags.add(t)));
 
-  // Render tag buttons
   tagsContainer.innerHTML = "";
-  tagsSet.forEach(tag => {
+  tags.forEach(tag => {
     const btn = document.createElement("button");
-    btn.className = `tag-filter-btn ${tag === "All" ? "active" : ""}`;
-    btn.textContent = tag === "All" ? "All Works" : `#${tag}`;
+    btn.className = `tag-btn ${tag === "All" ? "active" : ""}`;
+    btn.textContent = tag === "All" ? "All" : `#${tag}`;
     btn.addEventListener("click", () => {
-      document.querySelectorAll(".tag-filter-btn").forEach(b => b.classList.remove("active"));
+      document.querySelectorAll(".tag-btn").forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
-      activeFilterTag = tag;
-      renderPhotos();
+      activeTag = tag;
+      renderGallery();
     });
     tagsContainer.appendChild(btn);
   });
 
-  searchInput.addEventListener("input", () => renderPhotos());
+  searchInput.addEventListener("input", renderGallery);
 
-  function renderPhotos() {
-    const query = searchInput.value.toLowerCase().trim();
-    const filtered = photosData.filter(item => {
-      const matchesTag = activeFilterTag === "All" || item.tags.includes(activeFilterTag);
-      const matchesQuery = !query || 
-        item.title.toLowerCase().includes(query) ||
-        item.location.toLowerCase().includes(query) ||
-        item.exif.camera.toLowerCase().includes(query) ||
-        item.exif.lens.toLowerCase().includes(query) ||
-        item.tags.some(t => t.toLowerCase().includes(query));
+  function renderGallery() {
+    const q = searchInput.value.toLowerCase().trim();
+    const filtered = photos.filter(p => {
+      const matchTag = activeTag === "All" || p.tags.includes(activeTag);
+      const matchSearch = !q ||
+        p.title.toLowerCase().includes(q) ||
+        p.location.toLowerCase().includes(q) ||
+        p.exif.camera.toLowerCase().includes(q) ||
+        p.exif.lens.toLowerCase().includes(q) ||
+        p.tags.some(t => t.toLowerCase().includes(q));
 
-      return matchesTag && matchesQuery;
+      return matchTag && matchSearch;
     });
 
-    countLabel.textContent = `${filtered.length} of ${photosData.length} records`;
-
+    countLabel.textContent = `${filtered.length} of ${photos.length} frames`;
     grid.innerHTML = "";
+
     filtered.forEach(photo => {
       const card = document.createElement("div");
-      card.className = "photo-item skeleton";
+      card.className = "photo-card skeleton";
 
       const img = document.createElement("img");
       img.alt = photo.title;
       img.loading = "lazy";
       img.src = photo.thumb;
-
       img.onload = () => {
         img.classList.add("loaded");
         card.classList.remove("skeleton");
@@ -296,19 +309,18 @@ function initGallery() {
       const overlay = document.createElement("div");
       overlay.className = "photo-overlay";
       overlay.innerHTML = `
-        <div class="photo-title">${photo.title}</div>
-        <div class="photo-gear-pill">${photo.exif.camera} • ${photo.exif.lens}</div>
+        <div class="p-title">${photo.title}</div>
+        <div class="p-gear">${photo.exif.camera} • ${photo.exif.lens}</div>
       `;
 
       card.appendChild(img);
       card.appendChild(overlay);
-
       card.addEventListener("click", () => openLightbox(photo));
       grid.appendChild(card);
     });
   }
 
-  renderPhotos();
+  renderGallery();
 }
 
 // ==========================================================================
@@ -319,10 +331,10 @@ function initLightbox() {
   const closeBtn = document.getElementById("lightboxClose");
   const backdrop = document.getElementById("lightboxBackdrop");
 
-  function close() {
+  const close = () => {
     modal.classList.remove("active");
     modal.setAttribute("aria-hidden", "true");
-  }
+  };
 
   closeBtn.addEventListener("click", close);
   backdrop.addEventListener("click", close);
@@ -337,16 +349,39 @@ function openLightbox(photo) {
   document.getElementById("lightboxTitle").textContent = photo.title;
   document.getElementById("lightboxLocation").textContent = `📍 ${photo.location}`;
 
-  const exifContainer = document.getElementById("lightboxExif");
-  exifContainer.innerHTML = `
-    <div><span>Camera:</span> ${photo.exif.camera}</div>
-    <div><span>Lens:</span> ${photo.exif.lens}</div>
-    <div><span>Exposure:</span> ${photo.exif.shutter} at ${photo.exif.aperture}, ISO ${photo.exif.iso}</div>
+  const exifEl = document.getElementById("lightboxExif");
+  exifEl.innerHTML = `
+    <div><strong>Camera:</strong> ${photo.exif.camera}</div>
+    <div><strong>Lens:</strong> ${photo.exif.lens}</div>
+    <div><strong>Parameters:</strong> ${photo.exif.shutter} at ${photo.exif.aperture}, ISO ${photo.exif.iso}</div>
   `;
 
-  const tagsContainer = document.getElementById("lightboxTags");
-  tagsContainer.innerHTML = photo.tags.map(t => `<span>#${t}</span>`).join("");
+  const tagsEl = document.getElementById("lightboxTags");
+  tagsEl.innerHTML = photo.tags.map(t => `<span>#${t}</span>`).join("");
 
   modal.classList.add("active");
   modal.setAttribute("aria-hidden", "false");
+}
+
+// ==========================================================================
+// Theme Setup
+// ==========================================================================
+function initTheme() {
+  const btn = document.getElementById("themeToggle");
+  const saved = localStorage.getItem("jb-theme") || "dark";
+  document.documentElement.setAttribute("data-theme", saved);
+  updateThemeIcon(saved);
+
+  btn.addEventListener("click", () => {
+    const cur = document.documentElement.getAttribute("data-theme");
+    const next = cur === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
+    localStorage.setItem("jb-theme", next);
+    updateThemeIcon(next);
+  });
+}
+
+function updateThemeIcon(t) {
+  const icon = document.querySelector(".theme-icon");
+  if (icon) icon.textContent = t === "dark" ? "🌙" : "☀️";
 }

@@ -1,52 +1,46 @@
 /* ==========================================================================
-   Obsidian Retroma Theme Variables & Base Setup
+   Obsidian Retroma Theme Variables
    ========================================================================== */
 :root {
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
   --font-mono: 'Fira Code', monospace;
-  
   --transition-fast: 0.18s cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-dyno: 0.8s cubic-bezier(0.19, 1, 0.22, 1);
   --radius-card: 10px;
-  --radius-pill: 9999px;
 }
 
-/* Retroma Dark Palette */
 [data-theme="dark"] {
-  --bg-canvas: #080813;
-  --bg-panel: #0f0f24;
-  --bg-panel-alt: #161536;
-  --bg-card: #18173d;
-  --border-line: #2c2552;
-  --border-bright: #52408f;
-  
+  --bg-crag: #080814;
+  --bg-panel: #0f0f26;
+  --bg-panel-tab: #16153a;
+  --bg-card: #181742;
+  --border-line: #2e265b;
+  --border-glow: #634db8;
   --text-main: #c7d2fe;
-  --text-dim: #797db2;
-  --accent-orange: #fbbf24;
+  --text-muted: #8280b2;
+  --accent-amber: #fbbf24;
   --accent-coral: #fb7185;
-  --accent-cyan: #38bdf8;
   --accent-purple: #a855f7;
-  --glow-accent: rgba(168, 85, 247, 0.25);
-  --topo-spine: #2c2552;
+  --accent-cyan: #38bdf8;
+  --topo-line: #372a6b;
+  --banner-bg: #14133b;
 }
 
-/* Retroma Light Palette */
 [data-theme="light"] {
-  --bg-canvas: #cac5ea;
+  --bg-crag: #c8c3e8;
   --bg-panel: #faf9ff;
-  --bg-panel-alt: #f0eefa;
+  --bg-panel-tab: #ece9f8;
   --bg-card: #ffffff;
-  --border-line: #a69fd1;
-  --border-bright: #7c6fc2;
-  
-  --text-main: #201844;
-  --text-dim: #5c557d;
-  --accent-orange: #ea580c;
+  --border-line: #aba4d6;
+  --border-glow: #8172c7;
+  --text-main: #1f1842;
+  --text-muted: #625983;
+  --accent-amber: #d97706;
   --accent-coral: #e11d48;
-  --accent-cyan: #0284c7;
   --accent-purple: #7e22ce;
-  --glow-accent: rgba(126, 34, 206, 0.15);
-  --topo-spine: #9990c7;
+  --accent-cyan: #0284c7;
+  --topo-line: #9c92cc;
+  --banner-bg: #ded9f5;
 }
 
 * {
@@ -56,87 +50,164 @@
 }
 
 html {
-  scroll-behavior: smooth;
-  font-family: var(--font-sans);
-  background: var(--bg-canvas);
+  background: var(--bg-crag);
   color: var(--text-main);
+  font-family: var(--font-sans);
 }
 
 body {
   overflow-x: hidden;
   position: relative;
-  min-height: 100vh;
 }
 
 /* ==========================================================================
-   Interactive Climbing Route Topo Spine
+   Floating HUD Bar
    ========================================================================== */
-.climbing-topo {
+.hud-bar {
   position: fixed;
-  left: 32px;
-  top: 90px;
-  bottom: 40px;
-  width: 48px;
-  z-index: 90;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 52px;
+  background: rgba(8, 8, 20, 0.88);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-line);
+  z-index: 100;
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  padding: 0 24px 0 88px;
+}
+
+[data-theme="light"] .hud-bar {
+  background: rgba(200, 195, 232, 0.88);
+}
+
+.hud-left {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.hud-tag {
+  background: var(--accent-purple);
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.elevation-label {
+  color: var(--accent-amber);
+}
+
+.hud-right {
+  display: flex;
+  gap: 10px;
+}
+
+.hud-btn {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-glow);
+  color: var(--text-main);
+  padding: 5px 12px;
+  border-radius: 9999px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all var(--transition-fast);
+}
+
+.hud-btn:hover {
+  border-color: var(--accent-amber);
+  transform: translateY(-1px);
+}
+
+.friction-pill {
+  background: var(--border-line);
+  padding: 1px 6px;
+  border-radius: 4px;
+  color: var(--accent-amber);
+}
+
+/* ==========================================================================
+   Vertical Climbing Route Topo Spine
+   ========================================================================== */
+.crag-topo {
+  position: fixed;
+  left: 24px;
+  top: 70px;
+  bottom: 24px;
+  width: 44px;
+  z-index: 90;
 }
 
 .topo-line {
   position: absolute;
-  top: 15px;
-  bottom: 15px;
+  top: 16px;
+  bottom: 16px;
   left: 50%;
   transform: translateX(-50%);
   width: 3px;
-  background: var(--topo-spine);
-  border-radius: var(--radius-pill);
-  z-index: 1;
+  background: var(--topo-line);
+  border-radius: 9999px;
 }
 
-.hold-btn {
+.holds-column {
   position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   z-index: 2;
+}
+
+.hold-node {
   background: transparent;
   border: none;
   cursor: pointer;
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
   padding: 4px;
 }
 
-.hold-shape {
-  width: 22px;
-  height: 22px;
-  border-radius: 6px;
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-  border: 2px solid var(--border-bright);
+.hold-gem {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  border: 2px solid var(--border-glow);
+  transition: transform var(--transition-fast);
 }
 
-.hold-shape.jug { background: #34d399; clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%); }
-.hold-shape.crimp { background: #fbbf24; height: 12px; }
-.hold-shape.pinch { background: #f87171; border-radius: 50% 10%; }
-.hold-shape.sloper { background: #a78bfa; border-radius: 50%; }
-.hold-shape.anchor { background: #38bdf8; clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); }
+.anchor-hold { background: #38bdf8; clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); }
+.sloper-hold { background: #a855f7; border-radius: 50%; }
+.pinch-hold { background: #f87171; border-radius: 50% 10%; }
+.crimp-hold { background: #fbbf24; height: 10px; }
+.jug-hold { background: #34d399; }
+.ground-hold { background: #94a3b8; border-radius: 3px; }
 
-.hold-btn:hover .hold-shape,
-.hold-btn.active .hold-shape {
-  transform: scale(1.35);
-  box-shadow: 0 0 10px var(--accent-orange);
+.hold-node:hover .hold-gem,
+.hold-node.active .hold-gem {
+  transform: scale(1.4);
+  box-shadow: 0 0 10px var(--accent-amber);
 }
 
-.hold-tag {
+.hold-label {
   position: absolute;
-  left: 38px;
+  left: 36px;
   background: var(--bg-card);
+  border: 1px solid var(--border-glow);
   color: var(--text-main);
-  border: 1px solid var(--border-bright);
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  padding: 2px 7px;
+  padding: 2px 8px;
   border-radius: 4px;
   white-space: nowrap;
   opacity: 0;
@@ -145,12 +216,12 @@ body {
   transition: all var(--transition-fast);
 }
 
-.hold-btn:hover .hold-tag {
+.hold-node:hover .hold-label {
   opacity: 1;
   transform: translateX(0);
 }
 
-/* Retro 8-Bit Pixel Climber */
+/* Retro Pixel Climber Sprite */
 .pixel-climber {
   position: absolute;
   left: 50%;
@@ -159,313 +230,465 @@ body {
   height: 44px;
   z-index: 10;
   pointer-events: none;
-  transition: top var(--transition-smooth);
+  transition: top var(--transition-fast);
 }
 
 .climber-svg {
   width: 100%;
   height: 100%;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
-  transition: transform var(--transition-fast);
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.6));
 }
 
-/* Chalk Particles FX */
-.climber-chalk-container {
+.climber-chalking .climber-svg {
+  animation: dipAnimation 0.7s ease-in-out;
+}
+
+@keyframes dipAnimation {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.15) rotate(-12deg) translateY(2px); }
+}
+
+.pixel-climber.dyno-jumping {
+  transition: top var(--transition-dyno);
+}
+
+.pixel-climber.dyno-jumping .climber-svg {
+  transform: scale(1.3) translateY(-10px);
+}
+
+.pixel-climber.free-falling {
+  transition: top 0.9s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+}
+
+.pixel-climber.free-falling .climber-svg {
+  animation: tumble 0.9s infinite linear;
+}
+
+@keyframes tumble {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Chalk Particles */
+.chalk-emitter {
   position: absolute;
   top: 18px;
   left: 6px;
-  pointer-events: none;
 }
 
-.chalk-particle {
+.particle {
   position: absolute;
   background: #ffffff;
-  box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
   border-radius: 2px;
-  animation: chalkScatter 0.8s forwards ease-out;
+  box-shadow: 0 0 6px #ffffff;
+  animation: scatter 0.75s forwards ease-out;
 }
 
-@keyframes chalkScatter {
+@keyframes scatter {
   0% { opacity: 1; transform: translate(0, 0) scale(1); }
   100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0.2); }
 }
 
-/* Climber Chalk Dip Animation */
-.climber-chalking .climber-svg {
-  animation: climberDip 0.75s ease-in-out;
-}
-
-@keyframes climberDip {
-  0%, 100% { transform: scale(1) rotate(0deg); }
-  35% { transform: scale(1.1) rotate(-14deg) translateY(3px); }
-  70% { transform: scale(1.1) rotate(8deg) translateY(-2px); }
-}
-
-/* Climber Dyno Jump Animation */
-.climber-dyno .climber-svg {
-  animation: climberDynoJump 0.6s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-}
-
-@keyframes climberDynoJump {
-  0% { transform: scale(0.9) translateY(8px); }
-  40% { transform: scale(1.3) translateY(-14px) rotate(-8deg); }
-  100% { transform: scale(1) translateY(0); }
-}
-
-/* Max friction glowing mode */
-.pixel-climber.max-friction .climber-svg {
-  filter: drop-shadow(0 0 8px var(--accent-orange));
-}
-
 /* ==========================================================================
-   Header & Obsidian Vault Nav
+   Crag Body & Pitch Layout
    ========================================================================== */
-.app-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  background: rgba(8, 8, 19, 0.85);
-  border-bottom: 1px solid var(--border-line);
-}
-
-[data-theme="light"] .app-header {
-  background: rgba(202, 197, 234, 0.85);
-}
-
-.header-inner {
-  max-width: 1200px;
+.crag-body {
+  max-width: 1080px;
   margin: 0 auto;
-  padding: 12px 24px 12px 90px;
+  padding: 80px 24px 60px 88px;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.route-pitch {
+  scroll-margin-top: 70px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-line);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.22);
+}
+
+.pitch-tab {
+  background: var(--bg-panel-tab);
+  border-bottom: 1px solid var(--border-line);
+  padding: 8px 16px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.vault-brand {
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  color: var(--text-dim);
-}
-
-.active-node {
-  color: var(--accent-orange);
+.pitch-badge {
+  color: var(--accent-amber);
   font-weight: 600;
 }
 
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 16px;
+.pitch-code {
+  color: var(--text-muted);
 }
 
-.nav-item {
-  color: var(--text-dim);
-  text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition: color var(--transition-fast);
+.pitch-card {
+  padding: 32px;
 }
 
-.nav-item:hover {
-  color: var(--text-main);
+.pitch-card h2 {
+  font-size: 2rem;
+  color: var(--accent-amber);
+  margin-bottom: 10px;
 }
 
-.pill-btn {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: var(--radius-pill);
-  border: 1px solid var(--border-bright);
-  background: var(--bg-card);
-  color: var(--text-main);
-  cursor: pointer;
-  transition: all var(--transition-fast);
-}
-
-.pill-btn:hover {
-  border-color: var(--accent-orange);
-  box-shadow: 0 0 8px var(--glow-accent);
-}
-
-.friction-badge {
-  font-size: 0.72rem;
-  background: var(--border-line);
-  padding: 1px 5px;
-  border-radius: 4px;
-  color: var(--accent-orange);
-}
-
-/* ==========================================================================
-   Page Containers & Obsidian Cards
-   ========================================================================== */
-.page-container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 30px 24px 100px 90px;
-  display: flex;
-  flex-direction: column;
-  gap: 36px;
-}
-
-.panel {
-  background: var(--bg-panel);
-  border: 1px solid var(--border-line);
-  border-radius: var(--radius-card);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.18);
-  overflow: hidden;
-}
-
-.panel-header-tab {
-  background: var(--bg-panel-alt);
-  border-bottom: 1px solid var(--border-line);
-  padding: 8px 16px;
-  font-family: var(--font-mono);
-  font-size: 0.76rem;
-  color: var(--text-dim);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.tab-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--accent-orange);
-}
-
-.panel-body {
-  padding: 28px;
-}
-
-/* Obsidian Properties frontmatter */
-.obsidian-properties {
-  background: var(--bg-panel-alt);
-  border: 1px solid var(--border-line);
-  border-radius: 8px;
-  padding: 12px 16px;
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 24px;
-}
-
-.prop-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.prop-key {
-  color: var(--text-dim);
-  min-width: 65px;
-}
-
-.prop-val-badge {
-  background: var(--bg-card);
-  border: 1px solid var(--border-bright);
-  padding: 2px 8px;
-  border-radius: 4px;
-  color: var(--text-main);
-  font-size: 0.75rem;
-}
-
-.hero-title {
-  font-size: 2.3rem;
-  line-height: 1.25;
-  color: var(--accent-orange);
-  margin-bottom: 16px;
-}
-
-.hero-desc {
+.pitch-lead {
   font-size: 1.05rem;
   line-height: 1.6;
   color: var(--text-main);
-  max-width: 760px;
   margin-bottom: 24px;
 }
 
-.hero-actions {
+/* ==========================================================================
+   Ground Pitch / Welcome to Joel's Jungle
+   ========================================================================== */
+.jungle-welcome-card {
+  text-align: center;
   display: flex;
-  gap: 14px;
+  flex-direction: column;
+  align-items: center;
 }
 
-.cta-primary, .cta-secondary {
-  text-decoration: none;
+.retro-banner-frame {
+  width: 100%;
+  background: var(--banner-bg);
+  border: 2px solid var(--border-glow);
+  border-radius: 8px;
+  padding: 30px 20px;
+  margin-bottom: 24px;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.15);
+}
+
+.jungle-headline {
   font-family: var(--font-mono);
-  font-size: 0.88rem;
-  padding: 10px 18px;
+  font-size: 2.4rem;
+  letter-spacing: 2px;
+  color: var(--accent-amber);
+  text-shadow: 2px 2px 0px #000;
+  margin-bottom: 8px;
+}
+
+.banner-sub {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--accent-cyan);
+  letter-spacing: 3px;
+}
+
+.crag-intro {
+  max-width: 680px;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--text-main);
+  margin-bottom: 30px;
+}
+
+/* Grade Selector Strip */
+.boulder-grade-selector {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-line);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.grade-selector-label {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-align: left;
+  margin-bottom: 14px;
+}
+
+.grade-buttons-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(95px, 1fr));
+  gap: 10px;
+}
+
+.grade-btn {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-line);
+  color: var(--text-main);
   border-radius: 6px;
-  font-weight: 600;
+  padding: 10px 6px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
   transition: all var(--transition-fast);
 }
 
-.cta-primary {
-  background: var(--accent-orange);
-  color: #080813;
+.grade-btn:not(.locked):hover {
+  border-color: var(--accent-amber);
+  transform: translateY(-2px);
+  background: var(--bg-panel-tab);
 }
 
-.cta-primary:hover {
-  opacity: 0.92;
-  box-shadow: 0 0 12px var(--accent-orange);
+.grade-code {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--accent-amber);
 }
 
-.cta-secondary {
+.grade-name {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+
+.summit-grade-btn .grade-code {
+  color: var(--accent-coral);
+}
+
+.grade-btn.locked {
+  opacity: 0.45;
+  cursor: not-allowed;
+  border-style: dashed;
+}
+
+/* Ground & Summit Launch Buttons */
+.ground-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.super-btn {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.dyno-btn {
+  background: var(--accent-coral);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(251, 113, 133, 0.4);
+}
+
+.dyno-btn:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 20px rgba(251, 113, 133, 0.6);
+}
+
+.climb-step-btn {
   background: var(--bg-card);
-  border: 1px solid var(--border-bright);
+  border: 1px solid var(--border-glow);
   color: var(--text-main);
 }
 
-.cta-secondary:hover {
-  border-color: var(--accent-orange);
+.climb-step-btn:hover {
+  border-color: var(--accent-amber);
+}
+
+.freefall-btn {
+  background: var(--accent-purple);
+  color: #fff;
+}
+
+.freefall-btn:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 16px rgba(168, 85, 247, 0.5);
+}
+
+.summit-anchor-box {
+  margin-top: 40px;
+  background: var(--bg-card);
+  border: 2px dashed var(--border-glow);
+  padding: 24px;
+  border-radius: 8px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
 }
 
 /* ==========================================================================
-   Gallery Controls, Tags & Grid
+   Obsidian Cards, Grids & Pitch Components
+   ========================================================================== */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.obs-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-line);
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.obs-card-head {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.mono-id {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--accent-amber);
+}
+
+.stat-pill {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  background: var(--border-line);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.obs-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+.obs-card p {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.card-chips {
+  display: flex;
+  gap: 6px;
+}
+
+.card-chips span {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  border: 1px solid var(--border-line);
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+/* Karate Pitch Grid */
+.karate-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.stat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border-line);
+  border-radius: 8px;
+  padding: 24px;
+  text-align: center;
+}
+
+.stat-num {
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent-amber);
+  margin-bottom: 8px;
+  font-family: var(--font-mono);
+}
+
+.stat-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Gear Pitch */
+.gear-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.gear-block {
+  background: var(--bg-card);
+  border: 1px solid var(--border-line);
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.gear-block h3 {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--accent-cyan);
+  margin-bottom: 12px;
+}
+
+.gear-block ul {
+  list-style: none;
+  font-size: 0.88rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: var(--text-muted);
+}
+
+.gear-block strong {
+  color: var(--text-main);
+}
+
+/* ==========================================================================
+   Summit Photography Gallery
    ========================================================================== */
 .section-title-wrap {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 20px;
+  align-items: flex-end;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
-.section-title-wrap h2 {
-  font-size: 1.7rem;
-  color: var(--text-main);
+.section-sub {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-top: 4px;
 }
 
-.section-meta {
+.counter-badge {
   font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--text-dim);
+  font-size: 0.78rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-line);
+  padding: 4px 10px;
+  border-radius: 4px;
 }
 
-.filter-bar {
+.gallery-controls {
   display: flex;
   flex-direction: column;
   gap: 12px;
   margin-bottom: 24px;
 }
 
-.search-input-wrap {
+.search-box {
   position: relative;
 }
 
-.search-icon {
+.search-ico {
   position: absolute;
   left: 12px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 0.85rem;
   opacity: 0.6;
 }
 
@@ -477,42 +700,35 @@ body {
   border-radius: 6px;
   color: var(--text-main);
   font-family: var(--font-mono);
-  font-size: 0.85rem;
   outline: none;
-  transition: border-color var(--transition-fast);
 }
 
 #gallerySearch:focus {
-  border-color: var(--accent-orange);
+  border-color: var(--accent-amber);
 }
 
-.tags-scroller {
+.tags-row {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
 }
 
-.tag-filter-btn {
+.tag-btn {
   background: var(--bg-card);
   border: 1px solid var(--border-line);
-  color: var(--text-dim);
-  padding: 4px 10px;
-  border-radius: var(--radius-pill);
+  color: var(--text-muted);
   font-family: var(--font-mono);
   font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 9999px;
   cursor: pointer;
   transition: all var(--transition-fast);
 }
 
-.tag-filter-btn:hover {
-  border-color: var(--border-bright);
-  color: var(--text-main);
-}
-
-.tag-filter-btn.active {
+.tag-btn.active {
   background: var(--accent-purple);
   border-color: var(--accent-purple);
-  color: #ffffff;
+  color: #fff;
 }
 
 .gallery-grid {
@@ -521,31 +737,31 @@ body {
   gap: 20px;
 }
 
-.photo-item {
+.photo-card {
   position: relative;
+  aspect-ratio: 4 / 3;
   background: var(--bg-card);
   border: 1px solid var(--border-line);
   border-radius: 8px;
   overflow: hidden;
   cursor: pointer;
-  aspect-ratio: 4 / 3;
   transition: transform var(--transition-fast), border-color var(--transition-fast);
 }
 
-.photo-item:hover {
+.photo-card:hover {
   transform: translateY(-3px);
-  border-color: var(--accent-orange);
+  border-color: var(--accent-amber);
 }
 
-.photo-item img {
+.photo-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  transition: opacity 0.3s ease-in;
+  transition: opacity 0.3s;
 }
 
-.photo-item img.loaded {
+.photo-card img.loaded {
   opacity: 1;
 }
 
@@ -561,266 +777,37 @@ body {
   transition: opacity var(--transition-fast);
 }
 
-.photo-item:hover .photo-overlay {
+.photo-card:hover .photo-overlay {
   opacity: 1;
 }
 
-.photo-title {
-  color: #ffffff;
-  font-size: 0.95rem;
+.p-title {
+  color: #fff;
   font-weight: 600;
+  font-size: 0.95rem;
 }
 
-.photo-gear-pill {
+.p-gear {
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  color: var(--accent-orange);
+  color: var(--accent-amber);
   margin-top: 4px;
 }
 
-/* Skeleton Loading Placeholder */
+/* Skeleton loader */
 .skeleton {
-  background: linear-gradient(90deg, var(--bg-card) 25%, var(--bg-panel-alt) 50%, var(--bg-card) 75%);
+  background: linear-gradient(90deg, var(--bg-card) 25%, var(--bg-panel-tab) 50%, var(--bg-card) 75%);
   background-size: 200% 100%;
-  animation: skeletonShimmer 1.5s infinite;
+  animation: shimmer 1.5s infinite;
 }
 
-@keyframes skeletonShimmer {
+@keyframes shimmer {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
 }
 
 /* ==========================================================================
-   Projects & Builds Grid
-   ========================================================================== */
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
-}
-
-.project-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-line);
-  border-radius: 8px;
-  padding: 20px;
-  transition: border-color var(--transition-fast);
-}
-
-.project-card:hover {
-  border-color: var(--accent-purple);
-}
-
-.card-head {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 12px;
-}
-
-.card-id {
-  font-family: var(--font-mono);
-  color: var(--accent-orange);
-  font-size: 0.78rem;
-}
-
-.card-chip {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  background: var(--border-line);
-  padding: 2px 6px;
-  border-radius: 4px;
-  color: var(--text-dim);
-}
-
-.project-card h3 {
-  font-size: 1.1rem;
-  margin-bottom: 8px;
-  color: var(--text-main);
-}
-
-.project-card p {
-  font-size: 0.88rem;
-  color: var(--text-dim);
-  line-height: 1.5;
-  margin-bottom: 14px;
-}
-
-.card-tags {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-
-.card-tags span {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  background: var(--bg-panel);
-  border: 1px solid var(--border-bright);
-  padding: 2px 7px;
-  border-radius: 4px;
-  color: var(--text-dim);
-}
-
-/* ==========================================================================
-   About & Bouldering Card
-   ========================================================================== */
-.about-grid {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 32px;
-  align-items: start;
-}
-
-.about-text h2 {
-  font-size: 1.7rem;
-  margin-bottom: 16px;
-}
-
-.about-text p {
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: var(--text-main);
-  margin-bottom: 14px;
-}
-
-.gear-drawer {
-  margin-top: 24px;
-  background: var(--bg-panel-alt);
-  border: 1px solid var(--border-line);
-  padding: 16px;
-  border-radius: 8px;
-}
-
-.gear-drawer h4 {
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  color: var(--accent-orange);
-  margin-bottom: 10px;
-}
-
-.gear-list {
-  list-style: none;
-  font-size: 0.85rem;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  color: var(--text-dim);
-}
-
-.gear-list strong {
-  color: var(--text-main);
-}
-
-.boulder-problem-card {
-  background: var(--bg-card);
-  border: 2px dashed var(--border-bright);
-  border-radius: 10px;
-  padding: 20px;
-}
-
-.problem-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--text-dim);
-  margin-bottom: 16px;
-}
-
-.grade-pill {
-  background: var(--accent-coral);
-  color: #ffffff;
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-weight: 600;
-}
-
-.problem-stats {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  color: var(--text-main);
-  margin-bottom: 20px;
-}
-
-.problem-stats span {
-  color: var(--text-dim);
-}
-
-.climb-dyno-btn {
-  width: 100%;
-  padding: 10px;
-  background: var(--accent-purple);
-  border: none;
-  border-radius: 6px;
-  color: #ffffff;
-  font-family: var(--font-mono);
-  font-weight: 600;
-  cursor: pointer;
-  transition: opacity var(--transition-fast);
-}
-
-.climb-dyno-btn:hover {
-  opacity: 0.9;
-}
-
-/* ==========================================================================
-   Contact Panel
-   ========================================================================== */
-.contact-panel h2 {
-  font-size: 1.7rem;
-  margin-bottom: 10px;
-}
-
-.contact-panel p {
-  color: var(--text-dim);
-  margin-bottom: 20px;
-}
-
-.contact-links {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.contact-card {
-  text-decoration: none;
-  background: var(--bg-card);
-  border: 1px solid var(--border-line);
-  padding: 14px 18px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  transition: border-color var(--transition-fast);
-}
-
-.contact-card:hover {
-  border-color: var(--accent-orange);
-}
-
-.c-icon {
-  font-size: 1.5rem;
-}
-
-.c-title {
-  display: block;
-  font-size: 0.88rem;
-  font-weight: 600;
-  color: var(--text-main);
-}
-
-.c-sub {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  color: var(--text-dim);
-}
-
-/* ==========================================================================
-   Fullscreen Lightbox Modal
+   Lightbox
    ========================================================================== */
 .lightbox-modal {
   position: fixed;
@@ -842,17 +829,17 @@ body {
 .lightbox-backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(8px);
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(6px);
 }
 
-.lightbox-content {
+.lightbox-window {
   position: relative;
   z-index: 2;
   width: 90%;
-  max-width: 950px;
+  max-width: 940px;
   background: var(--bg-panel);
-  border: 1px solid var(--border-bright);
+  border: 1px solid var(--border-glow);
   border-radius: 10px;
   overflow: hidden;
   display: grid;
@@ -876,62 +863,61 @@ body {
   z-index: 10;
 }
 
-.lightbox-image-wrap {
-  background: #000000;
+.lightbox-frame {
+  background: #000;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.lightbox-image-wrap img {
+.lightbox-frame img {
   width: 100%;
-  height: auto;
   max-height: 75vh;
   object-fit: contain;
 }
 
-.lightbox-meta-panel {
+.lightbox-sidebar {
   padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.lightbox-meta-panel h3 {
-  font-size: 1.4rem;
+.lightbox-sidebar h3 {
+  font-size: 1.3rem;
   color: var(--text-main);
 }
 
-.meta-location {
+.loc-text {
   font-family: var(--font-mono);
   font-size: 0.8rem;
-  color: var(--accent-orange);
+  color: var(--accent-amber);
 }
 
-.exif-specs {
+.exif-data {
   font-family: var(--font-mono);
   font-size: 0.8rem;
   background: var(--bg-card);
   border: 1px solid var(--border-line);
-  border-radius: 6px;
   padding: 10px;
+  border-radius: 6px;
+  color: var(--text-muted);
   display: flex;
   flex-direction: column;
   gap: 6px;
-  color: var(--text-dim);
 }
 
-.lightbox-tags {
+.tag-pills {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
 }
 
-.lightbox-tags span {
+.tag-pills span {
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  background: var(--bg-panel-alt);
-  border: 1px solid var(--border-bright);
+  background: var(--bg-panel-tab);
+  border: 1px solid var(--border-glow);
   padding: 2px 7px;
   border-radius: 4px;
 }
@@ -940,17 +926,9 @@ body {
    Responsive Adaptations
    ========================================================================== */
 @media (max-width: 860px) {
-  .climbing-topo {
-    display: none;
-  }
-  .page-container {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-  .header-inner {
-    padding-left: 20px;
-  }
-  .about-grid, .lightbox-content {
-    grid-template-columns: 1fr;
-  }
+  .crag-topo { display: none; }
+  .hud-bar { padding-left: 16px; padding-right: 16px; }
+  .crag-body { padding-left: 16px; padding-right: 16px; }
+  .gear-columns, .lightbox-window { grid-template-columns: 1fr; }
+  .jungle-headline { font-size: 1.8rem; }
 }
