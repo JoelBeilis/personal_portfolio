@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joel Beilis — Photography & Engineering</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Climbing Route Topo Spine -->
+  <aside class="climbing-topo" id="climbingTopo" aria-label="Climbing Route Topo">
+    <div class="topo-line"></div>
+    
+    <!-- Holds acting as waypoint buttons -->
+    <button class="hold-btn active" data-target="#hero" data-grade="V0" aria-label="Send to Start: V0">
+      <span class="hold-shape jug"></span>
+      <span class="hold-tag">V0 START</span>
+    </button>
+    <button class="hold-btn" data-target="#gallery" data-grade="V3" aria-label="Send to Gallery: V3">
+      <span class="hold-shape crimp"></span>
+      <span class="hold-tag">V3 GALLERY</span>
+    </button>
+    <button class="hold-btn" data-target="#projects" data-grade="V5" aria-label="Send to Projects: V5">
+      <span class="hold-shape pinch"></span>
+      <span class="hold-tag">V5 BUILDS</span>
+    </button>
+    <button class="hold-btn" data-target="#about" data-grade="V7" aria-label="Send to About: V7">
+      <span class="hold-shape sloper"></span>
+      <span class="hold-tag">V7 ABOUT</span>
+    </button>
+    <button class="hold-btn" data-target="#contact" data-grade="TOP" aria-label="Send to Top: TOP">
+      <span class="hold-shape anchor"></span>
+      <span class="hold-tag">TOP SEND</span>
+    </button>
+
+    <!-- Retro 8-Bit Pixel Climber -->
+    <div class="pixel-climber" id="climber" aria-hidden="true">
+      <div class="climber-chalk-container" id="climberChalkContainer"></div>
+      <svg viewBox="0 0 32 32" class="climber-svg" shape-rendering="crispEdges">
+        <!-- Beanie & Hair -->
+        <rect x="12" y="3" width="8" height="3" fill="#f59e0b" />
+        <rect x="11" y="6" width="10" height="2" fill="#2d1b0d" />
+        <!-- Head / Skin -->
+        <rect x="12" y="8" width="8" height="6" fill="#fcd34d" />
+        <rect x="17" y="10" width="2" height="2" fill="#1e1b4b" />
+        <!-- Torso / Tank Top -->
+        <rect x="11" y="14" width="10" height="9" fill="#818cf8" />
+        <rect x="13" y="14" width="6" height="3" fill="#a5b4fc" />
+        <!-- Chalk Bag on Back -->
+        <rect x="8" y="19" width="4" height="4" fill="#fb7185" id="climberChalkBag" />
+        <rect x="9" y="18" width="2" height="1" fill="#f1f5f9" />
+        <!-- Left Arm reaching up -->
+        <rect x="9" y="10" width="3" height="4" fill="#fcd34d" />
+        <rect x="8" y="7" width="3" height="4" fill="#fcd34d" />
+        <rect x="8" y="5" width="4" height="3" fill="#fcd34d" />
+        <!-- Right Arm crimping -->
+        <rect x="20" y="11" width="3" height="4" fill="#fcd34d" />
+        <rect x="22" y="8" width="4" height="3" fill="#fcd34d" />
+        <!-- Harness & Shorts -->
+        <rect x="11" y="23" width="10" height="3" fill="#312e81" />
+        <rect x="12" y="24" width="8" height="1" fill="#ec4899" />
+        <!-- Legs & Climbing Shoes -->
+        <rect x="10" y="26" width="3" height="4" fill="#fcd34d" />
+        <rect x="8" y="29" width="5" height="3" fill="#06b6d4" />
+        <rect x="19" y="25" width="3" height="4" fill="#fcd34d" />
+        <rect x="21" y="28" width="5" height="3" fill="#06b6d4" />
+      </svg>
+    </div>
+  </aside>
+
+  <!-- Navigation Bar -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="vault-brand">
+        <span class="vault-icon">📁</span>
+        <span class="vault-path">JoelBeilis_Vault / <span class="active-node">home.md</span></span>
+      </div>
+      <nav class="nav-links">
+        <a href="#gallery" class="nav-item">Gallery</a>
+        <a href="#projects" class="nav-item">Builds</a>
+        <a href="#about" class="nav-item">About</a>
+        <a href="#contact" class="nav-item">Contact</a>
+        <button id="chalkBtn" class="pill-btn chalk-btn" title="Chalk up for extra friction!">
+          <span class="btn-icon">🧗</span>
+          <span class="btn-text">Chalk Up</span>
+          <span class="friction-badge" id="frictionBadge">+0%</span>
+        </button>
+        <button id="themeToggle" class="pill-btn theme-btn" aria-label="Toggle Obsidian Retroma theme">
+          <span class="theme-icon">🌙</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-container">
+    
+    <!-- Hero Section -->
+    <section id="hero" class="panel hero-panel">
+      <div class="panel-header-tab">
+        <span class="tab-dot"></span>
+        <span>00_hero.md</span>
+      </div>
+      <div class="panel-body">
+        <div class="obsidian-properties">
+          <div class="prop-row">
+            <span class="prop-key">id:</span>
+            <span class="prop-val">joel_beilis</span>
+          </div>
+          <div class="prop-row">
+            <span class="prop-key">focus:</span>
+            <span class="prop-val-badge">Photography</span>
+            <span class="prop-val-badge">Physics</span>
+            <span class="prop-val-badge">Engineering</span>
+            <span class="prop-val-badge">Bouldering</span>
+          </div>
+          <div class="prop-row">
+            <span class="prop-key">status:</span>
+            <span class="prop-val" style="color: var(--accent-orange);">⚡ Ready to send</span>
+          </div>
+        </div>
+
+        <h1 class="hero-title">Framing nature through glass & precision engineering.</h1>
+        <p class="hero-desc">
+          ROM Youth Wildlife Photographer of the Year winner. Capturing candid, un-staged wildlife and coastal environments with prime lenses, custom-engineered camera traps, and mechanical hardware.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#gallery" class="cta-primary">Explore Gallery ↓</a>
+          <a href="#projects" class="cta-secondary">View Hardware Builds</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="panel gallery-panel">
+      <div class="panel-header-tab">
+        <span class="tab-dot"></span>
+        <span>01_photo_archive.canvas</span>
+      </div>
+      <div class="panel-body">
+        <div class="section-title-wrap">
+          <h2>Photographic Works</h2>
+          <span class="section-meta" id="photoCount">Loading entries...</span>
+        </div>
+
+        <!-- Filter & Search Toolbar -->
+        <div class="filter-bar">
+          <div class="search-input-wrap">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="gallerySearch" placeholder="Filter by title, camera, lens, location..." aria-label="Search photos">
+          </div>
+          <div class="tags-scroller" id="tagPillsContainer">
+            <!-- Populated via script.js -->
+          </div>
+        </div>
+
+        <!-- Masonry Grid -->
+        <div class="gallery-grid" id="galleryGrid">
+          <!-- Dynamically populated photos -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Hardware & Builds Section -->
+    <section id="projects" class="panel projects-panel">
+      <div class="panel-header-tab">
+        <span class="tab-dot"></span>
+        <span>02_engineering_notes.md</span>
+      </div>
+      <div class="panel-body">
+        <div class="section-title-wrap">
+          <h2>Engineering & Creative Builds</h2>
+          <span class="section-meta">CAD / Embedded / Computational</span>
+        </div>
+
+        <div class="projects-grid">
+          <article class="project-card">
+            <div class="card-head">
+              <span class="card-id">[[ir-wildlife-gate.ino]]</span>
+              <span class="card-chip">Embedded</span>
+            </div>
+            <h3>Microsecond Laser Tripline Camera Shutter</h3>
+            <p>Non-invasive dual-beam infrared trigger with an Arduino interrupt controller to photograph fast-moving birds of prey and nocturnal critters.</p>
+            <div class="card-tags">
+              <span>C++</span>
+              <span>Hardware</span>
+              <span>Optoelectronics</span>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="card-head">
+              <span class="card-id">[[lens-hood-baffle.cad]]</span>
+              <span class="card-chip">3D Print</span>
+            </div>
+            <h3>Custom PETG Matte Lens Baffle & Ring</h3>
+            <p>Engineered petal hood modeled specifically for vintage manual prime glass on modern mirrorless mounts, preventing off-axis stray light flaring.</p>
+            <div class="card-tags">
+              <span>Fusion 360</span>
+              <span>Optics</span>
+              <span>PETG</span>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="card-head">
+              <span class="card-id">[[exif-manifest-gen.py]]</span>
+              <span class="card-chip">CLI Tool</span>
+            </div>
+            <h3>Automated EXIF Extraction & WebP Optimizer</h3>
+            <p>CLI pipeline parsing shutter count, aperture, and focal length into clean static JSON, reducing multi-megabyte gallery uploads to fast WebP assets.</p>
+            <div class="card-tags">
+              <span>Python</span>
+              <span>Pillow</span>
+              <span>Static Site</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="panel about-panel">
+      <div class="panel-header-tab">
+        <span class="tab-dot"></span>
+        <span>03_about_me.md</span>
+      </div>
+      <div class="panel-body">
+        <div class="about-grid">
+          <div class="about-text">
+            <h2>About & Philosophy</h2>
+            <p>
+              I am an Honours Mathematics and Physics student, photographer, and boulderer. My photography is rooted in patience and mechanical simplicity: <em>"Date your camera body, marry your prime lenses."</em>
+            </p>
+            <p>
+              Recognized with the Grand Prize in the <strong>Royal Ontario Museum (ROM) Wildlife Photographer of the Year Youth Contest</strong>, my work highlights intimate moments with avian predators, marine life, and raw wilderness landscapes without disturbing natural behaviors.
+            </p>
+            <div class="gear-drawer">
+              <h4>Primary Kit & Field Tools</h4>
+              <ul class="gear-list">
+                <li><strong>Bodies:</strong> Full-frame Digital Workhorse & 35mm Manual Film SLR</li>
+                <li><strong>Glass:</strong> 28mm Pancake, 35mm f/1.8, 50mm f/1.4, 105mm Micro</li>
+                <li><strong>Shoes:</strong> Soft sticky rubber for technical bouldering footwork</li>
+              </ul>
+            </div>
+          </div>
+          <div class="about-card-box">
+            <div class="boulder-problem-card">
+              <div class="problem-header">
+                <span>BOULDER PROBLEM: THE SEND</span>
+                <span class="grade-pill">V7 CRIMP</span>
+              </div>
+              <div class="problem-stats">
+                <div><span>Beta:</span> Flash Attempt</div>
+                <div><span>Holds:</span> Dual-Tex & Chalk</div>
+                <div><span>Style:</span> Technical Dyno</div>
+              </div>
+              <button class="climb-dyno-btn" id="sendDynoAction">Trigger Dyno Jump 🚀</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="panel contact-panel">
+      <div class="panel-header-tab">
+        <span class="tab-dot"></span>
+        <span>04_contact_desk.md</span>
+      </div>
+      <div class="panel-body">
+        <h2>Reach the Top</h2>
+        <p>Looking to collaborate on optical engineering, print licensing, or trade beta at the climbing gym?</p>
+        <div class="contact-links">
+          <a href="mailto:contact@joelbeilis.com" class="contact-card">
+            <span class="c-icon">✉️</span>
+            <div>
+              <span class="c-title">Email</span>
+              <span class="c-sub">contact@joelbeilis.com</span>
+            </div>
+          </a>
+          <a href="https://github.com/joelbeilis" target="_blank" rel="noreferrer" class="contact-card">
+            <span class="c-icon">🐙</span>
+            <div>
+              <span class="c-title">GitHub</span>
+              <span class="c-sub">@joelbeilis</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Fullscreen Lightbox Modal -->
+  <div class="lightbox-modal" id="lightboxModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Close modal">✕</button>
+      <div class="lightbox-image-wrap">
+        <img id="lightboxImg" src="" alt="">
+      </div>
+      <div class="lightbox-meta-panel">
+        <h3 id="lightboxTitle"></h3>
+        <p id="lightboxLocation" class="meta-location"></p>
+        <div class="exif-specs" id="lightboxExif"></div>
+        <div class="lightbox-tags" id="lightboxTags"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
