@@ -113,7 +113,8 @@ function initAscendingTopo() {
       V4: "520m", 
       V5: "680m", 
       V6: "810m",
-      V7: "950m (SUMMIT)" 
+      V7: "950m",
+      V8: "1000m (SUMMIT)"
     };
     if (elevationLabel) elevationLabel.textContent = `ELEVATION: ${elevMap[grade] || "500m"}`;
   }
