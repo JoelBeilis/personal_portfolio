@@ -1075,3 +1075,94 @@ body {
   line-height: 1.5;
   color: var(--text-muted);
 }
+
+/* ==========================================================================
+   Awards Pitch (V6)
+   ========================================================================== */
+.awards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.award-entry {
+  background: var(--bg-card);
+  border-left: 3px solid var(--accent-amber);
+  border-top: 1px solid var(--border-line);
+  border-right: 1px solid var(--border-line);
+  border-bottom: 1px solid var(--border-line);
+  border-radius: 0 8px 8px 0;
+  padding: 20px 24px;
+  transition: border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.award-entry:hover {
+  transform: translateX(4px);
+  border-color: var(--accent-amber);
+}
+
+.award-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.award-year {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent-amber);
+  font-weight: 600;
+}
+
+.award-badge {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  background: var(--bg-panel-tab);
+  border: 1px solid var(--border-glow);
+  color: var(--accent-coral);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.award-entry h3 {
+  font-size: 1.2rem;
+  color: var(--text-main);
+  margin-bottom: 8px;
+}
+
+.award-entry p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+.award-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.proof-link {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--accent-cyan);
+  text-decoration: none;
+  border: 1px solid var(--border-line);
+  background: var(--bg-panel-tab);
+  padding: 6px 12px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all var(--transition-fast);
+}
+
+.proof-link:hover {
+  border-color: var(--accent-cyan);
+  background: var(--bg-card);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(56, 189, 248, 0.2);
+}

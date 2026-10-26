@@ -34,13 +34,17 @@
 
 <!-- Holds ordered TOP (Summit) to BOTTOM (Base) -->
     <div class="holds-column">
+     <button class="hold-node" data-target="#v8-future" data-grade="V8">
+        <span class="hold-gem anchor-hold"></span>
+        <span class="hold-label">V8: Future Expansion</span>
+      </button>
       <button class="hold-node" data-target="#v7-photography" data-grade="V7">
         <span class="hold-gem anchor-hold"></span>
-        <span class="hold-label">V7: Photography (Summit)</span>
+        <span class="hold-label">V7: Photography</span>
       </button>
-      <button class="hold-node" data-target="#v6-betalog" data-grade="V6">
+      <button class="hold-node" data-target="#v6-awards" data-grade="V6">
         <span class="hold-gem sloper-hold"></span>
-        <span class="hold-label">V6: Beta Log</span>
+        <span class="hold-label">V6: Awards</span>
       </button>
       <button class="hold-node" data-target="#v5-projects" data-grade="V5">
         <span class="hold-gem pinch-hold"></span>
@@ -104,6 +108,19 @@
   <!-- MAIN CRAG: Arranged from Summit (Top) down to Ground (Bottom) -->
   <main class="crag-body">
 
+    <section id="v8-future" class="route-pitch locked-pitch">
+        <div class="summit-anchor-box">
+          <p>🚩 NO TOP OUT</p>
+          <button id="summitFallBtn" class="super-btn freefall-btn">Down Climb 🪂</button>
+        </div>
+      <div class="pitch-tab">
+        <span class="pitch-badge">V8 — FUTURE EXPANSION</span>
+        <span class="pitch-code">coming_soon.md</span>
+      </div>
+      <div class="pitch-card">
+        <p class="pitch-lead">I promise the setter is working as hard as they can.</p>
+      </div>
+    </section>
 <!-- ==================== V7: SUMMIT (PHOTOGRAPHY) ==================== -->
     <section id="v7-photography" class="route-pitch summit-pitch">
       <div class="pitch-tab">
@@ -113,8 +130,8 @@
       <div class="pitch-card">
         <div class="section-title-wrap">
           <div>
-            <h2>Photographic Works</h2>
-            <p class="section-sub">ROM Wildlife Photographer of the Year Youth winner. Candid, unstaged frames.</p>
+            <h2>My Photography</h2>
+            <p class="section-sub">ROM Wildlife Photographer of the Year Youth winner.</p>
           </div>
           <span class="counter-badge" id="photoCount">Loading records...</span>
         </div>
@@ -128,40 +145,38 @@
         </div>
 
         <div class="gallery-grid" id="galleryGrid"></div>
-
-        <div class="summit-anchor-box">
-          <p>🚩 You've topped out on the crag.</p>
-          <button id="summitFallBtn" class="super-btn freefall-btn">Free Fall Back to Ground! 🪂</button>
-        </div>
       </div>
     </section>
 
-    <!-- ==================== V6: THE BETA LOG ==================== -->
-    <section id="v6-betalog" class="route-pitch">
+<!-- ==================== V6: AWARDS ==================== -->
+    <section id="v6-awards" class="route-pitch">
       <div class="pitch-tab">
-        <span class="pitch-badge">V6 — PITCH 06</span>
-        <span class="pitch-code">field_journal.md</span>
+        <span class="pitch-badge">V6 — PITCH 06 // AWARDS</span>
+        <span class="pitch-code">winner_winner_chicken_dinner.md</span>
       </div>
       <div class="pitch-card">
-        <h2>The Beta Log & Field Dispatches</h2>
-        <p class="pitch-lead">Short dispatches from wildlife blinds, bench testing, and gym sessions.</p>
+        <h2>Awards & Recognition</h2>
+        <p class="pitch-lead">Recognized for patience in the field and capturing raw, unstaged wildlife behaviors.</p>
 
-        <div class="beta-log-list">
-          <article class="beta-entry">
-            <div class="beta-meta">
-              <span class="beta-date">FIELD NOTE // 04</span>
-              <span class="beta-tag">Wildlife</span>
+        <div class="awards-list">
+          <!-- ROM Youth Contest Feature -->
+          <article class="award-entry">
+            <div class="award-meta">
+              <span class="award-year">2024 HONOUR</span>
+              <span class="award-badge">Grand Prize Winner</span>
             </div>
-            <h3>Freezing brush & 300mm patience</h3>
-            <p>Waiting 3 hours in sub-zero Ontario wind for red fox movement. Prime lenses force you to move your feet and anticipate the geometry of the clearing before the subject appears.</p>
-          </article>
-          <article class="beta-entry">
-            <div class="beta-meta">
-              <span class="beta-date">BUILD NOTE // 03</span>
-              <span class="beta-tag">CAD / Print</span>
+            <h3>ROM Wildlife Photographer of the Year — Youth Contest</h3>
+            <p>
+              Awarded Grand Prize by the Royal Ontario Museum for avian tracking and field patience, documenting local wildlife without disturbing natural habitat routines.
+            </p>
+            <div class="award-actions">
+              <a href="https://blog.henrys.com/youth-winner-spotlight-joel-beilis-2024-rom-wildlife-photo-contest/" 
+                 target="_blank" 
+                 rel="noopener noreferrer" 
+                 class="proof-link">
+                <span>Henry's Spotlight Feature & Interview ↗</span>
+              </a>
             </div>
-            <h3>Dialing tolerances on PETG threads</h3>
-            <p>FDM 3D printed lens filters need a 0.15mm clearance offset to screw smoothly onto vintage metal threads without binding or chewing the plastic.</p>
           </article>
         </div>
       </div>
@@ -266,25 +281,25 @@
     <!-- ==================== V3: MARTIAL ARTS ==================== -->
     <section id="v3-karate" class="route-pitch">
       <div class="pitch-tab">
-        <span class="pitch-badge">V3 — PITCH 03</span>
+        <span class="pitch-badge">V3 — Martial Arts</span>
         <span class="pitch-code">martial_arts.md</span>
       </div>
       <div class="pitch-card">
-        <h2>Martial Arts: Karate & Discipline</h2>
-        <p class="pitch-lead">Years spent teaching and training form the backbone of patience in both climbing and tracking wildlife in the field.</p>
+        <h2>Karate</h2>
+        <p class="pitch-lead"><strong>Black Belt</strong> in Shotokan Karate and trained for 13 years.</p>
         
         <div class="karate-stats-grid">
           <div class="stat-box">
-            <span class="stat-num">3+</span>
-            <span class="stat-desc">Years as Dojo Instructor</span>
+            <span class="stat-num">6</span>
+            <span class="stat-desc">Years as Dojo Instructor or Volunteer</span>
           </div>
           <div class="stat-box">
-            <span class="stat-num">Kata & Kumite</span>
-            <span class="stat-desc">Precision form, focus & fast reflexes</span>
+            <span class="stat-num">2nd</span>
+            <span class="stat-desc">Degree Black belt</span>
           </div>
           <div class="stat-box">
-            <span class="stat-num">Field Focus</span>
-            <span class="stat-desc">Remaining completely motionless in freezing brush</span>
+            <span class="stat-num">#1</span>
+            <span class="stat-desc">Okinawa Karate Individuals E-Tournament</span>
           </div>
         </div>
       </div>
@@ -293,29 +308,39 @@
     <!-- ==================== V2: CAMERA EQUIPMENT ==================== -->
     <section id="v2-gear" class="route-pitch">
       <div class="pitch-tab">
-        <span class="pitch-badge">V2 — PITCH 02</span>
+        <span class="pitch-badge">V2 — My Gear</span>
         <span class="pitch-code">optics_locker.md</span>
       </div>
       <div class="pitch-card">
-        <h2>Camera Rig & Prime Glass</h2>
-        <p class="pitch-lead"><em>"Date your camera body, marry your prime lenses."</em> Keeping optics sharp and mechanics predictable.</p>
-        
+        <h2>What's in my bag??</h2>
         <div class="gear-columns">
           <div class="gear-block">
             <h3>Bodies</h3>
             <ul>
-              <li><strong>Nikon D700:</strong> Legendary full-frame CCD/CMOS color rendition</li>
-              <li><strong>Nikkormat 35mm SLR:</strong> Mechanical mechanical film purity</li>
-              <li><strong>Sony Mirrorless:</strong> Fast-aperture compact digital walkabout</li>
+              <li><strong>Nikon D700:</strong> Main DSLR Camera</li>
+              <li><strong>Nikkormat 35mm SLR:</strong> Mechanical film camera</li>
+              <li><strong>Sony ZV-E10II:</strong> Mirrorless vlog camera</li>
             </ul>
           </div>
           <div class="gear-block">
-            <h3>Primes & Specialized Glass</h3>
+            <h3>Nikkor Lenses</h3>
             <ul>
-              <li><strong>28mm Pancake:</strong> Ultra-lightweight street & landscape</li>
-              <li><strong>50mm f/1.4:</strong> Natural human eye perspective & low-light speed</li>
-              <li><strong>105mm Micro:</strong> Macro textures & razor wildlife portraits</li>
-              <li><strong>300mm Prime:</strong> Distant raptor & coastal action</li>
+              <li><strong>35mm f/2.0:</strong> Favourite for film</li>
+              <li><strong>50mm f/1.4:</strong> Go to automatic lens</li>
+              <li><strong>105mm f/2.5:</strong> When you gotta get just a bit closer</li>
+            </ul>
+          </div>
+          <div class="gear-block">
+            <h3>Sony Lenses</h3>
+            <ul>
+              <li><strong>25mm f/2.0:</strong> Compact pancake lens from TTartisan</li>
+              <li><strong>30mm f/1.4:</strong> Portrait and low light lens from Sigma</li>
+            </ul>
+          </div>
+          <div class="gear-block">
+            <h3>FOR SALE $$$</h3>
+            <ul>
+              <li><strong>35mm f/2.0 AF Nikkor:</strong> Contact for details</li>
             </ul>
           </div>
         </div>
@@ -325,13 +350,13 @@
 <!-- ==================== V1: ABOUT ME ==================== -->
     <section id="v1-about" class="route-pitch">
       <div class="pitch-tab">
-        <span class="pitch-badge">V1 — PITCH 01</span>
+        <span class="pitch-badge">V1 — About me</span>
         <span class="pitch-code">profile.md</span>
       </div>
       <div class="pitch-card">
         <h2>About Joel Beilis</h2>
         <p class="pitch-lead">
-          Honours Mathematics and Physics student, nature photographer, martial artist, and boulderer??
+            Honours Mathematical Physics student at the University of Waterloo.
         </p>
         <p>
           bio...
@@ -385,7 +410,7 @@
 
         <div class="crag-intro">
           <p>
-            Just go <strong>UP</strong>. Choose your route grade below, start sending your way, or just dyno to the top.
+            <strong>Just go UP</strong>
           </p>
         </div>
 
@@ -413,22 +438,18 @@
               <span class="grade-code">V5</span>
               <span class="grade-name">Projects</span>
             </button>
-            <button class="grade-btn" data-target="#v6-betalog">
+            <button class="grade-btn" data-target="#v6-awards">
               <span class="grade-code">V6</span>
-              <span class="grade-name">Beta Log</span>
+              <span class="grade-name">Awards</span>
             </button>
             <button class="grade-btn summit-grade-btn" data-target="#v7-photography">
               <span class="grade-code">V7</span>
-              <span class="grade-name">Summit 🏆</span>
+              <span class="grade-name">Photography</span>
             </button>
             
             <!-- Locked expansion grades -->
             <button class="grade-btn locked" disabled title="Future Project Expansion">
               <span class="grade-code">V8</span>
-              <span class="grade-name">Locked 🔒</span>
-            </button>
-            <button class="grade-btn locked" disabled title="Future Project Expansion">
-              <span class="grade-code">V9</span>
               <span class="grade-name">Locked 🔒</span>
             </button>
           </div>
