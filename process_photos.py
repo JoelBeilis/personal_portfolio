@@ -159,7 +159,7 @@ def main():
 
                 photos_list.append({
                     "id": name_stem,
-                    "title": title,
+                    "title": ".",
                     "location": location,
                     "aspect": aspect,
                     "lqip": lqip,
@@ -178,7 +178,7 @@ def main():
     with open(MANIFEST_FILE, "w", encoding="utf-8") as f:
         json.dump(photos_list, f, indent=2)
 
-    print(f"\n🎉 Successfully indexed {len(photos_list)} photos into {MANIFEST_FILE}")
+    print(f"\nYAHOOOOOOOOOOOOOOO Successfully indexed {len(photos_list)} photos into {MANIFEST_FILE}")
 
 
 if __name__ == "__main__":
