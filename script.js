@@ -42,6 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initAscendingTopo();
   initChalk();
   initSuperMoves();
+  initExperienceTabs();
   initGallery();
   initLightbox();
 
@@ -67,9 +68,6 @@ window.addEventListener("load", () => {
   }, 150);
 });
 
-// ==========================================================================
-// 3. Ascending Topo & Climber Motion
-// ==========================================================================
 // ==========================================================================
 // 3. Ascending Topo & Climber Motion
 // ==========================================================================
@@ -208,26 +206,80 @@ function initSuperMoves() {
     });
   }
 
-  // 🪂 DOWN CLIMB / FREE FALL: Plummet back to base camp
+// 🪂 DOWN CLIMB / FREE FALL: Plummet back to base camp
   if (fallBtn) {
     fallBtn.addEventListener("click", () => {
-      if (climber) {
+      const climber = document.getElementById("climber");
+      const ground = document.getElementById("ground");
+      const baseHold = document.querySelector('.hold-node[data-grade="V0"]');
+      const topo = document.getElementById("cragTopo");
+      const cragBody = document.querySelector(".crag-body");
+
+      if (climber && baseHold && topo) {
         climber.classList.add("free-falling");
+
+        // Calculate bottom hold position so the climber lands exactly on V0
+        const hRect = baseHold.getBoundingClientRect();
+        const tRect = topo.getBoundingClientRect();
+        const bottomY = (hRect.top - tRect.top) + (hRect.height / 2);
+        climber.style.top = `${bottomY}px`;
       }
 
-      const ground = document.getElementById("ground");
+      // Smooth scroll back to base camp
       if (ground) {
         ground.scrollIntoView({ behavior: "smooth" });
       }
 
+      // Landing impact after falling
       setTimeout(() => {
-        if (climber) climber.classList.remove("free-falling");
-        document.body.style.transform = "translateY(6px)";
-        setTimeout(() => document.body.style.transform = "translateY(0)", 120);
+        if (climber) {
+          climber.classList.remove("free-falling");
+        }
+
+        // Shake crag body only (keeps fixed topo spine intact)
+        if (cragBody) {
+          cragBody.classList.remove("landing-shake");
+          void cragBody.offsetWidth; // Force CSS reflow
+          cragBody.classList.add("landing-shake");
+        }
+
         emitChalkExplosion();
-      }, 900);
+      }, 950);
     });
   }
+}
+
+// ==========================================================================
+// Experience Tabs Controller
+// ==========================================================================
+function initExperienceTabs() {
+  const tabButtons = document.querySelectorAll(".exp-tab-btn");
+  const tabPanels = document.querySelectorAll(".exp-tab-panel");
+
+  if (!tabButtons.length) return;
+
+  tabButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const targetPanelId = btn.getAttribute("data-tab");
+
+      // Switch active button
+      tabButtons.forEach(b => {
+        b.classList.remove("active");
+        b.setAttribute("aria-selected", "false");
+      });
+      btn.classList.add("active");
+      btn.setAttribute("aria-selected", "true");
+
+      // Switch active panel
+      tabPanels.forEach(panel => {
+        if (panel.id === targetPanelId) {
+          panel.classList.add("active");
+        } else {
+          panel.classList.remove("active");
+        }
+      });
+    });
+  });
 }
 
 // ==========================================================================

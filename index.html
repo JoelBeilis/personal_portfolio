@@ -321,53 +321,98 @@
       </div>
     </section>
 
-    <!-- ==================== V2: EXPERIENCES ==================== -->
+<!-- ==================== V2: EXPERIENCES ==================== -->
     <section id="v2-experience" class="route-pitch">
       <div class="pitch-tab">
         <span class="pitch-badge">V2 — PITCH 02 // TRACK RECORD</span>
         <span class="pitch-code">work_and_volunteering.md</span>
       </div>
       <div class="pitch-card">
-        <h2>Work & Volunteer Experience</h2>
+        <h2>Experience</h2>
         <p class="pitch-lead">Applying computational physics, rapid prototyping, and leadership across research, design teams, and community coaching.</p>
 
-        <div class="experience-timeline">
-          <article class="exp-card">
-            <div class="exp-header">
-              <div>
-                <h3 class="exp-role">Research Assistant — Plasma & Micropropulsion</h3>
-                <span class="exp-org">Micropropulsion and Nanotechnology Laboratory</span>
-              </div>
-              <span class="exp-date">Current</span>
-            </div>
-            <p class="exp-desc">
-              Conducting experimental and computational research on Cold Atmospheric Plasma (CAP) jets, space-based power transmission, and optical emission spectroscopy decay modeling. Designed custom 3D-printed gantry systems and sensor rigs.
-            </p>
-            <div class="exp-tags">
-              <span>Optics Modeling</span>
-              <span>Sensors</span>
-              <span>Data Analysis</span>
-            </div>
-          </article>
-
-          <article class="exp-card">
-            <div class="exp-header">
-              <div>
-                <h3 class="exp-role">Vehicle Powertrain & Architecture Engineer</h3>
-                <span class="exp-org">Alternative Fuels Team</span>
-              </div>
-              <span class="exp-date">Active</span>
-            </div>
-            <p class="exp-desc">
-              Benchmarking hybrid vehicle conversions, evaluating chassis packaging, electric disconnect setups, and powertrain efficiency metrics.
-            </p>
-            <div class="exp-tags">
-              <span>Powertrain</span>
-              <span>Benchmarking</span>
-              <span>Hardware</span>
-            </div>
-          </article>
+        <!-- Experience Category Navigation Tabs -->
+        <div class="exp-nav-tabs" role="tablist">
+          <button class="exp-tab-btn active" data-tab="tab-work" role="tab" aria-selected="true">
+            Work 
+          </button>
+          <button class="exp-tab-btn" data-tab="tab-teams" role="tab" aria-selected="false">
+            Design Teams & Clubs
+          </button>
+          <button class="exp-tab-btn" data-tab="tab-volunteer" role="tab" aria-selected="false">
+            Volunteering
+          </button>
         </div>
+
+        <!-- Tab 1: Professional Work (Default Active) -->
+        <div id="tab-work" class="exp-tab-panel active" role="tabpanel">
+          <div class="experience-timeline">
+            <article class="exp-card">
+              <div class="exp-header">
+                <div>
+                  <h3 class="exp-role">Research Assistant — Plasma & Micropropulsion</h3>
+                  <span class="exp-org">Micropropulsion and Nanotechnology Laboratory</span>
+                </div>
+                <span class="exp-date">Current</span>
+              </div>
+              <p class="exp-desc">
+                Conducting experimental and computational research on Cold Atmospheric Plasma (CAP) jets, space-based power transmission, and optical emission spectroscopy decay modeling. Designed custom 3D-printed gantry systems and sensor rigs.
+              </p>
+              <div class="exp-tags">
+                <span>Optics Modeling</span>
+                <span>Sensors</span>
+                <span>Data Analysis</span>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- Tab 2: Design Teams & Clubs -->
+        <div id="tab-teams" class="exp-tab-panel" role="tabpanel">
+          <div class="experience-timeline">
+            <article class="exp-card">
+              <div class="exp-header">
+                <div>
+                  <h3 class="exp-role">Vehicle Powertrain & Architecture Engineer</h3>
+                  <span class="exp-org">Alternative Fuels Team</span>
+                </div>
+                <span class="exp-date">Active</span>
+              </div>
+              <p class="exp-desc">
+                Benchmarking hybrid vehicle conversions, evaluating chassis packaging, electric disconnect setups, and powertrain efficiency metrics.
+              </p>
+              <div class="exp-tags">
+                <span>Powertrain</span>
+                <span>Benchmarking</span>
+                <span>Hardware</span>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- Tab 3: Volunteer Work -->
+        <div id="tab-volunteer" class="exp-tab-panel" role="tabpanel">
+          <div class="experience-timeline">
+            <article class="exp-card">
+              <div class="exp-header">
+                <div>
+                  <h3 class="exp-role">Martial Arts Instructor & Youth Coach</h3>
+                  <span class="exp-org">Shotokan Karate Dojo</span>
+                </div>
+                <span class="exp-date">6+ Years</span>
+              </div>
+              <p class="exp-desc">
+                Instructed youth and adult classes across curriculum progression, kata precision, and safety. Mentored junior belts, assisted belt promotion exams, and organized local tournament logistics.
+              </p>
+              <div class="exp-tags">
+                <span>Coaching</span>
+                <span>Leadership</span>
+                <span>Mentorship</span>
+              </div>
+            </article>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -456,7 +501,7 @@
             </button>
             <button class="grade-btn" data-target="#v5-awards">
               <span class="grade-code">V5</span>
-              <span class="grade-name">Awards 🏆</span>
+              <span class="grade-name">Awards</span>
             </button>
             <button class="grade-btn" data-target="#v6-gear">
               <span class="grade-code">V6</span>
@@ -464,7 +509,7 @@
             </button>
             <button class="grade-btn summit-grade-btn" data-target="#v7-photography">
               <span class="grade-code">V7</span>
-              <span class="grade-name">Protography 📷</span>
+              <span class="grade-name">Protography</span>
             </button>
             <button class="grade-btn locked" data-target="#v8-future" title="Future Project Expansion">
               <span class="grade-code">V8</span>
