@@ -1,12 +1,13 @@
 /* ==========================================================================
-   Obsidian Retroma Theme Variables
+   1. Theme Tokens & Global Reset
    ========================================================================== */
 :root {
-  --font-sans: 'Inter', -apple-system, sans-serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'Fira Code', monospace;
   --transition-fast: 0.18s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-dyno: 0.8s cubic-bezier(0.19, 1, 0.22, 1);
   --radius-card: 10px;
+  --radius-pill: 9999px;
 }
 
 [data-theme="dark"] {
@@ -43,7 +44,7 @@
   --banner-bg: #ded9f5;
 }
 
-* {
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -53,6 +54,7 @@ html {
   background: var(--bg-crag);
   color: var(--text-main);
   font-family: var(--font-sans);
+  scroll-behavior: smooth;
 }
 
 body {
@@ -61,16 +63,15 @@ body {
 }
 
 /* ==========================================================================
-   Floating HUD Bar
+   2. Floating HUD Header
    ========================================================================== */
 .hud-bar {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  inset: 0 0 auto 0;
   height: 52px;
   background: rgba(8, 8, 20, 0.88);
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border-line);
   z-index: 100;
   display: flex;
@@ -115,9 +116,9 @@ body {
   border: 1px solid var(--border-glow);
   color: var(--text-main);
   padding: 5px 12px;
-  border-radius: 9999px;
+  border-radius: var(--radius-pill);
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 6px;
   transition: all var(--transition-fast);
@@ -136,7 +137,7 @@ body {
 }
 
 /* ==========================================================================
-   Vertical Climbing Route Topo Spine
+   3. Vertical Climbing Topo Spine & 8-Bit Climber
    ========================================================================== */
 .crag-topo {
   position: fixed;
@@ -155,7 +156,7 @@ body {
   transform: translateX(-50%);
   width: 3px;
   background: var(--topo-line);
-  border-radius: 9999px;
+  border-radius: var(--radius-pill);
 }
 
 .holds-column {
@@ -183,14 +184,14 @@ body {
   height: 20px;
   border-radius: 5px;
   border: 2px solid var(--border-glow);
-  transition: transform var(--transition-fast);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .anchor-hold { background: #38bdf8; clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); }
 .sloper-hold { background: #a855f7; border-radius: 50%; }
-.pinch-hold { background: #f87171; border-radius: 50% 10%; }
-.crimp-hold { background: #fbbf24; height: 10px; }
-.jug-hold { background: #34d399; }
+.pinch-hold  { background: #f87171; border-radius: 50% 10%; }
+.crimp-hold  { background: #fbbf24; height: 10px; }
+.jug-hold    { background: #34d399; }
 .ground-hold { background: #94a3b8; border-radius: 3px; }
 
 .hold-node:hover .hold-gem,
@@ -231,6 +232,7 @@ body {
   z-index: 10;
   pointer-events: none;
   transition: top var(--transition-fast);
+  will-change: top;
 }
 
 .climber-svg {
@@ -265,11 +267,10 @@ body {
 }
 
 @keyframes tumble {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
 }
 
-/* Chalk Particles */
 .chalk-emitter {
   position: absolute;
   top: 18px;
@@ -290,7 +291,7 @@ body {
 }
 
 /* ==========================================================================
-   Crag Body & Pitch Layout
+   4. Crag Layout & Pitch Panels
    ========================================================================== */
 .crag-body {
   max-width: 1080px;
@@ -348,8 +349,10 @@ body {
 }
 
 /* ==========================================================================
-   Ground Pitch / Welcome to Joel's Jungle
+   5. Pitch Specific Sections
    ========================================================================== */
+
+/* V0 Base Camp */
 .jungle-welcome-card {
   text-align: center;
   display: flex;
@@ -391,7 +394,6 @@ body {
   margin-bottom: 30px;
 }
 
-/* Grade Selector Strip */
 .boulder-grade-selector {
   width: 100%;
   background: var(--bg-card);
@@ -458,7 +460,6 @@ body {
   border-style: dashed;
 }
 
-/* Ground & Summit Launch Buttons */
 .ground-actions {
   display: flex;
   gap: 16px;
@@ -478,25 +479,28 @@ body {
   transition: all var(--transition-fast);
 }
 
-.dyno-btn {
-  background: var(--accent-coral);
-  color: #fff;
-  box-shadow: 0 4px 14px rgba(251, 113, 133, 0.4);
-}
-
-.dyno-btn:hover {
-  transform: scale(1.03);
-  box-shadow: 0 6px 20px rgba(251, 113, 133, 0.6);
-}
-
 .climb-step-btn {
+  background: var(--accent-amber);
+  color: #080814;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(251, 191, 36, 0.35);
+}
+
+.climb-step-btn:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 20px rgba(251, 191, 36, 0.55);
+}
+
+.dyno-btn {
   background: var(--bg-card);
   border: 1px solid var(--border-glow);
   color: var(--text-main);
 }
 
-.climb-step-btn:hover {
-  border-color: var(--accent-amber);
+.dyno-btn:hover {
+  border-color: var(--accent-coral);
+  color: var(--accent-coral);
+  transform: translateY(-2px);
 }
 
 .freefall-btn {
@@ -522,9 +526,226 @@ body {
   gap: 14px;
 }
 
-/* ==========================================================================
-   Obsidian Cards, Grids & Pitch Components
-   ========================================================================== */
+/* V1 About Socials */
+.about-socials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px dashed var(--border-line);
+}
+
+.social-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-line);
+  color: var(--text-main);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.social-icon-btn svg {
+  width: 20px;
+  height: 20px;
+  transition: transform var(--transition-fast);
+}
+
+.social-icon-btn:hover {
+  border-color: var(--accent-amber);
+  background: var(--bg-panel-tab);
+  color: var(--accent-amber);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.social-icon-btn:hover svg {
+  transform: scale(1.12);
+}
+
+/* V2 Experiences & V6 Awards (Consolidated Lateral Border Card Pattern) */
+.experience-timeline,
+.awards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.exp-card,
+.award-entry {
+  background: var(--bg-card);
+  border: 1px solid var(--border-line);
+  border-radius: 0 8px 8px 0;
+  padding: 20px 24px;
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.exp-card {
+  border-left: 3px solid var(--accent-cyan);
+}
+
+.exp-card:hover {
+  transform: translateX(4px);
+  border-color: var(--accent-cyan);
+}
+
+.award-entry {
+  border-left: 3px solid var(--accent-amber);
+}
+
+.award-entry:hover {
+  transform: translateX(4px);
+  border-color: var(--accent-amber);
+}
+
+.exp-header,
+.award-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.exp-role,
+.award-entry h3 {
+  font-size: 1.15rem;
+  color: var(--text-main);
+  margin-bottom: 2px;
+}
+
+.exp-org {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--accent-amber);
+}
+
+.exp-date,
+.award-year {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent-amber);
+  font-weight: 600;
+}
+
+.exp-date {
+  background: var(--bg-panel-tab);
+  border: 1px solid var(--border-glow);
+  padding: 2px 8px;
+  border-radius: 4px;
+  color: var(--text-muted);
+}
+
+.award-badge {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  background: var(--bg-panel-tab);
+  border: 1px solid var(--border-glow);
+  color: var(--accent-coral);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.exp-desc,
+.award-entry p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.exp-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.exp-tags span {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  background: var(--bg-panel-tab);
+  border: 1px solid var(--border-line);
+  padding: 2px 7px;
+  border-radius: 4px;
+  color: var(--text-main);
+}
+
+.award-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.proof-link {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--accent-cyan);
+  text-decoration: none;
+  border: 1px solid var(--border-line);
+  background: var(--bg-panel-tab);
+  padding: 6px 12px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all var(--transition-fast);
+}
+
+.proof-link:hover {
+  border-color: var(--accent-cyan);
+  background: var(--bg-card);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(56, 189, 248, 0.2);
+}
+
+/* V3/V4 Skills Matrix */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.skill-category {
+  background: var(--bg-card);
+  border: 1px solid var(--border-line);
+  border-radius: 8px;
+  padding: 18px;
+}
+
+.skill-category h3 {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  color: var(--accent-amber);
+  margin-bottom: 12px;
+  border-bottom: 1px dashed var(--border-line);
+  padding-bottom: 6px;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-tags span {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  background: var(--bg-panel-tab);
+  border: 1px solid var(--border-glow);
+  padding: 3px 8px;
+  border-radius: 4px;
+  color: var(--text-main);
+}
+
+/* V4/V5 Projects Grid */
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -583,35 +804,6 @@ body {
   border-radius: 4px;
 }
 
-/* Karate Pitch Grid */
-.karate-stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
-}
-
-.stat-box {
-  background: var(--bg-card);
-  border: 1px solid var(--border-line);
-  border-radius: 8px;
-  padding: 24px;
-  text-align: center;
-}
-
-.stat-num {
-  display: block;
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: var(--accent-amber);
-  margin-bottom: 8px;
-  font-family: var(--font-mono);
-}
-
-.stat-desc {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-}
-
 /* Gear Pitch */
 .gear-columns {
   display: grid;
@@ -647,7 +839,7 @@ body {
 }
 
 /* ==========================================================================
-   Summit Photography Gallery
+   6. Summit Photography Gallery & Lightbox
    ========================================================================== */
 .section-title-wrap {
   display: flex;
@@ -720,7 +912,7 @@ body {
   font-family: var(--font-mono);
   font-size: 0.75rem;
   padding: 4px 10px;
-  border-radius: 9999px;
+  border-radius: var(--radius-pill);
   cursor: pointer;
   transition: all var(--transition-fast);
 }
@@ -729,6 +921,13 @@ body {
   background: var(--accent-purple);
   border-color: var(--accent-purple);
   color: #fff;
+}
+
+.tag-btn:first-child.active {
+  background: var(--accent-amber);
+  border-color: var(--accent-amber);
+  color: #080814;
+  font-weight: 600;
 }
 
 .gallery-grid {
@@ -752,7 +951,6 @@ body {
   border-color: var(--accent-amber);
 }
 
-/* Micro-thumbnail blurred underlay */
 .lqip-placeholder {
   position: absolute;
   inset: 0;
@@ -763,7 +961,6 @@ body {
   transition: opacity 0.4s ease-out;
 }
 
-/* Sharp thumbnail on top */
 .progressive-img {
   position: relative;
   z-index: 1;
@@ -778,7 +975,6 @@ body {
   opacity: 1;
 }
 
-/* Fade out blur once loaded to save GPU resources */
 .photo-card.resolved .lqip-placeholder {
   opacity: 0;
 }
@@ -813,9 +1009,7 @@ body {
   margin-top: 4px;
 }
 
-/* ==========================================================================
-   Lightbox
-   ========================================================================== */
+/* Modal Lightbox */
 .lightbox-modal {
   position: fixed;
   inset: 0;
@@ -838,6 +1032,7 @@ body {
   inset: 0;
   background: rgba(0,0,0,0.85);
   backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 
 .lightbox-window {
@@ -930,246 +1125,22 @@ body {
 }
 
 /* ==========================================================================
-   Responsive Adaptations
+   7. Responsive Adaptations
    ========================================================================== */
 @media (max-width: 860px) {
-  .crag-topo { display: none; }
-  .hud-bar { padding-left: 16px; padding-right: 16px; }
-  .crag-body { padding-left: 16px; padding-right: 16px; }
-  .gear-columns, .lightbox-window { grid-template-columns: 1fr; }
-  .jungle-headline { font-size: 1.8rem; }
-}
-
-/* Centered Social Buttons in V1 About Me */
-.about-socials {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-  margin-top: 28px;
-  padding-top: 20px;
-  border-top: 1px dashed var(--border-line);
-}
-
-.social-icon-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 8px;
-  background: var(--bg-card);
-  border: 1px solid var(--border-line);
-  color: var(--text-main);
-  text-decoration: none;
-  transition: all var(--transition-fast);
-}
-
-.social-icon-btn svg {
-  width: 20px;
-  height: 20px;
-  transition: transform var(--transition-fast);
-}
-
-.social-icon-btn:hover {
-  border-color: var(--accent-amber);
-  background: var(--bg-panel-tab);
-  color: var(--accent-amber);
-  transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-}
-
-.social-icon-btn:hover svg {
-  transform: scale(1.12);
-}
-
-/* ==========================================================================
-   Skills Pitch (V4)
-   ========================================================================== */
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
-}
-
-.skill-category {
-  background: var(--bg-card);
-  border: 1px solid var(--border-line);
-  border-radius: 8px;
-  padding: 18px;
-}
-
-.skill-category h3 {
-  font-family: var(--font-mono);
-  font-size: 0.88rem;
-  color: var(--accent-amber);
-  margin-bottom: 12px;
-  border-bottom: 1px dashed var(--border-line);
-  padding-bottom: 6px;
-}
-
-.skill-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.skill-tags span {
-  font-family: var(--font-mono);
-  font-size: 0.76rem;
-  background: var(--bg-panel-tab);
-  border: 1px solid var(--border-glow);
-  padding: 3px 8px;
-  border-radius: 4px;
-  color: var(--text-main);
-}
-
-/* ==========================================================================
-   Beta Log Pitch (V6)
-   ========================================================================== */
-.beta-log-list {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.beta-entry {
-  background: var(--bg-card);
-  border-left: 3px solid var(--accent-coral);
-  border-top: 1px solid var(--border-line);
-  border-right: 1px solid var(--border-line);
-  border-bottom: 1px solid var(--border-line);
-  border-radius: 0 8px 8px 0;
-  padding: 16px 20px;
-}
-
-.beta-meta {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 6px;
-}
-
-.beta-date {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--accent-amber);
-}
-
-.beta-tag {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  background: var(--border-line);
-  padding: 2px 6px;
-  border-radius: 4px;
-  color: var(--text-muted);
-}
-
-.beta-entry h3 {
-  font-size: 1.05rem;
-  margin-bottom: 6px;
-  color: var(--text-main);
-}
-
-.beta-entry p {
-  font-size: 0.88rem;
-  line-height: 1.5;
-  color: var(--text-muted);
-}
-
-/* ==========================================================================
-   Awards Pitch (V6)
-   ========================================================================== */
-.awards-list {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.award-entry {
-  background: var(--bg-card);
-  border-left: 3px solid var(--accent-amber);
-  border-top: 1px solid var(--border-line);
-  border-right: 1px solid var(--border-line);
-  border-bottom: 1px solid var(--border-line);
-  border-radius: 0 8px 8px 0;
-  padding: 20px 24px;
-  transition: border-color var(--transition-fast), transform var(--transition-fast);
-}
-
-.award-entry:hover {
-  transform: translateX(4px);
-  border-color: var(--accent-amber);
-}
-
-.award-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-}
-
-.award-year {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--accent-amber);
-  font-weight: 600;
-}
-
-.award-badge {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  background: var(--bg-panel-tab);
-  border: 1px solid var(--border-glow);
-  color: var(--accent-coral);
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-weight: 600;
-}
-
-.award-entry h3 {
-  font-size: 1.2rem;
-  color: var(--text-main);
-  margin-bottom: 8px;
-}
-
-.award-entry p {
-  font-size: 0.9rem;
-  line-height: 1.6;
-  color: var(--text-muted);
-  margin-bottom: 14px;
-}
-
-.award-actions {
-  display: flex;
-  gap: 12px;
-}
-
-.proof-link {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--accent-cyan);
-  text-decoration: none;
-  border: 1px solid var(--border-line);
-  background: var(--bg-panel-tab);
-  padding: 6px 12px;
-  border-radius: 4px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  transition: all var(--transition-fast);
-}
-
-.proof-link:hover {
-  border-color: var(--accent-cyan);
-  background: var(--bg-card);
-  color: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(56, 189, 248, 0.2);
-}
-
-.tag-btn:first-child.active {
-  background: var(--accent-amber);
-  border-color: var(--accent-amber);
-  color: #080814;
-  font-weight: 600;
+  .crag-topo { 
+    display: none; 
+  }
+  .hud-bar,
+  .crag-body { 
+    padding-left: 16px; 
+    padding-right: 16px; 
+  }
+  .gear-columns, 
+  .lightbox-window { 
+    grid-template-columns: 1fr; 
+  }
+  .jungle-headline { 
+    font-size: 1.8rem; 
+  }
 }
