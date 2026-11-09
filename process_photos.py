@@ -9,7 +9,6 @@ THUMB_DIR = "images/thumbs"
 FULL_DIR = "images/full"
 MANIFEST_FILE = "photos.json"
 
-# Create destination directories if they don't exist
 os.makedirs(THUMB_DIR, exist_ok=True)
 os.makedirs(FULL_DIR, exist_ok=True)
 
@@ -26,7 +25,6 @@ def get_exif_data(img):
             tag = ExifTags.TAGS.get(tag_id, tag_id)
             exif[tag] = val
 
-        # Check nested IFD for specific shot parameters
         if hasattr(ExifTags, 'IFD') and ExifTags.IFD.Exif in exif_raw:
             nested = exif_raw.get_ifd(ExifTags.IFD.Exif)
             for tag_id, val in nested.items():
@@ -57,7 +55,6 @@ def get_exif_data(img):
 
         iso_val = exif.get('ISOSpeedRatings') or exif.get('PhotographicSensitivity')
         iso = f"ISO {iso_val}" if iso_val else None
-
         lens = str(exif.get('LensModel', '')).strip()
 
         return {
@@ -98,7 +95,7 @@ def main():
         print(f"Error: Could not find folder '{SOURCE_DIR}'. Create it and add photos.")
         return
 
-    # Load existing manifest to preserve custom edits (titles, tags, locations)
+    # Load existing manifest to cache previously generated data
     existing_data = {}
     if os.path.exists(MANIFEST_FILE):
         try:
@@ -108,7 +105,7 @@ def main():
         except Exception:
             pass
 
-    # Find valid images and sort by file modification date (oldest first, newest last)
+    # Find valid images and sort by file modification date
     valid_exts = ('.jpg', '.jpeg', '.png', '.avif', '.webp')
     files = [
         f for f in os.listdir(SOURCE_DIR)
@@ -121,14 +118,28 @@ def main():
         return
 
     photos_list = []
+    skipped_count = 0
+    processed_count = 0
 
     for filename in files:
         filepath = os.path.join(SOURCE_DIR, filename)
         name_stem = os.path.splitext(filename)[0].lower().replace(" ", "-")
 
+        full_rel_path = f"{FULL_DIR}/{name_stem}.webp"
+        thumb_rel_path = f"{THUMB_DIR}/{name_stem}.webp"
+
+        # Check if already processed and files still exist on disk
+        if (
+            name_stem in existing_data
+            and os.path.exists(full_rel_path)
+            and os.path.exists(thumb_rel_path)
+        ):
+            photos_list.append(existing_data[name_stem])
+            skipped_count += 1
+            continue
+
         try:
             with Image.open(filepath) as img:
-                # Convert RGBA/P images (e.g. PNGs) to RGB for clean WebP compression
                 if img.mode in ("RGBA", "P"):
                     rgb_img = img.convert("RGB")
                 else:
@@ -138,22 +149,19 @@ def main():
                 lqip = generate_lqip(rgb_img)
 
                 # 1. Full-res Lightbox WebP (2048px long edge)
-                full_rel_path = f"{FULL_DIR}/{name_stem}.webp"
                 full_img = rgb_img.copy()
                 full_img.thumbnail((2048, 2048), Image.Resampling.LANCZOS)
                 full_img.save(full_rel_path, format="WEBP", quality=82)
 
                 # 2. Grid Thumbnail WebP (600px long edge)
-                thumb_rel_path = f"{THUMB_DIR}/{name_stem}.webp"
                 thumb_img = rgb_img.copy()
                 thumb_img.thumbnail((600, 600), Image.Resampling.LANCZOS)
                 thumb_img.save(thumb_rel_path, format="WEBP", quality=75)
 
                 aspect = round(img.height / img.width, 4)
 
-                # Preserve any tags/titles previously written by hand
                 saved = existing_data.get(name_stem, {})
-                location = saved.get("location", "City, Country")  # Default placeholder
+                location = saved.get("location", "City, Country")
                 tags = saved.get("tags", [])
 
                 photos_list.append({
@@ -167,16 +175,17 @@ def main():
                     "exif": exif
                 })
 
+                processed_count += 1
                 print(f"✓ Processed {filename} -> {thumb_rel_path}")
 
         except Exception as e:
             print(f"✕ Skipping {filename}: {e}")
 
-    # Write the sorted manifest to photos.json
+    # Write the updated manifest to photos.json
     with open(MANIFEST_FILE, "w", encoding="utf-8") as f:
         json.dump(photos_list, f, indent=2)
 
-    print(f"\nYAHOOOOOOOOOOOOOOO Successfully indexed {len(photos_list)} photos into {MANIFEST_FILE}")
+    print(f"\YAHOOOOOO Processed {processed_count} new, reused {skipped_count} cached photos ({len(photos_list)} total in {MANIFEST_FILE}).")
 
 
 if __name__ == "__main__":
