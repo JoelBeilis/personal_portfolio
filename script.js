@@ -44,6 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initSuperMoves();
   initExperienceTabs();
   initRecipeTabs();
+  initBookLog();
   initGallery();
   initLightbox();
 
@@ -362,6 +363,110 @@ function initRecipeTabs() {
       });
     });
   });
+}
+
+// ==========================================================================
+// Book Log Engine: Stable Rating Sort, Search, and 4-Book Limit Toggle
+// ==========================================================================
+function initBookLog() {
+  const grid = document.getElementById("bookGrid");
+  const searchInput = document.getElementById("bookSearch");
+  const toggleBtn = document.getElementById("bookToggleBtn");
+  const countLabel = document.getElementById("bookCount");
+
+  if (!grid) return;
+
+  let isExpanded = false;
+  const originalCards = Array.from(grid.querySelectorAll(".book-cell"));
+
+  // 1. Sort top to bottom by rating descending (5 stars at top)
+  // Stable sort: If rating is tied, preserve their original relative HTML order
+  const sortedCards = originalCards
+    .map((card, index) => ({ card, originalIndex: index }))
+    .sort((a, b) => {
+      const ratingA = parseFloat(a.card.getAttribute("data-rating")) || 0;
+      const ratingB = parseFloat(b.card.getAttribute("data-rating")) || 0;
+      if (ratingB !== ratingA) {
+        return ratingB - ratingA; // Higher rating first
+      }
+      return a.originalIndex - b.originalIndex; // Stable tie-breaker
+    })
+    .map(item => item.card);
+
+  // Append sorted cards back to DOM container
+  sortedCards.forEach(card => grid.appendChild(card));
+
+  // 2. Render function applying Search + 4-item Collapse logic
+  function renderBooks() {
+    const query = searchInput ? searchInput.value.toLowerCase().trim() : "";
+    let matchCount = 0;
+
+    sortedCards.forEach(card => {
+      const title = (card.getAttribute("data-title") || "").toLowerCase();
+      const author = (card.getAttribute("data-author") || "").toLowerCase();
+      const genre = (card.getAttribute("data-genre") || "").toLowerCase();
+      const rating = (card.getAttribute("data-rating") || "").toLowerCase();
+      const text = card.textContent.toLowerCase();
+
+      // Check if card matches search query
+      const matches = !query || 
+        title.includes(query) || 
+        author.includes(query) || 
+        genre.includes(query) || 
+        rating.startsWith(query) || 
+        text.includes(query);
+
+      if (matches) {
+        matchCount++;
+        // If query is active OR expanded, show all matches.
+        // Otherwise only show the first 4 matching books.
+        if (query.length > 0 || isExpanded || matchCount <= 4) {
+          card.classList.remove("book-hidden");
+        } else {
+          card.classList.add("book-hidden");
+        }
+      } else {
+        card.classList.add("book-hidden");
+      }
+    });
+
+    // Update Counter and Toggle Button Label
+    if (countLabel) {
+      if (query.length > 0) {
+        countLabel.textContent = `Found ${matchCount} of ${sortedCards.length} books`;
+      } else {
+        const visibleCount = isExpanded ? sortedCards.length : Math.min(4, sortedCards.length);
+        countLabel.textContent = `Showing ${visibleCount} of ${sortedCards.length} books`;
+      }
+    }
+
+    if (toggleBtn) {
+      // Hide the toggle button if a search query is active
+      if (query.length > 0 || sortedCards.length <= 4) {
+        toggleBtn.style.display = "none";
+      } else {
+        toggleBtn.style.display = "inline-flex";
+        toggleBtn.innerHTML = isExpanded 
+          ? `<span>▲ Collapse to Top 4 Books</span>` 
+          : `<span>▼ Show All Books (${sortedCards.length})</span>`;
+      }
+    }
+  }
+
+  // 3. Event Listeners
+  if (searchInput) {
+    searchInput.addEventListener("input", renderBooks);
+  }
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener("click", () => {
+      isExpanded = !isExpanded;
+      renderBooks();
+    });
+  }
+
+  // Initial render
+  renderBooks();
 }
 
 // ==========================================================================

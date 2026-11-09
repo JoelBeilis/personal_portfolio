@@ -133,7 +133,7 @@
       </div>
     </section>
 
-    <!-- ==================== V9: BOOK LOG ==================== -->
+   <!-- ==================== V9: BOOK LOG ==================== -->
     <section id="v9-books" class="route-pitch">
       <div class="pitch-tab">
         <span class="pitch-badge">V9 — PITCH 09 // READING NOOK</span>
@@ -143,18 +143,32 @@
         <div class="section-title-wrap">
           <div>
             <h2>Book Log & Reading Nook</h2>
-            <p class="section-sub">I don't remember what I read so I'll put some favs, and add as I remember that this exists</p>
+            <p class="section-sub">I don't remember a lot of the books I've read so we'll just skip those.</p>
+          </div>
+          <span class="counter-badge" id="bookCount">Showing 4 of X entries</span>
+        </div>
+
+        <!-- Book Search & Controls Bar -->
+        <div class="book-controls">
+          <div class="search-box">
+            <span class="search-ico">🔍</span>
+            <input type="text" id="bookSearch" placeholder="Search by title, author, tag, or rating" />
+          </div>
+          <div class="book-toggle-bar">
+            <button id="bookToggleBtn" class="hud-btn book-toggle-btn">
+              <span>▼ Show All Books</span>
+            </button>
           </div>
         </div>
-        <!-- Book Cells Grid -->
-        <div class="book-cells-grid">
 
-          <!-- Cell 1 -->
-          <article class="book-cell">
+        <!-- Book Cells Grid (Requires id="bookGrid" for JS controller) -->
+        <div class="book-cells-grid" id="bookGrid">
+
+          <!-- 1. Project Hail Mary -->
+          <article class="book-cell" data-rating="5.0" data-title="Project Hail Mary" data-author="Andy Weir" data-genre="Sci-Fi">
             <div class="book-cell-top">
               <span class="book-genre-pill">Sci-Fi</span>
             </div>
-
             <div class="book-cell-main">
               <h3 class="book-cell-title">Project Hail Mary</h3>
               <div class="book-cell-author">Andy Weir</div>
@@ -166,18 +180,16 @@
                 It's so much fun to read. Idk why I didn't imagine rocky as small when I first read it, but the movie is also fire.
               </p>
             </div>
-
             <blockquote class="book-cell-quote">
               "Words of GREAT encouragement."
             </blockquote>
           </article>
 
-          <!-- Cell 2 -->
-          <article class="book-cell">
+          <!-- 2. Ready Player One -->
+          <article class="book-cell" data-rating="3.0" data-title="Ready Player One" data-author="Ernest Cline" data-genre="Sci-Fi">
             <div class="book-cell-top">
               <span class="book-genre-pill">Sci-Fi</span>
             </div>
-
             <div class="book-cell-main">
               <h3 class="book-cell-title">Ready Player One</h3>
               <div class="book-cell-author">Ernest Cline</div>
@@ -186,15 +198,16 @@
                 <span class="score">3.0</span>
               </div>
               <p class="book-cell-review">
-                I swear the movie is significantly better than the book. 
+                I swear the movie is significantly better than the book.
               </p>
-              <blockquote class="book-cell-quote">
-                "The only way to win is to play."
-              </blockquote>
             </div>
+            <blockquote class="book-cell-quote">
+              "The only way to win is to play."
+            </blockquote>
           </article>
 
-          <article class="book-cell">
+          <!-- 3. Recursion -->
+          <article class="book-cell" data-rating="4.5" data-title="Recursion" data-author="Blake Crouch" data-genre="Sci-Fi">
             <div class="book-cell-top">
               <span class="book-genre-pill">Sci-Fi</span>
             </div>
@@ -206,15 +219,16 @@
                 <span class="score">4.5</span>
               </div>
               <p class="book-cell-review">
-                The ending dragged on longer than I wanted, but ZOOWEEMAMA the concept was amazingly executed. 
+                The ending dragged on longer than I wanted, but ZOOWEEMAMA the concept was amazingly executed.
               </p>
-              <blockquote class="book-cell-quote">
-                "The past is never dead. It's not even past."
-              </blockquote>
             </div>
+            <blockquote class="book-cell-quote">
+              "The past is never dead. It's not even past."
+            </blockquote>
           </article>
 
-          <article class="book-cell">
+          <!-- 4. Ender's Game -->
+          <article class="book-cell" data-rating="4.5" data-title="Ender's Game" data-author="Orson Scott Card" data-genre="Sci-Fi">
             <div class="book-cell-top">
               <span class="book-genre-pill">Sci-Fi</span>
             </div>
@@ -228,13 +242,14 @@
               <p class="book-cell-review">
                 Children vs aliens very solid good plot.
               </p>
-              <blockquote class="book-cell-quote">
-                "Your mother cheated - that's why you look like a plumber"
-              </blockquote>
             </div>
+            <blockquote class="book-cell-quote">
+              "Your mother cheated - that's why you look like a plumber"
+            </blockquote>
           </article>
 
-          <article class="book-cell">
+          <!-- 5. The Hitchhiker's Guide to the Galaxy -->
+          <article class="book-cell" data-rating="4.0" data-title="The Hitchhiker's Guide to the Galaxy" data-author="Douglas Adams" data-genre="Sci-Fi">
             <div class="book-cell-top">
               <span class="book-genre-pill">Sci-Fi</span>
             </div>
@@ -248,33 +263,35 @@
               <p class="book-cell-review">
                 Nothing super insanely 100% must read, but it's funny.
               </p>
-              <blockquote class="book-cell-quote">
-                "Time is an illusion. Lunchtime doubly so."
-              </blockquote>
             </div>
+            <blockquote class="book-cell-quote">
+              "Time is an illusion. Lunchtime doubly so."
+            </blockquote>
           </article>
 
-          <article class="book-cell">
+          <!-- 6. Lord of the Flies -->
+          <article class="book-cell" data-rating="2.0" data-title="Lord of the Flies" data-author="William Golding" data-genre="Classics">
             <div class="book-cell-top">
-              <span class="book-genre-pill">Sci-Fi</span>
+              <span class="book-genre-pill">Classics</span>
             </div>
             <div class="book-cell-main">
-              <h3 class="book-cell-title">Lord of the flies</h3>
+              <h3 class="book-cell-title">Lord of the Flies</h3>
               <div class="book-cell-author">William Golding</div>
               <div class="book-cell-rating" title="Rating: 2.0 / 5.0">
                 <span class="stars">★★</span>
                 <span class="score">2.0</span>
               </div>
               <p class="book-cell-review">
-                yawn. 
+                yawn.
               </p>
-              <blockquote class="book-cell-quote">
-                "Maybe there is a beast... maybe it's only us."
-              </blockquote>
             </div>
+            <blockquote class="book-cell-quote">
+              "Maybe there is a beast... maybe it's only us."
+            </blockquote>
           </article>
 
-          <article class="book-cell">
+          <!-- 7. Scythe -->
+          <article class="book-cell" data-rating="5.0" data-title="Scythe" data-author="Neal Shusterman" data-genre="Sci-Fi">
             <div class="book-cell-top">
               <span class="book-genre-pill">Sci-Fi</span>
             </div>
@@ -286,15 +303,36 @@
                 <span class="score">5.0</span>
               </div>
               <p class="book-cell-review">
-                Wait hold on this was peak genuine peak. I can't think of a book I liked more. 
+                Wait hold on this was peak genuine peak. I can't think of a book I liked more.
               </p>
-              <blockquote class="book-cell-quote">
-                "Can I throw you under a truck some other time?"
-              </blockquote>
             </div>
+            <blockquote class="book-cell-quote">
+              "Can I throw you under a truck some other time?"
+            </blockquote>
           </article>
 
-          <article class="book-cell">
+          <article class="book-cell" data-rating="3.2" data-title="How To Kill Men and Get Away with It" data-author="Katy Brent" data-genre="Psychological Thriller ">
+            <div class="book-cell-top">
+              <span class="book-genre-pill">Psychological Thriller</span>
+            </div>
+            <div class="book-cell-main">
+              <h3 class="book-cell-title">How To Kill Men and Get Away with It</h3>
+              <div class="book-cell-author">Katy Brent</div>
+              <div class="book-cell-rating" title="Rating: 3.2 / 5.0">
+                <span class="stars">★★★</span>
+                <span class="score">3.2</span>
+              </div>
+              <p class="book-cell-review">
+                My name is in it :D ... that's really the only reason I even read it lol. Still fun ig.
+              </p>
+            </div>
+            <blockquote class="book-cell-quote">
+              "Oh, to have the confidence of a very average white male."
+            </blockquote>
+          </article>
+
+          <!-- 8. The Measure -->
+          <article class="book-cell" data-rating="3.0" data-title="The Measure" data-author="Nikki Erlick" data-genre="Sci-Fi">
             <div class="book-cell-top">
               <span class="book-genre-pill">Sci-Fi</span>
             </div>
@@ -306,15 +344,16 @@
                 <span class="score">3.0</span>
               </div>
               <p class="book-cell-review">
-                Kinda really sad. Fit my mood when I read it tbh so not complaining. 
+                Kinda really sad. Fit my mood when I read it tbh so not complaining.
               </p>
-              <blockquote class="book-cell-quote">
-                "The measure of a life is not its length, but the depth of its impact."
-              </blockquote>
             </div>
+            <blockquote class="book-cell-quote">
+              "The measure of a life is not its length, but the depth of its impact."
+            </blockquote>
           </article>
 
-          <article class="book-cell">
+          <!-- 9. Karate-do: My Way of Life -->
+          <article class="book-cell" data-rating="4.0" data-title="Karate-do: My way of life" data-author="Gichin Funakoshi" data-genre="Biography">
             <div class="book-cell-top">
               <span class="book-genre-pill">Biography</span>
             </div>
@@ -326,15 +365,16 @@
                 <span class="score">4.0</span>
               </div>
               <p class="book-cell-review">
-                I think I read this book like 3-4 times. It was necessary for black belt testing, but I do like his stories gives the same vibe as listening to grandparents. 
+                I think I read this book like 3-4 times. It was necessary for black belt testing, but I do like his stories gives the same vibe as listening to grandparents.
               </p>
-              <blockquote class="book-cell-quote">
-                "The ultimate aim of Karate lies not in victory or defeat, but in the perfection of the character of its participants."
-              </blockquote>
             </div>
+            <blockquote class="book-cell-quote">
+              "The ultimate aim of Karate lies not in victory or defeat, but in the perfection of the character of its participants."
+            </blockquote>
           </article>
 
-          <article class="book-cell">
+          <!-- 10. The Three-Body Problem -->
+          <article class="book-cell" data-rating="0.0" data-title="The Three-Body Problem" data-author="Cixin Liu" data-genre="Sci-Fi">
             <div class="book-cell-top">
               <span class="book-genre-pill">Sci-Fi</span>
             </div>
@@ -342,35 +382,92 @@
               <h3 class="book-cell-title">The Three-Body Problem</h3>
               <div class="book-cell-author">Cixin Liu</div>
               <div class="book-cell-rating" title="Rating: TBD">
-                <span class="stars"></span>
-                <span class="score"></span>
+                <span class="stars">⏳ Reading</span>
+                <span class="score">TBD</span>
               </div>
               <p class="book-cell-review">
-                Work in progress I swear. 
+                Work in progress I swear.
               </p>
             </div>
           </article>
 
-            <article class="book-cell">
-              <div class="book-cell-top">
-                <span class="book-genre-pill">Sci-Fi</span>
+          <!-- 11. The Martian -->
+          <article class="book-cell" data-rating="3.0" data-title="The Martian" data-author="Andy Weir" data-genre="Sci-Fi">
+            <div class="book-cell-top">
+              <span class="book-genre-pill">Sci-Fi</span>
+            </div>
+            <div class="book-cell-main">
+              <h3 class="book-cell-title">The Martian</h3>
+              <div class="book-cell-author">Andy Weir</div>
+              <div class="book-cell-rating" title="Rating: 3.0 / 5.0">
+                <span class="stars">★★★</span>
+                <span class="score">3.0</span>
               </div>
-              <div class="book-cell-main">
-                <h3 class="book-cell-title">The Martian</h3>
-                <div class="book-cell-author">Andy Weir</div>
-                <div class="book-cell-rating" title="Rating: 3.0 / 5.0">
-                  <span class="stars">★★★</span>
-                  <span class="score">3.0</span>
-                </div>
-                <p class="book-cell-review">
-                  It felt very repetitive at a point. Some problem omg we did it then oh whoops it went horribly wrong.
-                </p>
+              <p class="book-cell-review">
+                It felt very repetitive at a point. Some problem omg we did it then oh whoops it went horribly wrong.
+              </p>
+            </div>
+            <blockquote class="book-cell-quote">
+              "I’m going to have to science the shit out of this."
+            </blockquote>
+          </article>
 
-                <blockquote class="book-cell-quote">
-                  "I’m going to have to science the shit out of this."
-                </blockquote>
+          <article class="book-cell" data-rating="4.0" data-title="Thunderhead" data-author="Neal Shusterman" data-genre="Sci-Fi">
+            <div class="book-cell-top">
+              <span class="book-genre-pill">Sci-Fi</span>
+            </div>
+            <div class="book-cell-main">
+              <h3 class="book-cell-title">Thunderhead</h3>
+              <div class="book-cell-author">Neal Shusterman</div>
+              <div class="book-cell-rating" title="Rating: 4.0 / 5.0">
+                <span class="stars">★★★★</span>
+                <span class="score">4.0</span>
               </div>
-            </article>  
+              <p class="book-cell-review">
+                Big views on AI and stuff and the more technical world building aspect continuing off the first book. Not much to hate at all.
+              </p>
+            </div>
+            <blockquote class="book-cell-quote">
+              "The Thunderhead is not a god. It is a machine. A machine that has been programmed to serve humanity."
+            </blockquote>
+          </article>
+          <article class="book-cell" data-rating="4.5" data-title="The Toll" data-author="Neal Shusterman" data-genre="Sci-Fi">
+            <div class="book-cell-top">
+              <span class="book-genre-pill">Sci-Fi</span>
+            </div>
+            <div class="book-cell-main">
+              <h3 class="book-cell-title">The Toll</h3>
+              <div class="book-cell-author">Neal Shusterman</div>
+              <div class="book-cell-rating" title="Rating: 4.5 / 5.0">
+                <span class="stars">★★★★½</span>
+                <span class="score">4.5</span>
+              </div>
+              <p class="book-cell-review">
+                Final book in my fav trilogy of all time. Twas quite really fabulous. 
+              </p>
+            </div>
+            <blockquote class="book-cell-quote">
+              "The Toll is the end of the road, but it's also the beginning of a new journey."
+            </blockquote>
+          </article>
+
+          <article class="book-cell" data-rating="2.0" data-title="Gleanings" data-author="Neal Shusterman" data-genre="Sci-Fi">
+            <div class="book-cell-top">
+              <span class="book-genre-pill">Sci-Fi</span>
+            </div>
+            <div class="book-cell-main">
+              <h3 class="book-cell-title">Gleanings</h3>
+              <div class="book-cell-author">Neal Shusterman</div>
+              <div class="book-cell-rating" title="Rating: 2.0 / 5.0">
+                <span class="stars">★★</span>
+                <span class="score">2.0</span>
+              </div>
+              <p class="book-cell-review">
+                Bro what am I reading??? None of the characters I like are here other than Curie and like the stories are so unnecessary to the trilogy.
+              </p>
+            </div>
+          </article>
+
         </div>
       </div>
     </section>
