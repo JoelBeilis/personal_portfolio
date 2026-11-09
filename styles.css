@@ -1074,12 +1074,6 @@ body {
   opacity: 1;
 }
 
-.p-title {
-  color: #fff;
-  font-weight: 600;
-  font-size: 0.95rem;
-}
-
 .p-gear {
   font-family: var(--font-mono);
   font-size: 0.72rem;
