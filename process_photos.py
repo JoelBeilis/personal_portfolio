@@ -153,13 +153,11 @@ def main():
 
                 # Preserve any tags/titles previously written by hand
                 saved = existing_data.get(name_stem, {})
-                title = saved.get("title", name_stem.replace("-", " ").title())
                 location = saved.get("location", "City, Country")  # Default placeholder
                 tags = saved.get("tags", [])
 
                 photos_list.append({
                     "id": name_stem,
-                    "title": ".",
                     "location": location,
                     "aspect": aspect,
                     "lqip": lqip,
