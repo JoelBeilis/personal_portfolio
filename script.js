@@ -90,7 +90,8 @@ const elevMap = {
       V6: "730m (GEAR)",
       V7: "850m (HOLD UP POSE)",
       V8: "940m (RECIPES)",
-      V9: "1000m (NO TOP OUT)"
+      V9: "1000m (BOOKS)",
+      V10: "1100m (TOP)"
     };
 
   // Move the climber to a specific hold button
@@ -197,7 +198,7 @@ function initSuperMoves() {
         emitChalkExplosion();
       }
       
-      const summit = document.getElementById("v9-future");
+      const summit = document.getElementById("v10-future");
       if (summit) {
         summit.scrollIntoView({ behavior: "smooth" });
       }

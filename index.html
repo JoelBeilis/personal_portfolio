@@ -36,9 +36,13 @@
 
     <!-- Holds ordered TOP (Summit) to BOTTOM (Base) -->
     <div class="holds-column">
-      <button class="hold-node" data-target="#v9-future" data-grade="V9">
+      <button class="hold-node" data-target="#v10-future" data-grade="V10">
         <span class="hold-gem ground-hold"></span>
-        <span class="hold-label">V9: Future Expansion 🔒</span>
+        <span class="hold-label">V10: Future Expansion 🔒</span>
+      </button>
+      <button class="hold-node" data-target="#v9-books" data-grade="V9">
+        <span class="hold-gem ground-hold"></span>
+        <span class="hold-label">V9: Reading Log</span>
       </button>
       <button class="hold-node" data-target="#v8-munchies" data-grade="V8">
         <span class="hold-gem ground-hold"></span>
@@ -54,7 +58,7 @@
       </button>
       <button class="hold-node" data-target="#v5-awards" data-grade="V5">
         <span class="hold-gem sloper-hold"></span>
-        <span class="hold-label">V5: Awards 🏆</span>
+        <span class="hold-label">V5: Awards</span>
       </button>
       <button class="hold-node" data-target="#v4-projects" data-grade="V4">
         <span class="hold-gem pinch-hold"></span>
@@ -114,18 +118,130 @@
   <!-- MAIN CRAG: Arranged from Summit (Top) down to Ground (Bottom) -->
   <main class="crag-body">
 
-    <!-- ==================== V9: FUTURE EXPANSION ==================== -->
-    <section id="v9-future" class="route-pitch locked-pitch">
+   <!-- ==================== V10: FUTURE EXPANSION ==================== -->
+    <section id="v10-future" class="route-pitch locked-pitch">
       <div class="summit-anchor-box">
         <p>🚩 NO TOP OUT</p>
         <button id="summitFallBtn" class="super-btn freefall-btn">Down Climb 🪂</button>
       </div>
       <div class="pitch-tab">
-        <span class="pitch-badge">V9 — FUTURE EXPANSION</span>
+        <span class="pitch-badge">V10 — FUTURE EXPANSION</span>
         <span class="pitch-code">coming_soon.md</span>
       </div>
       <div class="pitch-card">
         <p class="pitch-lead">I promise the setter is working as hard as they can.</p>
+      </div>
+    </section>
+
+    <!-- ==================== V9: BOOK LOG ==================== -->
+    <section id="v9-books" class="route-pitch">
+      <div class="pitch-tab">
+        <span class="pitch-badge">V9 — PITCH 09 // READING NOOK</span>
+        <span class="pitch-code">book_log.canvas</span>
+      </div>
+      <div class="pitch-card">
+        <div class="section-title-wrap">
+          <div>
+            <h2>Book Log & Reading Nook</h2>
+            <p class="section-sub">Field notes, hard sci-fi, mathematics, and accounts of obsession under physical extremes.</p>
+          </div>
+          <span class="counter-badge">3 Records Logged</span>
+        </div>
+
+        <!-- Book Cells Grid -->
+        <div class="book-cells-grid">
+
+          <!-- Cell 1 -->
+          <article class="book-cell">
+            <div class="book-cell-top">
+              <span class="book-genre-pill">Sci-Fi // Physics</span>
+              <span class="book-status-pill finished">Finished • 2026</span>
+            </div>
+
+            <div class="book-cell-main">
+              <h3 class="book-cell-title">Project Hail Mary</h3>
+              <div class="book-cell-author">by Andy Weir</div>
+              <div class="book-cell-rating" title="Rating: 5.0 / 5.0">
+                <span class="stars">★★★★★</span>
+                <span class="score">5.0</span>
+              </div>
+              <p class="book-cell-review">
+                A masterclass in empirical problem-solving under extreme constraints. The scientific deduction loop—measuring, hypothesizing, and engineering tests with limited tools—reads like an adrenaline-fueled lab experiment.
+              </p>
+            </div>
+
+            <blockquote class="book-cell-quote">
+              "Human beings have a remarkable ability to accept the abnormal and make it normal."
+            </blockquote>
+
+            <div class="book-cell-footer">
+              <span>#Astrobiology</span>
+              <span>#FirstContact</span>
+              <span>#HardSciFi</span>
+            </div>
+          </article>
+
+          <!-- Cell 2 -->
+          <article class="book-cell">
+            <div class="book-cell-top">
+              <span class="book-genre-pill">Math // Biography</span>
+              <span class="book-status-pill finished">Finished • 2025</span>
+            </div>
+
+            <div class="book-cell-main">
+              <h3 class="book-cell-title">The Man Who Knew Infinity</h3>
+              <div class="book-cell-author">by Robert Kanigel</div>
+              <div class="book-cell-rating" title="Rating: 4.5 / 5.0">
+                <span class="stars">★★★★½</span>
+                <span class="score">4.5</span>
+              </div>
+              <p class="book-cell-review">
+                Fascinating look into Ramanujan's raw mathematical intuition colliding with Hardy’s formal European rigor. Really makes you appreciate how intuition and proof balance each other.
+              </p>
+            </div>
+
+            <blockquote class="book-cell-quote">
+              "An equation for me has no meaning unless it expresses a thought of God."
+            </blockquote>
+
+            <div class="book-cell-footer">
+              <span>#NumberTheory</span>
+              <span>#Biography</span>
+              <span>#Cambridge</span>
+            </div>
+          </article>
+
+          <!-- Cell 3 -->
+          <article class="book-cell active-read">
+            <div class="book-cell-top">
+              <span class="book-genre-pill">Outdoor // Big Wall</span>
+              <span class="book-status-pill ongoing">Currently Reading</span>
+            </div>
+
+            <div class="book-cell-main">
+              <h3 class="book-cell-title">The Push</h3>
+              <div class="book-cell-author">by Tommy Caldwell</div>
+              <div class="book-cell-rating" title="In Progress">
+                <span class="stars">★★★★★</span>
+                <span class="score">In Progress</span>
+              </div>
+              <p class="book-cell-review">
+                Intense exploration of grit, risk tolerance, and years of obsessive micro-problem solving on the Dawn Wall of El Capitan.
+              </p>
+            </div>
+
+            <blockquote class="book-cell-quote">
+              "The impossible is often the untried."
+            </blockquote>
+
+            <div class="book-cell-footer">
+              <span>#DawnWall</span>
+              <span>#ElCapitan</span>
+              <span>#ClimbingBeta</span>
+            </div>
+          </article>
+
+        </div>
       </div>
     </section>
 
@@ -695,48 +811,22 @@
         </div>
 
         <!-- Grade Selector (V1 to V8) -->
+        <!-- Grade Selector (V1 to V10) -->
         <div class="boulder-grade-selector">
           <div class="grade-selector-label">SELECT YOUR PITCH / GRADE:</div>
           <div class="grade-buttons-row">
-            <button class="grade-btn" data-target="#v1-about">
-              <span class="grade-code">V1</span>
-              <span class="grade-name">About</span>
-            </button>
-            <button class="grade-btn" data-target="#v2-experience">
-              <span class="grade-code">V2</span>
-              <span class="grade-name">Experience</span>
-            </button>
-            <button class="grade-btn" data-target="#v3-skills">
-              <span class="grade-code">V3</span>
-              <span class="grade-name">Skills</span>
-            </button>
-            <button class="grade-btn" data-target="#v4-projects">
-              <span class="grade-code">V4</span>
-              <span class="grade-name">Projects</span>
-            </button>
-            <button class="grade-btn" data-target="#v5-awards">
-              <span class="grade-code">V5</span>
-              <span class="grade-name">Awards</span>
-            </button>
-            <button class="grade-btn" data-target="#v6-gear">
-              <span class="grade-code">V6</span>
-              <span class="grade-name">Gear</span>
-            </button>
-            <button class="grade-btn" data-target="#v7-photography">
-              <span class="grade-code">V7</span>
-              <span class="grade-name">Protography</span>
-            </button>
-            <button class="grade-btn" data-target="#v8-recipes" title="Recipes">
-              <span class="grade-code">V8</span>
-              <span class="grade-name">Recipes</span>
-            </button>
-            <button class="grade-btn locked" data-target="#v9-future" title="Future Project Expansion">
-              <span class="grade-code">V9</span>
-              <span class="grade-name">Locked 🔒</span>
-            </button>
+            <button class="grade-btn" data-target="#v1-about"><span class="grade-code">V1</span><span class="grade-name">About</span></button>
+            <button class="grade-btn" data-target="#v2-experience"><span class="grade-code">V2</span><span class="grade-name">Experience</span></button>
+            <button class="grade-btn" data-target="#v3-skills"><span class="grade-code">V3</span><span class="grade-name">Skills</span></button>
+            <button class="grade-btn" data-target="#v4-projects"><span class="grade-code">V4</span><span class="grade-name">Projects</span></button>
+            <button class="grade-btn" data-target="#v5-awards"><span class="grade-code">V5</span><span class="grade-name">Awards</span></button>
+            <button class="grade-btn" data-target="#v6-gear"><span class="grade-code">V6</span><span class="grade-name">Gear</span></button>
+            <button class="grade-btn" data-target="#v7-photography"><span class="grade-code">V7</span><span class="grade-name">Summit</span></button>
+            <button class="grade-btn" data-target="#v8-recipes"><span class="grade-code">V8</span><span class="grade-name">Recipes</span></button>
+            <button class="grade-btn" data-target="#v9-books"><span class="grade-code">V9</span><span class="grade-name">Books</span></button>
+            <button class="grade-btn locked" data-target="#v10-future" title="Future Project Expansion"><span class="grade-code">V10</span><span class="grade-name">Locked 🔒</span></button>
           </div>
-        </div>
-        
+        </div>        
         <div class="ground-actions">
           <button id="dynoLaunchBtn" class="super-btn dyno-btn">
             🚀 FULL SEND DYNO
