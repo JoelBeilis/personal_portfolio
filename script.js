@@ -43,6 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initChalk();
   initSuperMoves();
   initExperienceTabs();
+  initRecipeTabs();
   initGallery();
   initLightbox();
 
@@ -79,17 +80,18 @@ function initAscendingTopo() {
 
   if (!climber || !topo || holdNodes.length === 0) return;
 
-  const elevMap = { 
-    V0: "0m (BASE CAMP)", 
-    V1: "120m (ABOUT)", 
-    V2: "250m (EXPERIENCE)", 
-    V3: "380m (SKILLS)", 
-    V4: "510m (PROJECTS)", 
-    V5: "640m (AWARDS)", 
-    V6: "770m (GEAR)",
-    V7: "900m (SUMMIT)",
-    V8: "990m (NO TOP OUT)"
-  };
+const elevMap = { 
+      V0: "0m (BASE CAMP)", 
+      V1: "110m (ABOUT)", 
+      V2: "230m (EXPERIENCE)", 
+      V3: "360m (SKILLS)", 
+      V4: "490m (PROJECTS)", 
+      V5: "610m (AWARDS)", 
+      V6: "730m (GEAR)",
+      V7: "850m (HOLD UP POSE)",
+      V8: "940m (RECIPES)",
+      V9: "1000m (NO TOP OUT)"
+    };
 
   // Move the climber to a specific hold button
   function moveClimberToHold(holdBtn) {
@@ -195,7 +197,7 @@ function initSuperMoves() {
         emitChalkExplosion();
       }
       
-      const summit = document.getElementById("v7-photography");
+      const summit = document.getElementById("v9-future");
       if (summit) {
         summit.scrollIntoView({ behavior: "smooth" });
       }
@@ -335,6 +337,30 @@ function emitChalkExplosion() {
     emitter.appendChild(p);
     setTimeout(() => p.remove(), 750);
   }
+}
+
+function initRecipeTabs() {
+  const tabBtns = document.querySelectorAll(".recipe-tab-btn");
+  const tabPanels = document.querySelectorAll(".recipe-tab-panel");
+
+  if (!tabBtns.length) return;
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const targetPanelId = btn.getAttribute("data-recipe-tab");
+
+      tabBtns.forEach(b => {
+        b.classList.remove("active");
+        b.setAttribute("aria-selected", "false");
+      });
+      btn.classList.add("active");
+      btn.setAttribute("aria-selected", "true");
+
+      tabPanels.forEach(panel => {
+        panel.classList.toggle("active", panel.id === targetPanelId);
+      });
+    });
+  });
 }
 
 // ==========================================================================

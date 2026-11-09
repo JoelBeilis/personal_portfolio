@@ -36,13 +36,17 @@
 
     <!-- Holds ordered TOP (Summit) to BOTTOM (Base) -->
     <div class="holds-column">
-      <button class="hold-node" data-target="#v8-future" data-grade="V8">
+      <button class="hold-node" data-target="#v9-future" data-grade="V9">
         <span class="hold-gem ground-hold"></span>
-        <span class="hold-label">V8: Future Expansion 🔒</span>
+        <span class="hold-label">V9: Future Expansion 🔒</span>
+      </button>
+      <button class="hold-node" data-target="#v8-munchies" data-grade="V8">
+        <span class="hold-gem ground-hold"></span>
+        <span class="hold-label">V8: Munchies</span>
       </button>
       <button class="hold-node" data-target="#v7-photography" data-grade="V7">
         <span class="hold-gem anchor-hold"></span>
-        <span class="hold-label">V7: Photography (Summit)</span>
+        <span class="hold-label">V7: Photography</span>
       </button>
       <button class="hold-node" data-target="#v6-gear" data-grade="V6">
         <span class="hold-gem pinch-hold"></span>
@@ -110,14 +114,14 @@
   <!-- MAIN CRAG: Arranged from Summit (Top) down to Ground (Bottom) -->
   <main class="crag-body">
 
-    <!-- ==================== V8: FUTURE EXPANSION ==================== -->
-    <section id="v8-future" class="route-pitch locked-pitch">
+    <!-- ==================== V9: FUTURE EXPANSION ==================== -->
+    <section id="v9-future" class="route-pitch locked-pitch">
       <div class="summit-anchor-box">
         <p>🚩 NO TOP OUT</p>
         <button id="summitFallBtn" class="super-btn freefall-btn">Down Climb 🪂</button>
       </div>
       <div class="pitch-tab">
-        <span class="pitch-badge">V8 — FUTURE EXPANSION</span>
+        <span class="pitch-badge">V9 — FUTURE EXPANSION</span>
         <span class="pitch-code">coming_soon.md</span>
       </div>
       <div class="pitch-card">
@@ -125,10 +129,131 @@
       </div>
     </section>
 
+    <!-- ==================== V8: RECIPES & KITCHEN LAB ==================== -->
+    <section id="v8-recipes" class="route-pitch">
+      <div class="pitch-tab">
+        <span class="pitch-badge">V8 — PITCH 08 // HOUSEWIFE</span>
+        <span class="pitch-code">munchies.md</span>
+      </div>
+      <div class="pitch-card">
+        <h2>Recipes and Munchies</h2>
+        <p class="pitch-lead">Random things I can't stop eating... or seeing in my dreams</p>
+
+        <!-- Category Tabs -->
+        <div class="recipe-tabs" role="tablist">
+          <button class="recipe-tab-btn active" data-recipe-tab="tab-savory" role="tab" aria-selected="true">
+            Main Dishes
+          </button>
+          <button class="recipe-tab-btn" data-recipe-tab="tab-baked" role="tab" aria-selected="false">
+            Baked Goods
+          </button>
+          <button class="recipe-tab-btn" data-recipe-tab="tab-other" role="tab" aria-selected="false">
+            Sides Sauces and Complimentary Goodies
+          </button>
+        </div>
+
+        <!-- Tab 1: Savory & Mains (Active by Default) -->
+        <div id="tab-savory" class="recipe-tab-panel active" role="tabpanel">
+          <div class="recipe-grid">
+            <article class="recipe-card">
+              <div class="recipe-header">
+                <span class="recipe-badge">Main Protocol</span>
+                <span class="recipe-time">⏱️ 45 min</span>
+              </div>
+              <h3>Crispy Skin Cast-Iron Salmon</h3>
+              <p class="recipe-desc">Dry-brined cold, skin scored with surgical precision, rendered slowly in tallow until paper-crisp with an acidic brown butter pan sauce.</p>
+              <div class="recipe-meta-row">
+                <span>Temp: 385°F</span>
+                <span>Gear: Cast Iron</span>
+                <span>Focus: Texture</span>
+              </div>
+            </article>
+
+            <article class="recipe-card">
+              <div class="recipe-header">
+                <span class="recipe-badge">Slow Cook</span>
+                <span class="recipe-time">⏱️ 3.5 hrs</span>
+              </div>
+              <h3>Red Wine Braised Short Ribs</h3>
+              <p class="recipe-desc">Heavy mirepoix base, reduced port and bone broth simmered until the connective tissue yields entirely. Finished with freshly grated horseradish.</p>
+              <div class="recipe-meta-row">
+                <span>Dutch Oven</span>
+                <span>Low & Slow</span>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- Tab 2: Bakes & Bread -->
+        <div id="tab-baked" class="recipe-tab-panel" role="tabpanel">
+          <div class="recipe-grid">
+            <article class="recipe-card">
+              <div class="recipe-header">
+                <span class="recipe-badge">Bake // High Hydration</span>
+                <span class="recipe-time">⏱️ 36 hrs</span>
+              </div>
+              <h3>78% Hydration Sourdough Boule</h3>
+              <p class="recipe-desc">Naturally leavened with wild starter, open crumb structure developed via coil folds, cold retard at 38°F, and baked in a preheated cast iron combo cooker.</p>
+              <div class="recipe-meta-row">
+                <span>78% H₂O</span>
+                <span>Wild Yeast</span>
+                <span>Cast Iron</span>
+              </div>
+            </article>
+
+            <article class="recipe-card">
+              <div class="recipe-header">
+                <span class="recipe-badge">Pastry</span>
+                <span class="recipe-time">⏱️ 1.5 hrs</span>
+              </div>
+              <h3>Brown Butter Cardamom Buns</h3>
+              <p class="recipe-desc">Enriched brioche base with toasted cracked green cardamom, brushed with rich browned butter and dark sugar glaze immediately out of the oven.</p>
+              <div class="recipe-meta-row">
+                <span>Brown Butter</span>
+                <span>Cardamom</span>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- Tab 3: Ferments & Pantry -->
+        <div id="tab-other" class="recipe-tab-panel" role="tabpanel">
+          <div class="recipe-grid">
+            <article class="recipe-card">
+              <div class="recipe-header">
+                <span class="recipe-badge">Ferment</span>
+                <span class="recipe-time">⏱️ 14 days</span>
+              </div>
+              <h3>Lacto-Fermented Fresno Chili Hot Sauce</h3>
+              <p class="recipe-desc">Fresno chilis and garlic submerged in a 2.5% salinity brine. Blended smooth with toasted cumin and a dash of raw apple cider vinegar.</p>
+              <div class="recipe-meta-row">
+                <span>2.5% Salinity</span>
+                <span>Anaerobic</span>
+              </div>
+            </article>
+
+            <article class="recipe-card">
+              <div class="recipe-header">
+                <span class="recipe-badge">Infusion</span>
+                <span class="recipe-time">⏱️ 2 hrs</span>
+              </div>
+              <h3>Szechuan Peppercorn Chili Crisp</h3>
+              <p class="recipe-desc">Crispy fried shallots, garlic flakes, roasted soybeans, and tingling numbing peppercorns infused in wok-hot peanut oil.</p>
+              <div class="recipe-meta-row">
+                <span>High Heat</span>
+                <span>Mala Crunch</span>
+              </div>
+            </article>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
     <!-- ==================== V7: SUMMIT (PHOTOGRAPHY) ==================== -->
     <section id="v7-photography" class="route-pitch summit-pitch">
       <div class="pitch-tab">
-        <span class="pitch-badge">V7 — THE SUMMIT</span>
+        <span class="pitch-badge">V7 — Hold up.. POSE!</span>
         <span class="pitch-code">photo_archive.canvas</span>
       </div>
       <div class="pitch-card">
@@ -597,12 +722,16 @@
               <span class="grade-code">V6</span>
               <span class="grade-name">Gear</span>
             </button>
-            <button class="grade-btn summit-grade-btn" data-target="#v7-photography">
+            <button class="grade-btn" data-target="#v7-photography">
               <span class="grade-code">V7</span>
               <span class="grade-name">Protography</span>
             </button>
-            <button class="grade-btn locked" data-target="#v8-future" title="Future Project Expansion">
+            <button class="grade-btn" data-target="#v8-recipes" title="Recipes">
               <span class="grade-code">V8</span>
+              <span class="grade-name">Recipes</span>
+            </button>
+            <button class="grade-btn locked" data-target="#v9-future" title="Future Project Expansion">
+              <span class="grade-code">V9</span>
               <span class="grade-name">Locked 🔒</span>
             </button>
           </div>
