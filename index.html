@@ -44,9 +44,9 @@
         <span class="hold-gem ground-hold"></span>
         <span class="hold-label">V9: Reading Log</span>
       </button>
-      <button class="hold-node" data-target="#v8-munchies" data-grade="V8">
+      <button class="hold-node" data-target="#v8-recipes" data-grade="V8">
         <span class="hold-gem ground-hold"></span>
-        <span class="hold-label">V8: Munchies</span>
+        <span class="hold-label">V8: Recipes</span>
       </button>
       <button class="hold-node" data-target="#v7-photography" data-grade="V7">
         <span class="hold-gem anchor-hold"></span>
@@ -970,21 +970,228 @@
         <!-- Tab 2: Design Teams & Clubs -->
         <div id="tab-teams" class="exp-tab-panel" role="tabpanel">
           <div class="experience-timeline">
-            <article class="exp-card">
-              <div class="exp-header">
+
+            <!-- UWAFT Expandable Experience Card -->
+            <article class="exp-card expandable" data-card-id="uwaft">
+              <div class="exp-header exp-toggle-trigger" role="button" tabindex="0" aria-expanded="false">
                 <div>
-                  <h3 class="exp-role">UWAFT - University of Waterloo Automotive Future Team</h3>
-                  <span class="exp-org">Mechanical and Electrical Member</span>
+                  <h3 class="exp-role">UWAFT — University of Waterloo Automotive Future Team</h3>
+                  <span class="exp-org">Mechanical & Electrical Member</span>
                 </div>
-                <span class="exp-date">Sept 2025 - Present</span>
+                <div class="exp-header-right">
+                  <span class="exp-date">Sept 2025 – Present</span>
+                  <span class="exp-chevron">▼</span>
+                </div>
+              </div>
+
+              <p class="exp-desc">
+                As someone who was quick to get their drivers license, it makes sense why I love UWAFT. 
+              </p>
+
+              <div class="exp-tags">
+                <span>Vehicle Dynamics</span>
+                <span>Vehicle Research</span>
+                <span>DesignCenter CAD</span>
+                <span>Technical Writing</span>
+              </div>
+
+              <!-- Interactive Timeline Drawer -->
+              <div class="exp-timeline-drawer">
+                <div class="timeline-track-wrap">
+                  <div class="timeline-spine-line"></div>
+                  
+                  <div class="timeline-nodes-list">
+
+                    <!-- Milestone 7: Current Focus (Nov 2026 - Present) -->
+                    <div class="timeline-milestone active-node" data-date="2026-11">
+                      <button class="milestone-pin-btn" aria-label="Toggle details for Simulation & Skid Plates">
+                        <span class="milestone-gem diamond"></span>
+                        <span class="milestone-date-label">Nov 2026 – Present</span>
+                      </button>
+                      <div class="milestone-content">
+                        <div class="milestone-title-row">
+                          <h4>Tire Simulations, Selection & Skid Plate CAD</h4>
+                          <span class="milestone-duration">Current</span>
+                        </div>
+                        <p class="milestone-body">
+                          Modeling tractive effort and wheel clearance envelopes for tire selection. Designing custom underbody skid plates to protect vital drivetrain components during competition off-road cycles. Also designed a 3D-printed gyroscopic cup holder prototype for in-cabin stabilization.
+                        </p>
+                      </div>
+                    </div>
+
+                    <!-- Milestone 6: Technical Report (Oct 2026) -->
+                    <div class="timeline-milestone" data-date="2026-10">
+                      <button class="milestone-pin-btn" aria-label="Toggle details for Technical Report Writing">
+                        <span class="milestone-gem"></span>
+                        <span class="milestone-date-label">Oct 2026</span>
+                      </button>
+                      <div class="milestone-content">
+                        <div class="milestone-title-row">
+                          <h4>Competition Technical Report</h4>
+                          <span class="milestone-duration">1 Month</span>
+                        </div>
+                        <p class="milestone-body">
+                          Assisted in writing and editing the team’s first technical deliverable detailing off-road dynamics and performance targets for our new Jeep Cherokee.
+                        </p>
+                      </div>
+                    </div>
+
+                    <!-- Milestone 5: Off-Road Research (Aug - Oct 2026) -->
+                    <div class="timeline-milestone" data-date="2026-08">
+                      <button class="milestone-pin-btn" aria-label="Toggle details for Cherokee Off-Road Research">
+                        <span class="milestone-gem"></span>
+                        <span class="milestone-date-label">Aug 2026 – Oct 2026</span>
+                      </button>
+                      <div class="milestone-content">
+                        <div class="milestone-title-row">
+                          <h4>Jeep Cherokee Off-Road Dynamics Benchmarking</h4>
+                          <span class="milestone-duration">3 Months</span>
+                        </div>
+                        <p class="milestone-body">
+                          Researched terrain articulation, breakover/approach angles, and structural demands to set architecture targets for upcoming competition vehicle builds.
+                        </p>
+                      </div>
+                    </div>
+
+                    <!-- Milestone 4: Safety Braking Rig (Jul - Aug 2026) -->
+                    <div class="timeline-milestone" data-date="2026-07">
+                      <button class="milestone-pin-btn" aria-label="Toggle details for Passenger Emergency Brake">
+                        <span class="milestone-gem"></span>
+                        <span class="milestone-date-label">Jul 2026 – Aug 2026</span>
+                      </button>
+                      <div class="milestone-content">
+                        <div class="milestone-title-row">
+                          <h4>Dual Passenger Emergency Brake Integration</h4>
+                          <span class="milestone-duration">2 Months</span>
+                        </div>
+                        <p class="milestone-body">
+                          Engineered and plumbed a secondary mechanical passenger-side emergency brake linked directly into the primary hydraulic driver brake system for track-testing safety redundancy.
+                        </p>
+                      </div>
+                    </div>
+
+                    <!-- Milestone 3: Fuse Diagnostics (Jun 2026) -->
+                    <div class="timeline-milestone" data-date="2026-06">
+                      <button class="milestone-pin-btn" aria-label="Toggle details for Cadillac Lyriq Diagnostics">
+                        <span class="milestone-gem"></span>
+                        <span class="milestone-date-label">Jun 2026</span>
+                      </button>
+                      <div class="milestone-content">
+                        <div class="milestone-title-row">
+                          <h4>Cadillac Lyriq Fuse & Breaker Electrical Diagnostics</h4>
+                          <span class="milestone-duration">1 Month</span>
+                        </div>
+                        <p class="milestone-body">
+                          Conducted high/low-voltage breaker continuity sweeps, fuse trace analysis, and power distribution diagnostics on the Cadillac Lyriq EV platform.
+                        </p>
+                      </div>
+                    </div>
+
+                    <!-- Milestone 2: Wire Harness Loom & Nav (Nov - Dec 2025) -->
+                    <div class="timeline-milestone" data-date="2025-11">
+                      <button class="milestone-pin-btn" aria-label="Toggle details for Harness & Nav Rewiring">
+                        <span class="milestone-gem"></span>
+                        <span class="milestone-date-label">Nov 2025 – Dec 2025</span>
+                      </button>
+                      <div class="milestone-content">
+                        <div class="milestone-title-row">
+                          <h4>Subframe Loom Rewiring & Navigation Simplification</h4>
+                          <span class="milestone-duration">2 Months</span>
+                        </div>
+                        <p class="milestone-body">
+                          Stripped, rerouted, and heat-shielded the chassis wire harness across the lower subframe. Simplified navigation system communication bus pinouts to cut signal noise and reduce harness bundle bulk.
+                        </p>
+                      </div>
+                    </div>
+
+                    <!-- Milestone 1: Joining the Team (Sept 2025) -->
+                    <div class="timeline-milestone" data-date="2025-09">
+                      <button class="milestone-pin-btn" aria-label="Toggle details for Joining UWAFT">
+                        <span class="milestone-gem"></span>
+                        <span class="milestone-date-label">Sept - Oct 2025</span>
+                      </button>
+                      <div class="milestone-content">
+                        <div class="milestone-title-row">
+                          <h4>Joined Mechanical & Electrical Subsystems</h4>
+                          <span class="milestone-duration">2 months</span>
+                        </div>
+                        <p class="milestone-body">
+                          Onboarding and training for mechanical and electrical subsystems.
+                        </p>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+        <div id="tab-teams" class="exp-tab-panel" role="tabpanel">
+          <div class="experience-timeline">
+            <article class="exp-card expandable" data-card-id="gwu-rocketry">
+              <div class="exp-header exp-toggle-trigger" role="button" tabindex="0" aria-expanded="false">
+                <div>
+                  <h3 class="exp-role">GWU Rocketry Club</h3>
+                  <span class="exp-org">Propulsion Engineer</span>
+                </div>
+                <div class="exp-header-right">
+                  <span class="exp-date">Sept 2026 - Present</span>
+                  <span class="exp-chevron">▼</span>
+                </div>
               </div>
               <p class="exp-desc">
-                
+                Analyzed various chemical compounds and combustion properties to optimize rocket fuel performance. Simulated and analyzed pressure curves for different fuel mixtures.
               </p>
               <div class="exp-tags">
-                <span>Powertrain</span>
-                <span>Benchmarking</span>
-                <span>Hardware</span>
+                <span>Chemistry</span>
+                <span>Simulation</span>
+              </div>
+              <!-- Collapsible Timeline Drawer -->
+              <div class="exp-timeline-drawer">
+                <div class="timeline-track-wrap">
+                  <div class="timeline-spine-line"></div>
+                  
+                  <div class="timeline-nodes-list">
+
+                    <!-- Milestone 2: Executive Promotion (Most Recent on Top) -->
+                    <div class="timeline-milestone active-node" data-date="2026-10">
+                      <button class="milestone-pin-btn" aria-label="Toggle details for Static Fire">
+                        <span class="milestone-gem diamond"></span>
+                        <span class="milestone-date-label">Oct 24, 2026</span>
+                      </button>
+
+                      <div class="milestone-content">
+                        <div class="milestone-title-row">
+                          <h4>First Static Fire</h4>
+                        </div>
+                        <!-- Optional Media/Photo Slot -->
+                        <div class="milestone-media">
+                          <img src="images/thumbs/cheese_exec.webp" alt="Cheese Club Tasting Event" onerror="this.parentElement.style.display='none'" />
+                        </div>
+                        <p class="milestone-body">
+                            Obtained pressure curves for fuel mixed during mixing sessions.
+                        </p>
+                      </div>
+                    </div>
+
+                    <!-- Milestone 1: General Member Join -->
+                    <div class="timeline-milestone" data-date="2026-10">
+                      <button class="milestone-pin-btn" aria-label="Toggle details for Fuel Mixing Session">
+                        <span class="milestone-gem"></span>
+                        <span class="milestone-date-label">Oct 13, 2026</span>
+                      </button>
+
+                      <div class="milestone-content">
+                        <div class="milestone-title-row">
+                          <h4>First Fuel Mixing Session</h4>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </article>
           </div>
@@ -992,20 +1199,75 @@
 
         <div id="tab-teams" class="exp-tab-panel" role="tabpanel">
           <div class="experience-timeline">
-            <article class="exp-card">
-              <div class="exp-header">
+            <article class="exp-card expandable" data-card-id="cheese-club">
+              <div class="exp-header exp-toggle-trigger" role="button" tabindex="0" aria-expanded="false">
                 <div>
-                  <h3 class="exp-role">GWU Rocketry</h3>
-                  <span class="exp-org">Propulsion Team Member</span>
+                  <h3 class="exp-role">UW Campus Crusade For Cheese!</h3>
+                  <span class="exp-org">Executive & Active Member</span>
                 </div>
-                <span class="exp-date">Sept 2025 - Present</span>
+                <div class="exp-header-right">
+                  <span class="exp-date">Sept 2025 - Present</span>
+                  <span class="exp-chevron">▼</span>
+                </div>
               </div>
+
               <p class="exp-desc">
-                
+                Nothing brings more joy than a splendid evening eating cheese.
               </p>
+
               <div class="exp-tags">
-                <span>Fuel Mixing</span>
-                <span>Static Fire</span>
+                <span>Budget Management</span>
+                <span>Event Operations</span>
+              </div>
+
+              <!-- Collapsible Timeline Drawer -->
+              <div class="exp-timeline-drawer">
+                <div class="timeline-track-wrap">
+                  <div class="timeline-spine-line"></div>
+                  
+                  <div class="timeline-nodes-list">
+
+                    <!-- Milestone 2: Executive Promotion (Most Recent on Top) -->
+                    <div class="timeline-milestone active-node" data-date="2026-05">
+                      <button class="milestone-pin-btn" aria-label="Toggle details for Executive Promotion">
+                        <span class="milestone-gem diamond"></span>
+                        <span class="milestone-date-label">May 2026 — Present</span>
+                      </button>
+
+                      <div class="milestone-content">
+                        <div class="milestone-title-row">
+                          <h4>Joined as Executive Member</h4>
+                          <span class="milestone-duration">Current Role</span>
+                        </div>
+                        <p class="milestone-body">
+                          Help organizing weekly meetings and manage club budget spreadsheet. Currently working on a new cheese club website to help keep all members in the loop. 
+                        </p>
+                        <!-- Optional Media/Photo Slot -->
+                        <div class="milestone-media">
+                          <img src="images/thumbs/cheese_exec.webp" alt="Cheese Club Tasting Event" onerror="this.parentElement.style.display='none'" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Milestone 1: General Member Join -->
+                    <div class="timeline-milestone" data-date="2025-09">
+                      <button class="milestone-pin-btn" aria-label="Toggle details for Joining Cheese Club">
+                        <span class="milestone-gem"></span>
+                        <span class="milestone-date-label">Sept 2025</span>
+                      </button>
+
+                      <div class="milestone-content">
+                        <div class="milestone-title-row">
+                          <h4>General Member</h4>
+                          <span class="milestone-duration">8 Months</span>
+                        </div>
+                        <p class="milestone-body">
+                          The guy with the spreadsheet that ranked every absurd cheese we ate.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </article>
           </div>

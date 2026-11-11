@@ -1545,3 +1545,180 @@ body {
     font-size: 1.8rem; 
   }
 }
+
+/* ==========================================================================
+   Interactive Expandable Experience Card & Vertical Topo Timeline
+   ========================================================================== */
+.exp-card.expandable {
+  cursor: default;
+}
+
+.exp-header.exp-toggle-trigger {
+  cursor: pointer;
+  user-select: none;
+}
+
+.exp-header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.exp-chevron {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent-cyan);
+  transition: transform var(--transition-fast);
+}
+
+.exp-card.is-open .exp-chevron {
+  transform: rotate(180deg);
+}
+
+/* Collapsible Outer Drawer */
+.exp-timeline-drawer {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease-out;
+}
+
+.exp-card.is-open .exp-timeline-drawer {
+  max-height: 1800px; /* Ample height headroom for dynamic content */
+  opacity: 1;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px dashed var(--border-line);
+}
+
+/* Vertical Timeline Track */
+.timeline-track-wrap {
+  position: relative;
+  padding-left: 28px;
+}
+
+.timeline-spine-line {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  bottom: 10px;
+  width: 2px;
+  background: var(--topo-line);
+  border-radius: 9999px;
+}
+
+.timeline-nodes-list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Timeline Milestone Item */
+.timeline-milestone {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.timeline-milestone:last-child {
+  margin-bottom: 4px;
+}
+
+/* Pin Hold Button */
+.milestone-pin-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 0;
+  text-align: left;
+}
+
+.milestone-gem {
+  position: absolute;
+  left: -28px;
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  background: var(--bg-card);
+  border: 2px solid var(--accent-amber);
+  box-shadow: 0 0 8px rgba(251, 191, 36, 0.3);
+  transition: transform var(--transition-fast), background var(--transition-fast);
+}
+
+.milestone-gem.diamond {
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  border-radius: 0;
+  background: var(--accent-cyan);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+}
+
+.timeline-milestone:hover .milestone-gem {
+  transform: scale(1.25);
+}
+
+.milestone-date-label {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--accent-amber);
+  font-weight: 600;
+}
+
+/* Expandable Milestone Content Box */
+.milestone-content {
+  background: var(--bg-panel-tab);
+  border: 1px solid var(--border-line);
+  border-radius: 6px;
+  padding: 14px 16px;
+  margin-top: 8px;
+  transition: border-color var(--transition-fast);
+}
+
+.timeline-milestone:hover .milestone-content {
+  border-color: var(--accent-cyan);
+}
+
+.milestone-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.milestone-title-row h4 {
+  font-size: 0.98rem;
+  color: var(--text-main);
+}
+
+.milestone-duration {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  background: var(--bg-card);
+  padding: 1px 6px;
+  border-radius: 4px;
+  color: var(--text-muted);
+}
+
+.milestone-body {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+/* Optional Media/Photo Slot */
+.milestone-media {
+  margin-top: 10px;
+  border-radius: 6px;
+  overflow: hidden;
+  max-width: 380px;
+  border: 1px solid var(--border-line);
+}
+
+.milestone-media img {
+  width: 100%;
+  height: auto;
+  display: block;
+}

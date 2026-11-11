@@ -43,6 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initChalk();
   initSuperMoves();
   initExperienceTabs();
+  initExperienceTimelines();
   initRecipeTabs();
   initBookLog();
   initGallery();
@@ -191,7 +192,7 @@ function initSuperMoves() {
     });
   });
 
-  // 🚀 DYNO: Leap from base straight to V7 photography summit
+  // 🚀 DYNO: Leap from base straight to TOP
   if (dynoBtn) {
     dynoBtn.addEventListener("click", () => {
       if (climber) {
@@ -283,6 +284,56 @@ function initExperienceTabs() {
         }
       });
     });
+  });
+}
+
+// ==========================================================================
+// Experience Card Expansion & Date-Scaled Vertical Timeline
+// ==========================================================================
+function initExperienceTimelines() {
+  const cards = document.querySelectorAll(".exp-card.expandable");
+
+  cards.forEach(card => {
+    const trigger = card.querySelector(".exp-toggle-trigger");
+    if (!trigger) return;
+
+    // Toggle Card Expansion
+    trigger.addEventListener("click", () => {
+      const isOpen = card.classList.toggle("is-open");
+      trigger.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    });
+
+    // Support keyboard navigation (Enter / Space)
+    trigger.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        trigger.click();
+      }
+    });
+
+    // Dynamically space nodes based on data-date (YYYY-MM)
+    const milestones = Array.from(card.querySelectorAll(".timeline-milestone"));
+    if (milestones.length > 1) {
+      for (let i = 0; i < milestones.length - 1; i++) {
+        const currentMilestone = milestones[i];
+        const nextMilestone = milestones[i + 1];
+
+        const dateStrA = currentMilestone.getAttribute("data-date");
+        const dateStrB = nextMilestone.getAttribute("data-date");
+
+        if (dateStrA && dateStrB) {
+          const dateA = new Date(dateStrA + "-01");
+          const dateB = new Date(dateStrB + "-01");
+
+          // Calculate month difference
+          const monthsDiff = Math.max(1, Math.round(Math.abs(dateA - dateB) / (1000 * 60 * 60 * 24 * 30.44)));
+
+          // Scale spacing: baseline 18px + 7px per month of tenure (clamped between 20px and 90px)
+          const dynamicGap = Math.min(90, Math.max(20, 18 + monthsDiff * 7));
+          currentMilestone.style.marginBottom = `${dynamicGap}px`;
+        }
+      }
+    }
   });
 }
 
