@@ -74,6 +74,9 @@ window.addEventListener("load", () => {
 // ==========================================================================
 // 3. Ascending Topo & Climber Motion
 // ==========================================================================
+// ==========================================================================
+// Continuous Dynamic Elevation Counter & Ascending Topo
+// ==========================================================================
 function initAscendingTopo() {
   const climber = document.getElementById("climber");
   const topo = document.getElementById("cragTopo");
@@ -82,25 +85,31 @@ function initAscendingTopo() {
 
   if (!climber || !topo || holdNodes.length === 0) return;
 
-const elevMap = { 
-      V0: "0m (BASE CAMP)", 
-      V1: "110m (ABOUT)", 
-      V2: "230m (EXPERIENCE)", 
-      V3: "360m (SKILLS)", 
-      V4: "490m (PROJECTS)", 
-      V5: "610m (AWARDS)", 
-      V6: "730m (GEAR)",
-      V7: "850m (HOLD UP POSE)",
-      V8: "940m (RECIPES)",
-      V9: "1000m (BOOKS)",
-      V10: "1100m (TOP)"
-    };
+  const MAX_ELEVATION_METRES = 1500; // Peak summit altitude
 
-  // Move the climber to a specific hold button
+  // 1. Function to calculate elevation purely based on scroll position
+  function updateElevationDisplay() {
+    if (!elevationLabel) return;
+
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    if (maxScroll <= 0) {
+      elevationLabel.textContent = `Elevation: 0 metres`;
+      return;
+    }
+
+    // scrollRatio: 0 at absolute bottom (Base Camp), 1 at absolute top (Summit)
+    const currentScroll = window.scrollY;
+    const climbProgress = Math.max(0, Math.min(1, (maxScroll - currentScroll) / maxScroll));
+
+    // Calculate exact meters
+    const currentMetres = Math.round(climbProgress * MAX_ELEVATION_METRES);
+    elevationLabel.textContent = `Elevation: ${currentMetres} metres`;
+  }
+
+  // 2. Position the sprite on the closest hold
   function moveClimberToHold(holdBtn) {
     if (!holdBtn) return;
 
-    // Calculate center of the hold relative to the #cragTopo container
     const holdRect = holdBtn.getBoundingClientRect();
     const topoRect = topo.getBoundingClientRect();
     const targetY = (holdRect.top - topoRect.top) + (holdRect.height / 2);
@@ -109,14 +118,9 @@ const elevMap = {
 
     holdNodes.forEach(b => b.classList.remove("active"));
     holdBtn.classList.add("active");
-
-    const grade = holdBtn.getAttribute("data-grade");
-    if (elevationLabel) {
-      elevationLabel.textContent = `ELEVATION: ${elevMap[grade] || "500m"}`;
-    }
   }
 
-  // Click handler: smooth scroll to selected pitch
+  // 3. Click handler: smooth scroll to selected pitch
   holdNodes.forEach(btn => {
     btn.addEventListener("click", () => {
       const targetId = btn.getAttribute("data-target");
@@ -127,19 +131,22 @@ const elevMap = {
     });
   });
 
-  // Build route mapping
+  // Map holds to DOM sections
   const pairs = holdNodes.map(btn => ({
     btn: btn,
     sec: document.querySelector(btn.getAttribute("data-target"))
   })).filter(p => p.sec !== null);
 
-  // Update climber on scroll
-  function updateClimberOnScroll() {
+  // 4. Combined onScroll handler
+  function onScrollHandler() {
+    // A. Update live counting metres
+    updateElevationDisplay();
+
+    // B. Snap climber sprite to the hold closest to viewport center
     const viewportCenter = window.innerHeight * 0.5;
     let closestPair = null;
     let minDistance = Infinity;
 
-    // Check which section's center is closest to the screen center
     pairs.forEach(pair => {
       const rect = pair.sec.getBoundingClientRect();
       const sectionCenter = rect.top + (rect.height / 2);
@@ -151,7 +158,7 @@ const elevMap = {
       }
     });
 
-    // Special edge case: If scrolled near the very bottom, always lock to V0
+    // Lock to V0 hold if user reaches the bottom margin
     const scrollBottom = window.innerHeight + window.scrollY;
     if (scrollBottom >= document.documentElement.scrollHeight - 50) {
       const basePair = pairs.find(p => p.btn.getAttribute("data-grade") === "V0");
@@ -163,13 +170,15 @@ const elevMap = {
     }
   }
 
-  window.addEventListener("scroll", updateClimberOnScroll, { passive: true });
-  window.addEventListener("resize", updateClimberOnScroll);
+  window.addEventListener("scroll", onScrollHandler, { passive: true });
+  window.addEventListener("resize", onScrollHandler);
 
-  // Initialize climber at base camp
+  // Initial setup at bottom
+  updateElevationDisplay();
   const baseBtn = document.querySelector('.hold-node[data-grade="V0"]') || holdNodes[holdNodes.length - 1];
   setTimeout(() => {
     moveClimberToHold(baseBtn);
+    updateElevationDisplay();
   }, 100);
 }
 
