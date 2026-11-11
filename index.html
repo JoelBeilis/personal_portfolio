@@ -736,7 +736,7 @@
         <span class="pitch-code">winner_winner_chicken_dinner.md</span>
       </div>
       <div class="pitch-card">
-        <h2>Awards & Recognition</h2>
+        <h2>Awards</h2>
 
         <div class="awards-list">
           <article class="award-entry">
@@ -923,26 +923,100 @@
           </button>
         </div>
 
-        <!-- Tab 1: Professional Work (Default Active) -->
+<!-- Tab 1: Professional Work (Active by Default) -->
         <div id="tab-work" class="exp-tab-panel active" role="tabpanel">
           <div class="experience-timeline">
-            <article class="exp-card">
-              <div class="exp-header">
+
+            <!-- Micropropulsion & Nanotechnology Laboratory Card -->
+            <article class="exp-card expandable" data-card-id="mpnl-lab">
+              <div class="exp-header exp-toggle-trigger" role="button" tabindex="0" aria-expanded="false">
                 <div>
                   <h3 class="exp-role">Research Assistant — Plasma & Micropropulsion</h3>
                   <span class="exp-org">Micropropulsion and Nanotechnology Laboratory</span>
                 </div>
-                <span class="exp-date">Sept 2026 - Present</span>
+                <div class="exp-header-right">
+                  <span class="exp-date">Sept 2026 – Present</span>
+                  <span class="exp-chevron">▼</span>
+                </div>
               </div>
+
               <p class="exp-desc">
-                
+                Investigating computational plasma dynamics, biomedical cancer treatment apparatus, and optical emission diagnostics. Click to view timeline and project milestones.
               </p>
+
               <div class="exp-tags">
-                <span>OES</span>
-                <span>Simulink</span>
-                <span>Data Analysis</span>
+                <span>Particle-in-Cell (PIC)</span>
+                <span>Poisson Solvers</span>
+                <span>Cold Atmospheric Plasma (CAP)</span>
+                <span>Optical Emission Spectroscopy (OES)</span>
+                <span>Rapid Prototyping</span>
+              </div>
+
+              <!-- Collapsible Timeline Drawer -->
+              <div class="exp-timeline-drawer">
+                <div class="timeline-track-wrap">
+                  <div class="timeline-spine-line"></div>
+                  
+                  <div class="timeline-nodes-list">
+
+                    <!-- Milestone 3: PIC Simulations & Poisson Solver (Oct 2026 – Present) -->
+                    <div class="timeline-milestone active-node" data-date="2026-10">
+                      <button class="milestone-pin-btn" aria-label="Toggle details for PIC Simulations">
+                        <span class="milestone-gem diamond"></span>
+                        <span class="milestone-date-label">Oct 2026 – Present</span>
+                      </button>
+                      <div class="milestone-content">
+                        <div class="milestone-title-row">
+                          <h4>Particle-in-Cell (PIC) Simulations & Poisson Solver</h4>
+                          <span class="milestone-duration">Current</span>
+                        </div>
+                        <p class="milestone-body">
+                          Developing and running Particle-in-Cell (PIC) electrostatic simulations using numerical Poisson solvers. Modeling electron trajectories, charge densities, and plasma beam interactions.
+                        </p>
+                      </div>
+                    </div>
+
+                    <!-- Milestone 2: Biomedical Cancer Team & Rotary Rig (Oct 2026) -->
+                    <div class="timeline-milestone" data-date="2026-10">
+                      <button class="milestone-pin-btn" aria-label="Toggle details for Biomedical Cancer Team">
+                        <span class="milestone-gem"></span>
+                        <span class="milestone-date-label">Oct 2026</span>
+                      </button>
+                      <div class="milestone-content">
+                        <div class="milestone-title-row">
+                          <h4>Biomedical CAP Team & Electric Field Rotary Sensor Rig</h4>
+                          <span class="milestone-duration">1 Month</span>
+                        </div>
+                        <p class="milestone-body">
+                          Joined the biomedical research group targeting brain cancer tumors using Cold Atmospheric Plasma (CAP) jets. 
+                          I designed and built a motorized rotary fixture to map electric field potential profiles along the circumference of the treatment helmet.
+                        </p>
+                      </div>
+                    </div>
+
+                    <!-- Milestone 1: OES Diagnostics & ML Training (Sept 2026) -->
+                    <div class="timeline-milestone" data-date="2026-09">
+                      <button class="milestone-pin-btn" aria-label="Toggle details for OES Experiments">
+                        <span class="milestone-gem"></span>
+                        <span class="milestone-date-label">Sept 2026</span>
+                      </button>
+                      <div class="milestone-content">
+                        <div class="milestone-title-row">
+                          <h4>Optical Emission Spectroscopy (OES) & ML Diagnostics</h4>
+                          <span class="milestone-duration">1 Month</span>
+                        </div>
+                        <p class="milestone-body">
+                          Set up optical diagnostic benches and executed Optical Emission Spectroscopy (OES) experiments on plasma discharges. 
+                          Processed, calibrated, and structured data to train a predictive machine learning model for plasma state estimation.
+                        </p>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
               </div>
             </article>
+
           </div>
         </div>
 
@@ -957,7 +1031,7 @@
                 <span class="exp-date">Oct 2022 - Aug 2025</span>
               </div>
               <p class="exp-desc">
-                
+                Worked part-time after school and on weekends teaching karate to kids and adults (age range: 4-50 years old). 
               </p>
               <div class="exp-tags">
                 <span>Instructor</span>
@@ -1285,12 +1359,12 @@
                 <span class="exp-date">July 2018 - Oct 2022</span>
               </div>
               <p class="exp-desc">
-                
+                Helped my local dojo by doing board breaking seminars for tali's fund a children's brain cancer research center. 
+                Also volunteered as a youth coach and karate camp counselor, helping kids learn the basics of martial arts.
               </p>
               <div class="exp-tags">
-                <span>Coaching</span>
+                <span>Volunteer</span>
                 <span>Leadership</span>
-                <span>Mentorship</span>
               </div>
             </article>
           </div>
@@ -1357,12 +1431,6 @@
             <h1 class="jungle-headline">WELCOME TO JOEL'S JUNGLE</h1>
             <p class="banner-sub">CLIMB UP (it's free)</p>
           </div>
-        </div>
-
-        <div class="crag-intro">
-          <p>
-            <strong>Just go UP</strong>
-          </p>
         </div>
 
         <!-- Grade Selector (V1 to V8) -->
